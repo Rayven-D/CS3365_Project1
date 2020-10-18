@@ -38,6 +38,22 @@ public class User {
         return lastName;
     }
 
+    public ArrayList<AppointmentInformation> getAppointmentInformation() {
+        return appointmentInformation;
+    }
+
+    public void setAppointmentInformation(ArrayList<AppointmentInformation> appointmentInformation) {
+        this.appointmentInformation = appointmentInformation;
+    }
+
+    public ArrayList<PaymentInformation> getPaymentInformation() {
+        return paymentInformation;
+    }
+
+    public void setPaymentInformation(ArrayList<PaymentInformation> paymentInformation) {
+        this.paymentInformation = paymentInformation;
+    }
+
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }

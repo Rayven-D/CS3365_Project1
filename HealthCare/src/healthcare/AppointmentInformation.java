@@ -10,18 +10,18 @@ package healthcare;
  * @author Arthr
  */
 public class AppointmentInformation {
-    private int appointmentId;
+    private long appointmentId;
     private String doctorName;
     private String date;
     private String time;
     private PatientChart chart;
-    private int active;
+    private long active;
 
-    public int getAppointmentId() {
+    public long getAppointmentId() {
         return appointmentId;
     }
 
-    public void setAppointmentId(int appointmentId) {
+    public void setAppointmentId(long appointmentId) {
         this.appointmentId = appointmentId;
     }
 
@@ -57,11 +57,11 @@ public class AppointmentInformation {
         this.chart = chart;
     }
 
-    public int getActive() {
+    public long getActive() {
         return active;
     }
 
-    public void setActive(int active) {
+    public void setActive(long active) {
         this.active = active;
     }
 }

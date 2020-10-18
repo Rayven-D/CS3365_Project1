@@ -42,7 +42,7 @@ public class HealthCare extends Application {
                     Logger.getLogger(HealthCare.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 for (User user : users) {
-                    System.out.println(user.getPermissions());
+                    System.out.println(user.getAppointmentInformation().get(0).getAppointmentId());
                 }
             }
         });

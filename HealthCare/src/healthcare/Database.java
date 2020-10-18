@@ -19,6 +19,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
 
+import com.google.gson.Gson;
 /**
  *
  * @author Arthr
@@ -75,6 +76,34 @@ public class Database {
                     user.setHealthInsurance(pair.getValue().toString());
                 }
                 if (pair.getKey().equals("appointmentInformation")) {
+                    JSONObject ai = (JSONObject) pair.getValue();
+                    JSONArray appointInfo = (JSONArray) ai.get("appointmentInformation");
+                    Iterator appointInfoItr2 = appointInfo.iterator();
+                    Iterator<Map.Entry> appointInfoItr1;
+                    appointInfoItr1 = ((Map) appointInfoItr2.next()).entrySet().iterator();
+                    ArrayList<AppointmentInformation> appointments = new ArrayList();
+                    while (appointInfoItr2.hasNext()) {
+                        AppointmentInformation appointment = new AppointmentInformation();
+                        while (appointInfoItr1.hasNext()) {
+                            if (pair.getKey().equals("appointmentId")) {
+                                appointment.setAppointmentId((long) pair.getValue());
+                            }
+                            if (pair.getKey().equals("doctorName")) {
+                                appointment.setDoctorName(pair.getValue().toString());
+                            }
+                            if (pair.getKey().equals("date")) {
+                                appointment.setDate(pair.getValue().toString());
+                            }
+                            if (pair.getKey().equals("time")) {
+                                appointment.setTime(pair.getValue().toString());
+                            }
+                            if (pair.getKey().equals("active")) {
+                                appointment.setActive((long)pair.getValue());
+                            }
+                            if (pair.getKey().equals("chart")) {
+                            }
+                        }
+                    }
                     System.out.println(pair.getKey() + " : " + pair.getValue());
                 }
                 if (pair.getKey().equals("paymentInformation")) {
@@ -84,7 +113,10 @@ public class Database {
             data.add(user);
         }
     }
-
+    
+    private void parseDataFromJSON2() {
+        
+    }
     public ArrayList<User> initDatabase() throws Exception {
         this.parseDataFromJSON();
         return data;

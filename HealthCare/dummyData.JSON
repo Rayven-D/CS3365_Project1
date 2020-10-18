@@ -15,7 +15,16 @@
       "doctorName": "Dr. Faker 2020 Grad",
       "date": "12/20/20",
       "time": "13:00",
-      "active": 1
+      "active": 1,
+			"chart":{
+				"firstName":"Frank",
+				"lastName":"Bobby",
+				"weight":160,
+				"height":5.8,
+				"bloodPressure":120,
+				"reason":"He got sick lol",
+				"patientId":51
+			}
     }],
     "paymentInformation": [{
       "date": "12/20/20"
@@ -39,7 +48,15 @@
       "doctorName": "Dr. Faker 2020 Grad",
       "date": "12/20/20",
       "time": "13:00",
-      "active": 1
+      "active": 1,
+			"chart":{
+				"firstName":"Frank",
+				"lastName":"Bobby",
+				"weight":160,
+				"height":5.8,
+				"bloodPressure":120,
+				"reason":"He got sick lol",
+				"
     }],
     "paymentInformation": [{
       "date": "12/20/20"

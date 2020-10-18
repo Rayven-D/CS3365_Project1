@@ -8,7 +8,31 @@
     "dob": "2/5/1999",
     "address": "Fake Mc Fake Ln 7843",
     "phoneNumber": 254133789,
-    "snn": 1337420,
+    "ssn": 1337420,
+    "healthInsurance": "Texas Tech Insurance",
+    "appointmentInformation": [{
+      "appointmentId": 1 "doctorName": "Dr. Faker 2020 Grad",
+      "date": "12/20/20",
+      "time": "13:00",
+      "chart": "The patient has something wrong with their head kekw",
+      "active": 1
+    }],
+    "paymentInformation": [{
+      "date": "12/20/20"
+      "amount": "250.25",
+      "paymentType": "Visa Debit",
+      "referanceNumber": 1
+    }]
+  }, {
+    "firstName": "John",
+    "lastName": "Jill",
+    "userId": 52,
+    "password": "abc123stronkpassword",
+    "permissions": 3,
+    "dob": "2/5/1999",
+    "address": "Fake Mc Fake Ln 7843",
+    "phoneNumber": 254133789,
+    "ssn": 1337420,
     "healthInsurance": "Texas Tech Insurance",
     "appointmentInformation": [{
       "appointmentId": 1 "doctorName": "Dr. Faker 2020 Grad",

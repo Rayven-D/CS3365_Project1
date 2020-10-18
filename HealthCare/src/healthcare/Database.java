@@ -25,41 +25,69 @@ import org.json.simple.parser.*;
  */
 public class Database {
 
-    private ArrayList data = new ArrayList();
+    private ArrayList<User> data;
 
-    private String loadData(String filename) {
-        String json = "";
-        try {
-            json = new String(Files.readAllBytes(Paths.get(filename)));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return json;
+    public Database() {
+        this.data = new ArrayList();
     }
 
-    private User parseDataFromJSON() throws Exception {
+    private void parseDataFromJSON() throws Exception {
         User user = new User();
         Object obj = new JSONParser().parse(new FileReader("./dummyData.JSON"));
         JSONObject jo = (JSONObject) obj;
         JSONArray ja = (JSONArray) jo.get("users");
-        
+
         Iterator itr2 = ja.iterator();
         Iterator<Map.Entry> itr1;
         while (itr2.hasNext()) {
+            user = new User();
             itr1 = ((Map) itr2.next()).entrySet().iterator();
             while (itr1.hasNext()) {
                 Map.Entry pair = itr1.next();
-                System.out.println(pair.getKey() + " : " + pair.getValue());
+                if (pair.getKey().toString().equals("firstName")) {
+                    user.setFirstName(pair.getValue().toString());
+                }
+                if (pair.getKey().equals("lastName")) {
+                    user.setLastName(pair.getValue().toString());
+                }
+                if (pair.getKey().equals("userId")) {
+                    user.setUserId((long) pair.getValue());
+                }
+                if (pair.getKey().equals("password")) {
+                    user.setPassword(pair.getValue().toString());
+                }
+                if (pair.getKey().equals("permissions")) {
+                    user.setPermissions((long) pair.getValue());
+                }
+                if (pair.getKey().equals("dob")) {
+                    user.setDob(pair.getValue().toString());
+                }
+                if (pair.getKey().equals("address")) {
+                    user.setAddress(pair.getValue().toString());
+                }
+                if (pair.getKey().equals("phonenumber")) {
+                    user.setPhoneNumber((long) pair.getValue());
+                }
+                if (pair.getKey().equals("ssn")) {
+                    user.setSSN((long) pair.getValue());
+                }
+                if (pair.getKey().equals("healthInsurance")) {
+                    user.setHealthInsurance(pair.getValue().toString());
+                }
+                if (pair.getKey().equals("appointmentInformation")) {
+                    System.out.println(pair.getKey() + " : " + pair.getValue());
+                }
+                if (pair.getKey().equals("paymentInformation")) {
+                    System.out.println(pair.getKey() + " : " + pair.getValue());
+                }
             }
+            data.add(user);
         }
-        return user;
     }
 
     public ArrayList<User> initDatabase() throws Exception {
-        ArrayList users = new ArrayList<>();
         this.parseDataFromJSON();
-        return users;
+        return data;
     }
 
     public void saveData(ArrayList users) {

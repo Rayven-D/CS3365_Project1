@@ -5,6 +5,8 @@
  */
 package healthcare;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Arthr
@@ -13,16 +15,16 @@ public class User {
 
     private String firstName;
     private String lastName;
-    private int userId;
+    private long userId;
     private String password;
-    private int permissions;
+    private long permissions;
     private String dob;
     private String address;
-    private int phoneNumber;
-    private int snn;
+    private long phoneNumber;
+    private long SSN;
     private String healthInsurance;
-    private String[] appointmentInformation = new String[5];
-    private String[] paymentInformation = new String[4];
+    private ArrayList<AppointmentInformation> appointmentInformation = new ArrayList();
+    private ArrayList<PaymentInformation> paymentInformation = new ArrayList();
 
     public String getFirstName() {
         return firstName;
@@ -40,11 +42,11 @@ public class User {
         this.lastName = lastName;
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
@@ -56,11 +58,11 @@ public class User {
         this.password = password;
     }
 
-    public int getPermissions() {
+    public long getPermissions() {
         return permissions;
     }
 
-    public void setPermissions(int permissions) {
+    public void setPermissions(long permissions) {
         this.permissions = permissions;
     }
 
@@ -80,20 +82,20 @@ public class User {
         this.address = address;
     }
 
-    public int getPhoneNumber() {
+    public long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(long phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public int getSnn() {
-        return snn;
+    public long getSSN() {
+        return SSN;
     }
 
-    public void setSnn(int snn) {
-        this.snn = snn;
+    public void setSSN(long snn) {
+        this.SSN = SSN;
     }
 
     public String getHealthInsurance() {
@@ -103,21 +105,4 @@ public class User {
     public void setHealthInsurance(String healthInsurance) {
         this.healthInsurance = healthInsurance;
     }
-
-    public String[] getAppointmentInformation() {
-        return appointmentInformation;
-    }
-
-    public void setAppointmentInformation(String[] appointmentInformation) {
-        this.appointmentInformation = appointmentInformation;
-    }
-
-    public String[] getPaymentInformation() {
-        return paymentInformation;
-    }
-
-    public void setPaymentInformation(String[] paymentInformation) {
-        this.paymentInformation = paymentInformation;
-    }
-
 }

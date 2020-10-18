@@ -5,6 +5,7 @@
  */
 package healthcare;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -19,30 +20,38 @@ import javafx.stage.Stage;
  *
  * @author Arthr
  */
-public class HealthCare extends Application  {
+public class HealthCare extends Application {
+
     Database db = new Database();
+    ArrayList<User> users = new ArrayList();
+
+    ;
     @Override
-    public void start(Stage primaryStage)  {
+    public void start(Stage primaryStage) {
         Button btn = new Button();
+
         btn.setText("Say 'Hello World'");
         btn.setOnAction(new EventHandler<ActionEvent>() {
-            
+
             @Override
-            public void handle(ActionEvent event)  {
+            public void handle(ActionEvent event) {
                 System.out.println("Hello World!");
                 try {
-                    db.initDatabase();
+                    users = db.initDatabase();
                 } catch (Exception ex) {
                     Logger.getLogger(HealthCare.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                for (User user : users) {
+                    System.out.println(user.getPermissions());
+                }
             }
         });
-        
+
         StackPane root = new StackPane();
         root.getChildren().add(btn);
-        
+
         Scene scene = new Scene(root, 300, 250);
-        
+
         primaryStage.setTitle("Hello World!");
         primaryStage.setScene(scene);
         primaryStage.show();
@@ -54,5 +63,5 @@ public class HealthCare extends Application  {
     public static void main(String[] args) {
         launch(args);
     }
-    
+
 }

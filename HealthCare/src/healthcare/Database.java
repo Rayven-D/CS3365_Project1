@@ -43,6 +43,7 @@ public class Database {
         Object obj = new JSONParser().parse(new FileReader("./dummyData.JSON"));
         JSONObject jo = (JSONObject) obj;
         JSONArray ja = (JSONArray) jo.get("users");
+        
         Iterator itr2 = ja.iterator();
         Iterator<Map.Entry> itr1;
         while (itr2.hasNext()) {

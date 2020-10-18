@@ -14,7 +14,7 @@ public class AppointmentInformation {
     private String doctorName;
     private String date;
     private String time;
-    private String chart;
+    private PatientChart chart;
     private int active;
 
     public int getAppointmentId() {
@@ -49,11 +49,11 @@ public class AppointmentInformation {
         this.time = time;
     }
 
-    public String getChart() {
+    public PatientChart getChart() {
         return chart;
     }
 
-    public void setChart(String chart) {
+    public void setChart(PatientChart chart) {
         this.chart = chart;
     }
 

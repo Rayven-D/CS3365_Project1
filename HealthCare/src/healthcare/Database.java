@@ -122,7 +122,7 @@ public class Database {
             System.out.println(reader);
             // Convert JSON File to Java Object
             User[] userD = gson.fromJson(reader, User[].class);
-			// print staff
+            // print staff
             System.out.println(userD[0].getPaymentInformation().get(0).getAmount());
 
         } catch (IOException e) {

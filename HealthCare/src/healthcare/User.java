@@ -26,6 +26,22 @@ public class User {
     private ArrayList<AppointmentInformation> appointmentInformation = new ArrayList();
     private ArrayList<PaymentInformation> paymentInformation = new ArrayList();
 
+    public User(String firstName, String lastName, long userId, String password, long permissions, String dob, String address, long phoneNumber, long SSN, String healthInsurance) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userId = userId;
+        this.password = password;
+        this.permissions = permissions;
+        this.dob = dob;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+        this.SSN = SSN;
+        this.healthInsurance = healthInsurance;
+    }
+
+    public User() {
+    }
+
     public String getFirstName() {
         return firstName;
     }

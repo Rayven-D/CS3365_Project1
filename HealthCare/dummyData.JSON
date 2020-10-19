@@ -1,5 +1,4 @@
-{
-  "users": [{
+[{
     "firstName": "Frank",
     "lastName": "Bobby",
     "userId": 51,
@@ -8,7 +7,7 @@
     "dob": "2/5/1999",
     "address": "Fake Mc Fake Ln 7843",
     "phoneNumber": 254133789,
-    "ssn": 1337420,
+    "SSN": 1337420,
     "healthInsurance": "Texas Tech Insurance",
     "appointmentInformation": [{
       "appointmentId": 1,
@@ -16,18 +15,18 @@
       "date": "12/20/20",
       "time": "13:00",
       "active": 1,
-			"chart":{
-				"firstName":"Frank",
-				"lastName":"Bobby",
-				"weight":160,
-				"height":5.8,
-				"bloodPressure":120,
-				"reason":"He got sick lol",
-				"patientId":51
-			}
+      "chart": {
+        "firstName": "Frank",
+        "lastName": "Bobby",
+        "weight": 160,
+        "height": 5.8,
+        "bloodPressure": 120,
+        "reason": "He got sick lol",
+        "patientId": 51
+      }
     }],
     "paymentInformation": [{
-      "date": "12/20/20"
+      "date": "12/20/20",
       "amount": "250.25",
       "paymentType": "Visa Debit",
       "referanceNumber": 1
@@ -41,28 +40,28 @@
     "dob": "2/5/1999",
     "address": "Fake Mc Fake Ln 7843",
     "phoneNumber": 254133789,
-    "ssn": 1337420,
+    "SSN": 1337420,
     "healthInsurance": "Texas Tech Insurance",
     "appointmentInformation": [{
-      "appointmentId": 1,
-      "doctorName": "Dr. Faker 2020 Grad",
-      "date": "12/20/20",
-      "time": "13:00",
-      "active": 1,
-			"chart":{
-				"firstName":"Frank",
-				"lastName":"Bobby",
-				"weight":160,
-				"height":5.8,
-				"bloodPressure":120,
-				"reason":"He got sick lol",
-				"
-    }],
-    "paymentInformation": [{
-      "date": "12/20/20"
-      "amount": "250.25",
-      "paymentType": "Visa Debit",
-      "referanceNumber": 1
+        "appointmentId": 1,
+        "doctorName": "Dr. Faker 2020 Grad",
+        "date": "12/20/20",
+        "time": "13:00",
+        "active": 1,
+        "chart": {
+          "firstName": "Frank",
+          "lastName": "Bobby",
+          "weight": 160,
+          "height": 5.8,
+          "bloodPressure": 120,
+          "reason": "He got sick lol",
+          "patientId": 51
+        }
+        }],
+      "paymentInformation": [{
+        "date": "12/20/20",
+        "amount": "250.25",
+        "paymentType": "Visa Debit",
+        "referanceNumber": 1
+      }]
     }]
-  }]
-}

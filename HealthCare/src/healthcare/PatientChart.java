@@ -12,9 +12,9 @@ package healthcare;
 public class PatientChart {
     private String firstName;
     private String lastName;
-    private int weight;
-    private int height;
-    private int bloodPressure;
+    private float weight;
+    private float height;
+    private float bloodPressure;
     private String reason;
     private int patientId;
 
@@ -44,27 +44,27 @@ public class PatientChart {
         this.lastName = lastName;
     }
 
-    public int getWeight() {
+    public float getWeight() {
         return weight;
     }
 
-    public void setWeight(int weight) {
+    public void setWeight(float weight) {
         this.weight = weight;
     }
 
-    public int getHeight() {
+    public float getHeight() {
         return height;
     }
 
-    public void setHeight(int height) {
+    public void setHeight(float height) {
         this.height = height;
     }
 
-    public int getBloodPressure() {
+    public float getBloodPressure() {
         return bloodPressure;
     }
 
-    public void setBloodPressure(int bloodPressure) {
+    public void setBloodPressure(float bloodPressure) {
         this.bloodPressure = bloodPressure;
     }
 

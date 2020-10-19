@@ -20,6 +20,7 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
 
 import com.google.gson.Gson;
+import java.io.Reader;
 /**
  *
  * @author Arthr
@@ -115,10 +116,22 @@ public class Database {
     }
     
     private void parseDataFromJSON2() {
+        Gson gson = new Gson();
         
+        try (Reader reader = new FileReader("./dummyData.JSON")) {
+            System.out.println(reader);
+            // Convert JSON File to Java Object
+            User[] userD = gson.fromJson(reader, User[].class);
+			// print staff
+            System.out.println(userD[0].getPaymentInformation().get(0).getAmount());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public ArrayList<User> initDatabase() throws Exception {
-        this.parseDataFromJSON();
+//        this.parseDataFromJSON();
+          this.parseDataFromJSON2();
         return data;
     }
 

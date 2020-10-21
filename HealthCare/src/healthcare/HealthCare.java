@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package healthcare;
 
 import java.util.ArrayList;
@@ -25,7 +20,6 @@ public class HealthCare extends Application {
     Database db = new Database();
     ArrayList<User> users = new ArrayList();
 
-    ;
     @Override
     public void start(Stage primaryStage) {
         Button btn = new Button();
@@ -40,8 +34,8 @@ public class HealthCare extends Application {
                 } catch (Exception ex) {
                     Logger.getLogger(HealthCare.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-                if(db.saveData(users) == 1) {
+
+                if (db.saveData(users) == 1) {
                     System.out.println(users.get(0).getPaymentInformation().get(0).getPin());
                 };
                 for (User user : users) {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package healthcare;
 
 /**
@@ -10,14 +5,26 @@ package healthcare;
  * @author Arthr
  */
 public class AppointmentInformation {
-    private long appointmentId;
+
+    private int appointmentId;
     private String doctorName;
     private String date;
     private String time;
     private PatientChart chart;
-    private long active;
+    private int active;
 
-    public AppointmentInformation(long appointmentId, String doctorName, String date, String time, PatientChart chart, long active) {
+    /**
+     * Param Constructor
+     *
+     * @param appointmentId The special id for each appointment
+     * @param doctorName The doctor who the patient selected name
+     * @param date The date the appointment will take place mm/dd/yyyy format
+     * @param time The time the appointment will take place
+     * @param chart The chart object for this appointment
+     * @param active If the appointment is active then it can still happen if it
+     * isn't active then it is over
+     */
+    public AppointmentInformation(int appointmentId, String doctorName, String date, String time, PatientChart chart, int active) {
         this.appointmentId = appointmentId;
         this.doctorName = doctorName;
         this.date = date;
@@ -26,54 +33,118 @@ public class AppointmentInformation {
         this.active = active;
     }
 
+    /**
+     * Empty Constructor
+     */
     public AppointmentInformation() {
     }
 
-    public long getAppointmentId() {
+    /**
+     * Get Appointment ID
+     *
+     * @return Will return the appointment ID
+     */
+    public int getAppointmentId() {
         return appointmentId;
     }
 
-    public void setAppointmentId(long appointmentId) {
+    /**
+     * Set Appointment ID
+     *
+     * @param appointmentId The setter to the appointment ID
+     */
+    public void setAppointmentId(int appointmentId) {
         this.appointmentId = appointmentId;
     }
 
+    /**
+     * Get Doctor Name
+     *
+     * @return The Doctor who the patient wanted
+     */
     public String getDoctorName() {
         return doctorName;
     }
 
+    /**
+     * Set Doctor Name
+     *
+     * @param doctorName Will set the doctors name
+     */
     public void setDoctorName(String doctorName) {
         this.doctorName = doctorName;
     }
 
+    /**
+     * Get Date
+     *
+     * @return Will return the date string in a mm/dd/yyyy format
+     */
     public String getDate() {
         return date;
     }
 
+    /**
+     * Set Date
+     *
+     * @param date A string that takes a date with a mm/dd/yyyy format
+     */
     public void setDate(String date) {
         this.date = date;
     }
 
+    /**
+     * Get Time
+     *
+     * @return Will return time as a string. Place in AM/PM format for
+     * consistency
+     */
     public String getTime() {
         return time;
     }
 
+    /**
+     * Set Time
+     *
+     * @param time Time in a AM/PM format
+     */
     public void setTime(String time) {
         this.time = time;
     }
 
+    /**
+     * Get Chart
+     *
+     * @return will return the Patient Chart object
+     */
     public PatientChart getChart() {
         return chart;
     }
 
+    /**
+     * Set Chart
+     *
+     * @param chart A PatientChart object
+     */
     public void setChart(PatientChart chart) {
         this.chart = chart;
     }
 
-    public long getActive() {
+    /**
+     * Get Active
+     *
+     * @return If the appointment is still active
+     */
+    public int getActive() {
         return active;
     }
 
-    public void setActive(long active) {
+    /**
+     * Set Active
+     *
+     * @param active 0 or 1 if the appointment is active or not. 1 being active
+     */
+    public void setActive(int active) {
         this.active = active;
     }
 }

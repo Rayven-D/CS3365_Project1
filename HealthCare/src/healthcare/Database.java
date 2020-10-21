@@ -1,24 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package healthcare;
 
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.nio.charset.*;
-
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Iterator;
-import java.util.Map;
-
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.*;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import java.io.FileNotFoundException;
@@ -35,6 +19,9 @@ public class Database {
 
     private ArrayList<User> data;
 
+    /**
+     * Constructor
+     */
     public Database() {
         this.data = new ArrayList();
     }
@@ -42,7 +29,6 @@ public class Database {
     private void parseDataFromJSON() {
         Gson gson = new Gson();
         try (Reader reader = new FileReader("./dummyData.JSON")) {
-            // Convert JSON File to Java Object
             data = gson.fromJson(reader, new TypeToken<ArrayList<User>>() {
             }.getType());
         } catch (IOException e) {
@@ -50,11 +36,23 @@ public class Database {
         }
     }
 
+    /**
+     * initDatabases
+     *
+     * @return An ArrayList containing all the user data.
+     * @throws Exception To catch any file issues
+     */
     public ArrayList<User> initDatabase() throws Exception {
         this.parseDataFromJSON();
         return data;
     }
 
+    /**
+     * saveData will save the data to a JSON file.
+     *
+     * @param users An ArrayList of users.
+     * @return Will return 1 or 0 depending if the save was successful.
+     */
     public int saveData(ArrayList users) {
         int checker = 0;
         Gson gson = new Gson();
@@ -67,27 +65,4 @@ public class Database {
         }
         return checker;
     }
-
-//    public int saveNewPatientAppointment() {
-//        int checker = 0;
-//        return checker;
-//    }
-//
-//    public int deletePatientAppointment() {
-//        int checker = 0;
-//
-//        return checker;
-//    }
-//
-//    public int savePaymentInformation() {
-//        int checker = 0;
-//
-//        return checker;
-//    }
-//
-//    public int deletePaymentInformation() {
-//        int checker = 0;
-//
-//        return checker;
-//    }
 }

@@ -10,10 +10,31 @@ package healthcare;
  * @author Arthr
  */
 public class PaymentInformation {
+
     private String date;
     private float amount;
     private String paymentType;
     private int referacneNumber;
+    private int pin;
+
+    public int getPin() {
+        return pin;
+    }
+
+    public void setPin(int pin) {
+        this.pin = pin;
+    }
+
+    public PaymentInformation(String date, float amount, String paymentType, int referacneNumber, int pin) {
+        this.date = date;
+        this.amount = amount;
+        this.paymentType = paymentType;
+        this.referacneNumber = referacneNumber;
+        this.pin = pin;
+    }
+
+    public PaymentInformation() {
+    }
 
     public String getDate() {
         return date;

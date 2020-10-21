@@ -17,6 +17,18 @@ public class AppointmentInformation {
     private PatientChart chart;
     private long active;
 
+    public AppointmentInformation(long appointmentId, String doctorName, String date, String time, PatientChart chart, long active) {
+        this.appointmentId = appointmentId;
+        this.doctorName = doctorName;
+        this.date = date;
+        this.time = time;
+        this.chart = chart;
+        this.active = active;
+    }
+
+    public AppointmentInformation() {
+    }
+
     public long getAppointmentId() {
         return appointmentId;
     }

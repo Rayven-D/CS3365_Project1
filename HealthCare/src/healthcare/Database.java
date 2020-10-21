@@ -20,7 +20,13 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.*;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.io.Reader;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Arthr
@@ -33,132 +39,55 @@ public class Database {
         this.data = new ArrayList();
     }
 
-    private void parseDataFromJSON() throws Exception {
-        User user = new User();
-        Object obj = new JSONParser().parse(new FileReader("./dummyData.JSON"));
-        JSONObject jo = (JSONObject) obj;
-        JSONArray ja = (JSONArray) jo.get("users");
-
-        Iterator itr2 = ja.iterator();
-        Iterator<Map.Entry> itr1;
-        while (itr2.hasNext()) {
-            user = new User();
-            itr1 = ((Map) itr2.next()).entrySet().iterator();
-            while (itr1.hasNext()) {
-                Map.Entry pair = itr1.next();
-                if (pair.getKey().toString().equals("firstName")) {
-                    user.setFirstName(pair.getValue().toString());
-                }
-                if (pair.getKey().equals("lastName")) {
-                    user.setLastName(pair.getValue().toString());
-                }
-                if (pair.getKey().equals("userId")) {
-                    user.setUserId((long) pair.getValue());
-                }
-                if (pair.getKey().equals("password")) {
-                    user.setPassword(pair.getValue().toString());
-                }
-                if (pair.getKey().equals("permissions")) {
-                    user.setPermissions((long) pair.getValue());
-                }
-                if (pair.getKey().equals("dob")) {
-                    user.setDob(pair.getValue().toString());
-                }
-                if (pair.getKey().equals("address")) {
-                    user.setAddress(pair.getValue().toString());
-                }
-                if (pair.getKey().equals("phonenumber")) {
-                    user.setPhoneNumber((long) pair.getValue());
-                }
-                if (pair.getKey().equals("ssn")) {
-                    user.setSSN((long) pair.getValue());
-                }
-                if (pair.getKey().equals("healthInsurance")) {
-                    user.setHealthInsurance(pair.getValue().toString());
-                }
-                if (pair.getKey().equals("appointmentInformation")) {
-                    JSONObject ai = (JSONObject) pair.getValue();
-                    JSONArray appointInfo = (JSONArray) ai.get("appointmentInformation");
-                    Iterator appointInfoItr2 = appointInfo.iterator();
-                    Iterator<Map.Entry> appointInfoItr1;
-                    appointInfoItr1 = ((Map) appointInfoItr2.next()).entrySet().iterator();
-                    ArrayList<AppointmentInformation> appointments = new ArrayList();
-                    while (appointInfoItr2.hasNext()) {
-                        AppointmentInformation appointment = new AppointmentInformation();
-                        while (appointInfoItr1.hasNext()) {
-                            if (pair.getKey().equals("appointmentId")) {
-                                appointment.setAppointmentId((long) pair.getValue());
-                            }
-                            if (pair.getKey().equals("doctorName")) {
-                                appointment.setDoctorName(pair.getValue().toString());
-                            }
-                            if (pair.getKey().equals("date")) {
-                                appointment.setDate(pair.getValue().toString());
-                            }
-                            if (pair.getKey().equals("time")) {
-                                appointment.setTime(pair.getValue().toString());
-                            }
-                            if (pair.getKey().equals("active")) {
-                                appointment.setActive((long)pair.getValue());
-                            }
-                            if (pair.getKey().equals("chart")) {
-                            }
-                        }
-                    }
-                    System.out.println(pair.getKey() + " : " + pair.getValue());
-                }
-                if (pair.getKey().equals("paymentInformation")) {
-                    System.out.println(pair.getKey() + " : " + pair.getValue());
-                }
-            }
-            data.add(user);
-        }
-    }
-    
-    private void parseDataFromJSON2() {
+    private void parseDataFromJSON() {
         Gson gson = new Gson();
-        
         try (Reader reader = new FileReader("./dummyData.JSON")) {
-            System.out.println(reader);
             // Convert JSON File to Java Object
-            User[] userD = gson.fromJson(reader, User[].class);
-            // print staff
-            System.out.println(userD[0].getPaymentInformation().get(0).getAmount());
-
+            data = gson.fromJson(reader, new TypeToken<ArrayList<User>>() {
+            }.getType());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     public ArrayList<User> initDatabase() throws Exception {
-//        this.parseDataFromJSON();
-          this.parseDataFromJSON2();
+        this.parseDataFromJSON();
         return data;
     }
 
-    public void saveData(ArrayList users) {
-
-    }
-
-    public int saveNewPatientAppointment() {
+    public int saveData(ArrayList users) {
         int checker = 0;
+        Gson gson = new Gson();
+        String json = gson.toJson(users);
+        try (PrintWriter out = new PrintWriter("./dummyData.JSON")) {
+            out.println(json);
+            checker = 1;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return checker;
     }
 
-    public int deletePatientAppointment() {
-        int checker = 0;
-
-        return checker;
-    }
-
-    public int savePaymentInformation() {
-        int checker = 0;
-
-        return checker;
-    }
-
-    public int deletePaymentInformation() {
-        int checker = 0;
-
-        return checker;
-    }
+//    public int saveNewPatientAppointment() {
+//        int checker = 0;
+//        return checker;
+//    }
+//
+//    public int deletePatientAppointment() {
+//        int checker = 0;
+//
+//        return checker;
+//    }
+//
+//    public int savePaymentInformation() {
+//        int checker = 0;
+//
+//        return checker;
+//    }
+//
+//    public int deletePaymentInformation() {
+//        int checker = 0;
+//
+//        return checker;
+//    }
 }

@@ -35,12 +35,15 @@ public class HealthCare extends Application {
 
             @Override
             public void handle(ActionEvent event) {
-                System.out.println("Hello World!");
                 try {
                     users = db.initDatabase();
                 } catch (Exception ex) {
                     Logger.getLogger(HealthCare.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
+                if(db.saveData(users) == 1) {
+                    System.out.println(users.get(0).getPaymentInformation().get(0).getPin());
+                };
                 for (User user : users) {
                     System.out.println(user.getAppointmentInformation().get(0).getAppointmentId());
                 }

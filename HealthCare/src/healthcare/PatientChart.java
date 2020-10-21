@@ -10,42 +10,44 @@ package healthcare;
  * @author Arthr
  */
 public class PatientChart {
-    private String firstName;
-    private String lastName;
+
     private float weight;
     private float height;
     private float bloodPressure;
     private String reason;
-    private int patientId;
+    private String treatment;
+    private String prescription;
 
-    public PatientChart(String firstName, String lastName, int weight, int height, int bloodPressure, String reason, int patientId) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public PatientChart(int weight, int height, int bloodPressure, String reason, int patientId, String treatment, String prescription) {
         this.weight = weight;
         this.height = height;
         this.bloodPressure = bloodPressure;
         this.reason = reason;
-        this.patientId = patientId;
+        this.treatment = treatment;
+        this.prescription = prescription;
+    }
+
+    public PatientChart() {
     }
     
-    public String getFirstName() {
-        return firstName;
+    public String getPrescription() {
+        return prescription;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setPrescription(String prescription) {
+        this.prescription = prescription;
     }
 
     public float getWeight() {
         return weight;
+    }
+
+    public String getTreatment() {
+        return treatment;
+    }
+
+    public void setTreatment(String treatment) {
+        this.treatment = treatment;
     }
 
     public void setWeight(float weight) {
@@ -76,12 +78,4 @@ public class PatientChart {
         this.reason = reason;
     }
 
-    public int getPatientId() {
-        return patientId;
-    }
-
-    public void setPatientId(int patientId) {
-        this.patientId = patientId;
-    }
-    
 }

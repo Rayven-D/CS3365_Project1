@@ -18,6 +18,7 @@ public class User {
     private int phoneNumber;
     private int SSN;
     private String healthInsurance;
+    private int[] availabilityTimes;
     private ArrayList<AppointmentInformation> appointmentInformation = new ArrayList();
     private ArrayList<PaymentInformation> paymentInformation = new ArrayList();
 
@@ -35,8 +36,9 @@ public class User {
      * @param phoneNumber User's Phone number
      * @param SSN User's SSN
      * @param healthInsurance User's Health insurance provider
+     * @param availabilityTimes Array of availablityTimes, 0 being available and 1 being unavailable from 9am to 10pm each number is a 30minute increment
      */
-    public User(String firstName, String lastName, int userId, String password, int permissions, String dob, String address, int phoneNumber, int SSN, String healthInsurance) {
+    public User(String firstName, String lastName, int userId, String password, int permissions, String dob, String address, int phoneNumber, int SSN, String healthInsurance, int[] availabilityTimes) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.userId = userId;
@@ -47,6 +49,7 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.SSN = SSN;
         this.healthInsurance = healthInsurance;
+        this.availabilityTimes = availabilityTimes;
     }
 
     /**
@@ -270,4 +273,22 @@ public class User {
     public void setHealthInsurance(String healthInsurance) {
         this.healthInsurance = healthInsurance;
     }
+
+    /**
+     * Get Availability Times
+     * @return An array containing available times, 0 being available and 1 being unavailable
+     */
+    public int[] getAvailabilityTimes() {
+        return availabilityTimes;
+    }
+
+    /**
+     * Set Availability times
+     * @param availabilityTimes An Array of availability times, 0 being available and 1 being unavailable
+     */
+    public void setAvailabilityTimes(int[] availabilityTimes) {
+        this.availabilityTimes = availabilityTimes;
+    }
+    
+    
 }

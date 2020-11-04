@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 public class Database {
 
     private ArrayList<User> data;
+    private ArrayList<Report> reports;
 
     /**
      * Constructor
@@ -28,10 +29,18 @@ public class Database {
 
     private void parseDataFromJSON() {
         Gson gson = new Gson();
-        try (Reader reader = new FileReader("./dummyData.JSON")) {
+        try (Reader reader = new FileReader("./DB/users.json")) {
             data = gson.fromJson(reader, new TypeToken<ArrayList<User>>() {
             }.getType());
         } catch (IOException e) {
+            System.out.println("Something wrong with getting Users JSON file.");
+            e.printStackTrace();
+        }
+        try (Reader reader = new FileReader("./DB/dailyreports.json")) {
+            reports = gson.fromJson(reader, new TypeToken<ArrayList<Report>>() {
+            }.getType());
+        } catch (IOException e) {
+            System.out.println("Something wrong with getting Daily Reports JSON file.");
             e.printStackTrace();
         }
     }
@@ -57,7 +66,7 @@ public class Database {
         int checker = 0;
         Gson gson = new Gson();
         String json = gson.toJson(users);
-        try (PrintWriter out = new PrintWriter("./dummyData.JSON")) {
+        try (PrintWriter out = new PrintWriter("./DB/users.JSON")) {
             out.println(json);
             checker = 1;
         } catch (FileNotFoundException ex) {

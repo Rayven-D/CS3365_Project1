@@ -101,13 +101,6 @@ public class LoginInterface extends Application {
             }
             loginInfo.getChildren().add(errorMessage);                            
         }
-    }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
-    
+    }    
+       
 }

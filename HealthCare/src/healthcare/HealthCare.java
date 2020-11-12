@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 public class HealthCare extends Application {
 
     Database db = new Database();
-    ArrayList<User> users = new ArrayList();
+    ArrayList<User_Old> users = new ArrayList();
 
     @Override
     public void start(Stage primaryStage) {
@@ -38,7 +38,7 @@ public class HealthCare extends Application {
                 if (db.saveData(users) == 1) {
                     System.out.println(users.get(0).getPaymentInformation().get(0).getPin());
                 };
-                for (User user : users) {
+                for (User_Old user : users) {
                     System.out.println(user.getAppointmentInformation().get(0).getAppointmentId());
                 }
             }

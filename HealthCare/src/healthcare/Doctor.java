@@ -12,6 +12,8 @@ import java.util.*;
  * @author fract
  */
 public class Doctor extends User{
+    
+    private int dailyPatientCount;
 
     public Doctor(int id, String password, String name, int permissions) {
         setId(id);
@@ -22,7 +24,10 @@ public class Doctor extends User{
     
     @Override
     public String[] methodList() {
-        
+        String[] mlist;
+        return mlist;
     }
+    
+    
     
 }

@@ -4,8 +4,6 @@
  * and open the template in the editor.
  */
 package healthcare;
-
-import java.util.*;
 /**
  *
  * @author fract

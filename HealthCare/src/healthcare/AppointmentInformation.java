@@ -10,7 +10,7 @@ public class AppointmentInformation {
     private String doctorName;
     private String date;
     private String time;
-    private PatientChart chart;
+    private PatientChart_Old chart;
     private int active;
 
     /**
@@ -24,7 +24,7 @@ public class AppointmentInformation {
      * @param active If the appointment is active then it can still happen if it
      * isn't active then it is over
      */
-    public AppointmentInformation(int appointmentId, String doctorName, String date, String time, PatientChart chart, int active) {
+    public AppointmentInformation(int appointmentId, String doctorName, String date, String time, PatientChart_Old chart, int active) {
         this.appointmentId = appointmentId;
         this.doctorName = doctorName;
         this.date = date;
@@ -117,7 +117,7 @@ public class AppointmentInformation {
      *
      * @return will return the Patient Chart object
      */
-    public PatientChart getChart() {
+    public PatientChart_Old getChart() {
         return chart;
     }
 
@@ -126,7 +126,7 @@ public class AppointmentInformation {
      *
      * @param chart A PatientChart object
      */
-    public void setChart(PatientChart chart) {
+    public void setChart(PatientChart_Old chart) {
         this.chart = chart;
     }
 

@@ -68,5 +68,4 @@ abstract class User {
         return new_user;
     }
     
-    public abstract String[] methodList();
 }

@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 public class Database {
 
-    private ArrayList<User_Old> data;
+    private ArrayList<User> data;
 
     /**
      * Constructor
@@ -29,7 +29,7 @@ public class Database {
     private void parseDataFromJSON() {
         Gson gson = new Gson();
         try (Reader reader = new FileReader("./dummyData.JSON")) {
-            data = gson.fromJson(reader, new TypeToken<ArrayList<User_Old>>() {
+            data = gson.fromJson(reader, new TypeToken<ArrayList<User>>() {
             }.getType());
         } catch (IOException e) {
             e.printStackTrace();
@@ -42,7 +42,7 @@ public class Database {
      * @return An ArrayList containing all the user data.
      * @throws Exception To catch any file issues
      */
-    public ArrayList<User_Old> initDatabase() throws Exception {
+    public ArrayList<User> initDatabase() throws Exception {
         this.parseDataFromJSON();
         return data;
     }

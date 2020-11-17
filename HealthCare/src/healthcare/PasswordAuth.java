@@ -29,7 +29,7 @@ public class PasswordAuth {
     
     public boolean usernameFound(String username){
         for(int i = 0 ; i < data.size(); i++){
-            if(username.equals(data.get(i).getLastName())){
+            if(username.equals(data.get(i).getName())){
                 curUser = data.get(i);
                 return true;
             }

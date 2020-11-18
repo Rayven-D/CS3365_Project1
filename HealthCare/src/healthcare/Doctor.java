@@ -13,8 +13,7 @@ import java.util.*;
  */
 public class Doctor extends User{
     
-    private int dailyPatientCount;
-
+    private ArrayList<Day> availabilityDates;
     public Doctor(int id, String password, String name, int permissions) {
         setId(id);
         setPassword(password);
@@ -34,6 +33,14 @@ public class Doctor extends User{
         pat_info.add(patient.getCurrent_visit()); //Current treatmentRecord (starts off almost blank/ requires updating)
         pat_info.trimToSize();
         return pat_info;
+    }
+
+    public ArrayList<Day> getAvailabilityDates() {
+        return availabilityDates;
+    }
+
+    public void setAvailabilityDates(ArrayList<Day> availabilityDates) {
+        this.availabilityDates = availabilityDates;
     }
     
     public void changePatient_name(PatientChart patient, String new_name) {

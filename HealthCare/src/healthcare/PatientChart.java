@@ -23,6 +23,9 @@ public class PatientChart {
     private ArrayList treatment_record_arr;
     private TreatmentRecord previous_visit;
     private TreatmentRecord current_visit;
+
+    public PatientChart() {
+    }
     
     // Constructor for adding new patient into system
     public PatientChart(String patient_name, String birthday, String address, int ssn, String insurance, PaymentInformation patient_payment, int patient_id) {

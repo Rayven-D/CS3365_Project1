@@ -18,8 +18,8 @@ import javafx.stage.Stage;
 public class HealthCare extends Application {
 
     Database db = new Database();
-    ArrayList<User_Old> users = new ArrayList();
-
+    ArrayList<User> users = new ArrayList();
+    ArrayList<PatientChart> charts = new ArrayList();
     @Override
     public void start(Stage primaryStage) {
         Button btn = new Button();
@@ -32,18 +32,15 @@ public class HealthCare extends Application {
 
                 //GET DATABSE INFORMATION AND PUT IT INTO USERS
                 try {
-                    users = db.initDatabase();
+                    users = db.getUsers();
+                    charts = db.getCharts();
                 } catch (Exception ex) {
                     Logger.getLogger(HealthCare.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 //PULLING DATA FROM USERS EXAMPLE AFTER GETTING FROM DB
-                if (db.saveData(users) == 1) {
-                    System.out.println(users.get(0).getPaymentInformation().get(0).getPin());
-                };
-                for (User_Old user : users) {
-                    System.out.println(user.getAppointmentInformation().get(0).getAppointmentId());
-                }
+                //users.get(0).changePatient_name(new PatientChart(),"bob");
+                System.out.println(db.getSingleAvailability(124).get(0).getPatientCount());
             }
         });
 

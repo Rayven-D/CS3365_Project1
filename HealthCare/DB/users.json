@@ -1,1 +1,31 @@
-[{"firstName":"ArthurLee","lastName":"Bobby","userId":51,"password":"abc123stronkpassword","permissions":3,"dob":"2/5/1999","address":"Fake Mc Fake Ln 7843","phoneNumber":254133789,"SSN":1337420,"healthInsurance":"Texas Tech Insurance","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"appointmentInformation":[{"appointmentId":1,"doctorName":"Dr. Faker 2020 Grad","date":"12/20/20","time":"13:00","chart":{"weight":160.0,"height":5.8,"bloodPressure":120.0,"reason":"He got sick lol","treatment":"Get gud","prescription":"Dont get sick"},"active":1}],"paymentInformation":[{"date":"12/20/20","amount":250.25,"paymentType":"Visa Debit","referenceNumber":0,"pin":1234}]},{"firstName":"John","lastName":"Jill","userId":52,"password":"abc123stronkpassword","permissions":3,"dob":"2/5/1999","address":"Fake Mc Fake Ln 7843","phoneNumber":254133789,"SSN":1337420,"healthInsurance":"Texas Tech Insurance","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],"appointmentInformation":[{"appointmentId":1,"doctorName":"Dr. Faker 2020 Grad","date":"12/20/20","time":"13:00","chart":{"weight":160.0,"height":5.8,"bloodPressure":120.0,"reason":"He got sick lol","treatment":"Get gud","prescription":"Dont get sick"},"active":1}],"paymentInformation":[{"date":"12/20/20","amount":250.25,"paymentType":"Visa Debit","referenceNumber":0,"pin":1337}]}]
+[{
+    "id": 124,
+    "password": "abc124",
+    "name": "Dr. Liam",
+    "permissions": 2
+}, {
+  "id": 123,
+  "password": "abc123",
+  "name": "Dr. Jones",
+  "permissions": 2
+}, {
+  "id": 125,
+  "password": "abc125",
+  "name": "Dr. Rayven",
+  "permissions": 2
+}, {
+  "id": 126,
+  "password": "abc126",
+  "name": "Jane",
+  "permissions": 0
+}, {
+  "id": 127,
+  "password": "abc127",
+  "name": "Tim",
+  "permissions": 1
+}, {
+  "id": 128,
+  "password": "abc127",
+  "name": "Dr. CEO. Bob Mc Bobber",
+  "permissions": 3
+}]

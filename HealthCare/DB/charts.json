@@ -1,0 +1,56 @@
+[{
+    "patient_name": "Frank Franker",
+    "birthday": "12/12/2020",
+    "address": "21 hundo mac davo lano",
+    "ssn": 1337445,
+    "insurance": "KEKW Tech insurance",
+    "patient_payment": {
+      "date":"12/12/1111",
+      "amount":1337,
+      "paymentType":"Card",
+      "referenceNumber":1,
+      "pin":1100
+    },
+    "patient_id":500,
+    "treatment_record_arr":[
+      {
+        "appointment_date":"12/12/1111",
+        "reason_for_visit":"Corona",
+        "weight":120,
+        "height":300,
+        "blood_pressure":123,
+        "treatment":"Get gud",
+        "prescription":"lol pills",
+        "visited_doctor":"Dr. Rayven"
+      },{
+        "appointment_date":"12/12/2222",
+        "reason_for_visit":"Corona phase 2",
+        "weight":120,
+        "height":300,
+        "blood_pressure":123,
+        "treatment":"Get gud",
+        "prescription":"lol more pills",
+        "visited_doctor":"Dr. Rayven"
+      }
+    ],
+    "previous_visit":{
+      "appointment_date":"12/12/1111",
+      "reason_for_visit":"Corona",
+      "weight":120,
+      "height":300,
+      "blood_pressure":123,
+      "treatment":"Get gud",
+      "prescription":"lol pills",
+      "visited_doctor":"Dr. Rayven"
+    },
+    "current_visit":{
+      "appointment_date":"12/12/2222",
+      "reason_for_visit":"Corona phase 2",
+      "weight":120,
+      "height":300,
+      "blood_pressure":123,
+      "treatment":"Get gud",
+      "prescription":"lol more pills",
+      "visited_doctor":"Dr. Rayven"
+    }
+}]

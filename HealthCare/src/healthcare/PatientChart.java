@@ -1,149 +1,140 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package healthcare;
 
+import java.util.ArrayList;
 /**
  *
- * @author Arthr
+ * @author fract
  */
 public class PatientChart {
-
-    private float weight;
-    private float height;
-    private float bloodPressure;
-    private String reason;
-    private String treatment;
-    private String prescription;
-
-    /**
-     * Param Constructor
-     *
-     * @param weight The weight of the patient
-     * @param height The height of the patient
-     * @param bloodPressure The blood pressure of the patient
-     * @param reason The reason behind the visit
-     * @param treatment The treatment provided by the doctor
-     * @param prescription The prescription provided by the doctor
-     */
-    public PatientChart(int weight, int height, int bloodPressure, String reason, String treatment, String prescription) {
-        this.weight = weight;
-        this.height = height;
-        this.bloodPressure = bloodPressure;
-        this.reason = reason;
-        this.treatment = treatment;
-        this.prescription = prescription;
+    
+    private String patient_name;
+    private String birthday;
+    private String address;
+    private int ssn;
+    private String insurance;
+    private PaymentInformation patient_payment;
+    private int patient_id;
+    
+    private ArrayList treatment_record_arr;
+    private TreatmentRecord previous_visit;
+    private TreatmentRecord current_visit;
+    
+    // Constructor for adding new patient into system
+    public PatientChart(String patient_name, String birthday, String address, int ssn, String insurance, PaymentInformation patient_payment, int patient_id) {
+        this.patient_name = patient_name;
+        this.birthday = birthday;
+        this.address = address;
+        this.ssn = ssn;
+        this.insurance = insurance;
+        this.patient_payment = patient_payment;
+        this.patient_id = patient_id;
+        this.previous_visit = null;
+        this.current_visit = new TreatmentRecord();
+        
+        this.treatment_record_arr.add(this.current_visit);
+        this.treatment_record_arr.trimToSize();
     }
 
-    /**
-     * Empty Constructor
-     */
-    public PatientChart() {
+    // Constructor for existing patient (has had previous visits) ----- Should run on start-up to add existing patients back into system
+    public PatientChart(String patient_name, String birthday, String address, int ssn, String insurance, PaymentInformation patient_payment, int patient_id, ArrayList treatment_record) {
+        this.patient_name = patient_name;
+        this.birthday = birthday;
+        this.address = address;
+        this.ssn = ssn;
+        this.insurance = insurance;
+        this.patient_payment = patient_payment;
+        this.patient_id = patient_id;
+        
+        this.treatment_record_arr = treatment_record;
+        this.treatment_record_arr.trimToSize();
+        int temp = this.treatment_record_arr.size();
+        this.previous_visit = (TreatmentRecord) this.treatment_record_arr.get(temp);
+        
+        this.current_visit = new TreatmentRecord(this.previous_visit); //To show blank treatment record for current visit and to allow nurse/doctor to "update" previous values (height/weight/etc)
+        this.treatment_record_arr.add(this.current_visit); //Adds current visit to ArrayList in order to update Treatment_Record JSON from just the ArrayList.
+    }                                                      //NOTE: Current_visit in ArrayList will be replaced with updated version of this.current_visit once any values are changed.
+
+    public String getPatient_name() {
+        return patient_name;
     }
 
-    /**
-     * Get Prescription
-     *
-     * @return The prescription provided by the doctor
-     */
-    public String getPrescription() {
-        return prescription;
+    public void setPatient_name(String patient_name) {
+        this.patient_name = patient_name;
     }
 
-    /**
-     * Set Prescription
-     *
-     * @param prescription New Prescription
-     */
-    public void setPrescription(String prescription) {
-        this.prescription = prescription;
+    public String getBirthday() {
+        return birthday;
     }
 
-    /**
-     * Get Weight
-     *
-     * @return The User's weight
-     */
-    public float getWeight() {
-        return weight;
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 
-    /**
-     * Set Weight
-     *
-     * @param weight New patient weight
-     */
-    public void setWeight(float weight) {
-        this.weight = weight;
+    public String getAddress() {
+        return address;
     }
 
-    /**
-     * Get Treatment
-     *
-     * @return The Treatment provided by the doctor
-     */
-    public String getTreatment() {
-        return treatment;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    /**
-     * Set Treatment
-     *
-     * @param treatment New treatment by doctor
-     */
-    public void setTreatment(String treatment) {
-        this.treatment = treatment;
+    public int getSsn() {
+        return ssn;
     }
 
-    /**
-     * Get Height
-     *
-     * @return The User's Height
-     */
-    public float getHeight() {
-        return height;
+    public void setSsn(int ssn) {
+        this.ssn = ssn;
     }
 
-    /**
-     * Set Height
-     *
-     * @param height New patient height
-     */
-    public void setHeight(float height) {
-        this.height = height;
+    public String getInsurance() {
+        return insurance;
     }
 
-    /**
-     * Get Blood Pressure
-     *
-     * @return The User's blood pressure
-     */
-    public float getBloodPressure() {
-        return bloodPressure;
+    public void setInsurance(String insurance) {
+        this.insurance = insurance;
     }
 
-    /**
-     * Set Blood Pressure
-     *
-     * @param bloodPressure New patient blood pressure
-     */
-    public void setBloodPressure(float bloodPressure) {
-        this.bloodPressure = bloodPressure;
+    public PaymentInformation getPatient_payment() {
+        return patient_payment;
     }
 
-    /**
-     * Get Reason
-     *
-     * @return The User's reason for visit
-     */
-    public String getReason() {
-        return reason;
+    public void setPatient_payment(PaymentInformation patient_payment) {
+        this.patient_payment = patient_payment;
     }
 
-    /**
-     * Set Reason
-     *
-     * @param reason New patient's reason for visit
-     */
-    public void setReason(String reason) {
-        this.reason = reason;
+    public int getPatient_id() {
+        return patient_id;
     }
 
+    public void setPatient_id(int patient_id) {
+        this.patient_id = patient_id;
+    }
+
+    public ArrayList getTreatment_record_arr() {
+        return treatment_record_arr;
+    }
+
+    public void setTreatment_record_arr(ArrayList treatment_record_arr) {
+        this.treatment_record_arr = treatment_record_arr;
+    }
+
+    public TreatmentRecord getCurrent_visit() {
+        return current_visit;
+    }
+
+    public void setCurrent_visit(TreatmentRecord current_visit) {
+        this.current_visit = current_visit;
+        
+        int temp = this.treatment_record_arr.size(); //Updates the current_visit in the arraylist with the version that has updated values. 
+        this.treatment_record_arr.set(temp, current_visit);
+    }
+    
+    
+    
+    
 }

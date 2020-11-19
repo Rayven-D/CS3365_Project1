@@ -18,11 +18,8 @@ import java.util.logging.Logger;
 public class Database {
 
     private ArrayList<User> data;
-<<<<<<< HEAD
-=======
     private ArrayList<PatientChart> charts;
     private ArrayList<Availability> availabilityTimes;
->>>>>>> a24e0f9a6f99d969e2f82a6fa7cce07bfb0fe604
 
     /**
      * Constructor
@@ -33,13 +30,8 @@ public class Database {
 
     private void parseDataFromJSON() {
         Gson gson = new Gson();
-<<<<<<< HEAD
-        try (Reader reader = new FileReader("./dummyData.JSON")) {
-            data = gson.fromJson(reader, new TypeToken<ArrayList<User>>() {
-=======
         try (Reader reader = new FileReader("./DB/users.json")) {
             data = gson.fromJson(reader, new TypeToken<ArrayList<BaseResponse>>() {
->>>>>>> a24e0f9a6f99d969e2f82a6fa7cce07bfb0fe604
             }.getType());
         } catch (IOException e) {
             System.out.println("Something wrong with getting Users JSON file.");
@@ -68,11 +60,7 @@ public class Database {
      * @return An ArrayList containing all the user data.
      * @throws Exception To catch any file issues
      */
-<<<<<<< HEAD
-    public ArrayList<User> initDatabase() throws Exception {
-=======
     public ArrayList<User> getUsers() throws Exception {
->>>>>>> a24e0f9a6f99d969e2f82a6fa7cce07bfb0fe604
         this.parseDataFromJSON();
         return data;
     }

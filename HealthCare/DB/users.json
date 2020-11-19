@@ -1,0 +1,31 @@
+[{
+    "id": 124,
+    "password": "abc124",
+    "name": "Dr. Liam",
+    "permissions": 2
+}, {
+  "id": 123,
+  "password": "abc123",
+  "name": "Dr. Jones",
+  "permissions": 2
+}, {
+  "id": 125,
+  "password": "abc125",
+  "name": "Dr. Rayven",
+  "permissions": 2
+}, {
+  "id": 126,
+  "password": "abc126",
+  "name": "Jane",
+  "permissions": 0
+}, {
+  "id": 127,
+  "password": "abc127",
+  "name": "Tim",
+  "permissions": 1
+}, {
+  "id": 128,
+  "password": "abc127",
+  "name": "Dr. CEO. Bob Mc Bobber",
+  "permissions": 3
+}]

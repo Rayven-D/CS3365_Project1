@@ -14,6 +14,7 @@ import java.util.ArrayList;
  * @author Rayven
  */
 public class HealthCare extends Application {
+<<<<<<< HEAD
     ArrayList<PatientChart> charts;
     @Override
     public void start(Stage primaryStage) {}
@@ -32,6 +33,44 @@ public class HealthCare extends Application {
             
         }
         
+=======
+
+    Database db = new Database();
+    ArrayList<User> users = new ArrayList();
+    ArrayList<PatientChart> charts = new ArrayList();
+    @Override
+    public void start(Stage primaryStage) {
+        Button btn = new Button();
+
+        btn.setText("Say 'Hello World'");
+        btn.setOnAction(new EventHandler<ActionEvent>() {
+
+            @Override
+            public void handle(ActionEvent event) {
+
+                //GET DATABSE INFORMATION AND PUT IT INTO USERS
+                try {
+                    users = db.getUsers();
+                    charts = db.getCharts();
+                } catch (Exception ex) {
+                    Logger.getLogger(HealthCare.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                //PULLING DATA FROM USERS EXAMPLE AFTER GETTING FROM DB
+                //users.get(0).changePatient_name(new PatientChart(),"bob");
+                System.out.println(db.getSingleAvailability(124).get(0).getPatientCount());
+            }
+        });
+
+        StackPane root = new StackPane();
+        root.getChildren().add(btn);
+
+        Scene scene = new Scene(root, 300, 250);
+
+        primaryStage.setTitle("Hello World!");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+>>>>>>> a24e0f9a6f99d969e2f82a6fa7cce07bfb0fe604
     }
 
     /**

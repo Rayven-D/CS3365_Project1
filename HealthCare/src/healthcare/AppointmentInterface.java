@@ -100,6 +100,9 @@ public class AppointmentInterface{
         
             
     }
+    public void setCheckInScene(){
+        
+    }
     
     public void handle(Event e){
         if(e.getSource() == this.apptDocCombo || e.getSource() == this.apptDateCombo){
@@ -123,12 +126,6 @@ public class AppointmentInterface{
                 }
             }
         }
-    }
-    
-   
-    
-    public void setCheckInScene(){
-        
     }
     
     public Scene getAppointmentScene(){

@@ -7,15 +7,12 @@ package healthcare;
 
 import java.util.ArrayList;
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.geometry.*;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -241,6 +238,10 @@ public class HealthCareInterface extends Application {
         
     }
     
+    public void setStaffInterface(){
+        
+    }
+    
     public void fillChartInfo(PatientChart curPatient){
         this.nameField.setText(curPatient.getPatient_name());
         this.birthdayField.setText(curPatient.getBirthday());
@@ -280,7 +281,15 @@ public class HealthCareInterface extends Application {
                 loginInfo.getChildren().add(errorMessage);
             }else{
                 curUser = this.passAuth.allowUser();
-                this.runChartInterface();
+                if(curUser instanceof Staff){
+                    AppointmentInterface apptInterface = new AppointmentInterface();
+                    apptInterface.setAppointmentScene();
+                    System.out.println("Staf");
+                    this.userInterface.setScene(apptInterface.getAppointmentScene());
+                    this.userInterface.show();
+                    this.userInterface.setTitle(curUser.getName() + " | Staff");
+                }else
+                    this.runChartInterface();
             } 
         }else if(e.getSource() == this.treatments){
             int sel_index = this.treatments.getSelectionModel().getSelectedIndex();
@@ -321,11 +330,5 @@ public class HealthCareInterface extends Application {
         
     }   
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
-    
+
 }

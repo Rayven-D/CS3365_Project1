@@ -1,4 +1,4 @@
-/*
+/*  
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -18,9 +18,10 @@ public class Timer {
     public Timer(){
         d = new Date();
         c = Calendar.getInstance();
+        c.set(2020, 11, 1);
     }
     public String getTodayDate(){
-        DateFormat form = new SimpleDateFormat("MM/dd/yy");
+        DateFormat form = new SimpleDateFormat("MM/dd/yyyy");
         String todayDate = form.format(d);
         return todayDate;
     }
@@ -33,5 +34,18 @@ public class Timer {
         Timer t = new Timer();
         System.out.println(t.getTodayDate());
         System.out.println(t.getTime());
+    }
+    
+    public ArrayList<String> getTwoWeekList(){
+        ArrayList<String> temp = new ArrayList<>();
+        DateFormat form = new SimpleDateFormat("MM/dd/yyyy");
+        Calendar tempCal = c;
+        Date tempDate = tempCal.getTime();
+        for(int i = 0 ; i < 10; i++){
+            temp.add(form.format(tempDate));
+            tempCal.add(Calendar.DATE, 1);
+            tempDate = tempCal.getTime();
+        }
+        return temp;
     }
 }

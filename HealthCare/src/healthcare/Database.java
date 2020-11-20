@@ -66,6 +66,90 @@ public class Database {
     }
 
     /**
+     * saveUsers
+     *
+     * @param users An arraylist of users
+     * @return a boolean to tell you if it saved properly
+     */
+    public int saveUsers(ArrayList users) {
+        int checker = 0;
+        Gson gson = new Gson();
+        String json = gson.toJson(users);
+        try (PrintWriter out = new PrintWriter("./DB/users.json")) {
+            out.println(json);
+            checker = 1;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return checker;
+    }
+
+    /**
+     * getSingleAvailability
+     *
+     * @param userId The ID of the Doctor
+     * @return The availability times of the doctor.
+     */
+    public ArrayList<Day> getSingleAvailability(int userId) {
+        this.parseDataFromJSON();
+        ArrayList<Day> singleTime = null;
+        for (Availability availabilityTime : availabilityTimes) {
+            if (userId == availabilityTime.getUserId()) {
+                singleTime = availabilityTime.getAvailabilityDates();
+            }
+        }
+        return singleTime;
+    }
+    
+    /**
+     * saveSingleAvailability
+     * @param doctorId The Doctor's ID
+     * @param days The Days arraylist for their availability
+     * @return a boolean to tell you if it saved properly
+     */
+    public int saveSingleAvailability(int doctorId, ArrayList<Day> days) {
+        int checker = 0;
+        ArrayList<Day> temp = getSingleAvailability(doctorId);
+        Availability availability = new Availability();
+        if (temp == null) {
+            availability.setUserId(doctorId);
+            availability.setAvailabilityDates(days);
+            availabilityTimes.add(availability);
+            saveAvailabilityTimes(availabilityTimes);
+        } else {
+            int i = 0;
+            for (Availability availabilityIter : availabilityTimes) {
+                i++;
+                if (availabilityIter.getUserId() == doctorId) {
+                    availabilityTimes.remove(i);
+                    availabilityTimes.add(availability);
+                    break;
+                }
+            }
+        }
+        return checker;
+    }
+
+    /**
+     * saveUsers
+     *
+     * @param availabilityTimes An arraylist of availabilityTimes
+     * @return a boolean to tell you if it saved properly
+     */
+    public int saveAvailabilityTimes(ArrayList availabilityTimes) {
+        int checker = 0;
+        Gson gson = new Gson();
+        String json = gson.toJson(availabilityTimes);
+        try (PrintWriter out = new PrintWriter("./DB/availabilityTimes.json")) {
+            out.println(json);
+            checker = 1;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return checker;
+    }
+
+    /**
      * getCharts
      *
      * @return An ArrayList containing all the charts data.
@@ -75,17 +159,18 @@ public class Database {
         this.parseDataFromJSON();
         return charts;
     }
+
     /**
      * getSingleChart
      *
-     * @return An ArrayList containing all the charts data.
-     * @throws Exception To catch any file issues
+     * @param patientID The ID of the patient
+     * @return A single chart
      */
-    public PatientChart getSingleChart(int userId) {
+    public PatientChart getSingleChart(int patientID) {
         this.parseDataFromJSON();
-        PatientChart singleChart = new PatientChart();
+        PatientChart singleChart = null;
         for (PatientChart chart : charts) {
-            if(userId == chart.getPatient_id()) {
+            if (patientID == chart.getPatient_id()) {
                 singleChart = chart;
             }
         }
@@ -93,33 +178,16 @@ public class Database {
     }
 
     /**
-     * getSingleAvailability
+     * saveUsers
      *
-     * @return An ArrayList containing all the charts data.
-     * @throws Exception To catch any file issues
+     * @param charts An arraylist of charts
+     * @return a boolean to tell you if it saved properly
      */
-    public ArrayList<Day> getSingleAvailability(int userId) {
-        this.parseDataFromJSON();
-        ArrayList<Day> singleTime = null;
-        for (Availability availabilityTime : availabilityTimes) {
-            if(userId == availabilityTime.getUserId()) {
-                singleTime = availabilityTime.getAvailabilityDates();
-            }
-        }
-        return singleTime;
-    }
-
-    /**
-     * saveData will save the data to a JSON file.
-     *
-     * @param users An ArrayList of users.
-     * @return Will return 1 or 0 depending if the save was successful.
-     */
-    public int saveData(ArrayList users) {
+    public int saveCharts(ArrayList charts) {
         int checker = 0;
         Gson gson = new Gson();
-        String json = gson.toJson(users);
-        try (PrintWriter out = new PrintWriter("./DB/users.JSON")) {
+        String json = gson.toJson(charts);
+        try (PrintWriter out = new PrintWriter("./DB/charts.json")) {
             out.println(json);
             checker = 1;
         } catch (FileNotFoundException ex) {
@@ -127,4 +195,32 @@ public class Database {
         }
         return checker;
     }
+
+    /**
+     * saveSingleChart
+     *
+     * @param chart The new chart
+     * @param patientID The patientID for the chart
+     * @return a boolean to tell you if it saved properly
+     */
+    public int saveSingleChart(PatientChart chart, int patientID) {
+        int checker = 0;
+        PatientChart temp = getSingleChart(patientID);
+        if (temp == null) {
+            charts.add(chart);
+            saveCharts(charts);
+        } else {
+            int i = 0;
+            for (PatientChart chartIter : charts) {
+                i++;
+                if (chartIter.getPatient_id() == chart.getPatient_id()) {
+                    charts.remove(i);
+                    charts.add(chart);
+                    break;
+                }
+            }
+        }
+        return checker;
+    }
+
 }

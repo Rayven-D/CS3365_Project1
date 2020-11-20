@@ -1,0 +1,37 @@
+[{
+  "date": "12/01/2020",
+  "chartInformation": [{
+      "doctorNane": "Dr. Arthur",
+      "numberOfPatients": 1,
+      "amountEarned": 100
+    },
+    {
+      "doctorNane": "Dr. Rayven",
+      "numberOfPatients": 2,
+      "amountEarned": 200
+    },
+    {
+      "doctorNane": "Dr. Liam",
+      "numberOfPatients": 3,
+      "amountEarned": 300
+    }
+  ]
+}, {
+  "date": "12/02/2020",
+  "chartInformation": [{
+      "doctorNane": "Dr. Arthur",
+      "numberOfPatients": 4,
+      "amountEarned": 400
+    },
+    {
+      "doctorNane": "Dr. Rayven",
+      "numberOfPatients": 5,
+      "amountEarned": 500
+    },
+    {
+      "doctorNane": "Dr. Liam",
+      "numberOfPatients": 6,
+      "amountEarned": 6s00
+    }
+  ]
+}]

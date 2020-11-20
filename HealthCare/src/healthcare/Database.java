@@ -17,21 +17,22 @@ import java.util.logging.Logger;
  */
 public class Database {
 
-    private ArrayList<User> data;
+    private ArrayList<User> users;
     private ArrayList<PatientChart> charts;
     private ArrayList<Availability> availabilityTimes;
+    private ArrayList<Report> reports;
 
     /**
      * Constructor
      */
     public Database() {
-        this.data = new ArrayList();
+        this.users = new ArrayList();
     }
 
     private void parseDataFromJSON() {
         Gson gson = new Gson();
         try (Reader reader = new FileReader("./DB/users.json")) {
-            data = gson.fromJson(reader, new TypeToken<ArrayList<BaseResponse>>() {
+            users = gson.fromJson(reader, new TypeToken<ArrayList<BaseResponse>>() {
             }.getType());
         } catch (IOException e) {
             System.out.println("Something wrong with getting Users JSON file.");
@@ -52,6 +53,14 @@ public class Database {
             System.out.println("Something wrong with getting Availability Times JSON file.");
             e.printStackTrace();
         }
+
+        try (Reader reader = new FileReader("./DB/dailyReports.json")) {
+            reports = gson.fromJson(reader, new TypeToken<ArrayList<Report>>() {
+            }.getType());
+        } catch (IOException e) {
+            System.out.println("Something wrong with getting Daily Reports JSON file.");
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -62,7 +71,7 @@ public class Database {
      */
     public ArrayList<User> getUsers() throws Exception {
         this.parseDataFromJSON();
-        return data;
+        return users;
     }
 
     /**
@@ -116,7 +125,6 @@ public class Database {
             availability.setUserId(doctorId);
             availability.setAvailabilityDates(days);
             availabilityTimes.add(availability);
-            saveAvailabilityTimes(availabilityTimes);
         } else {
             int i = 0;
             for (Availability availabilityIter : availabilityTimes) {
@@ -128,6 +136,7 @@ public class Database {
                 i++;
             }
         }
+        saveAvailabilityTimes(availabilityTimes);
         return checker;
     }
 
@@ -209,7 +218,6 @@ public class Database {
         PatientChart temp = getSingleChart(patientID);
         if (temp == null) {
             charts.add(chart);
-            saveCharts(charts);
         } else {
             int i = 0;
             for (PatientChart chartIter : charts) {
@@ -221,7 +229,57 @@ public class Database {
                 i++;
             }
         }
+        saveCharts(charts);
         return checker;
     }
 
+    public ArrayList<Report> getReports() {
+        this.parseDataFromJSON();
+        return reports;
+    }
+
+    public int saveReports(ArrayList reports) {
+        int checker = 0;
+        Gson gson = new Gson();
+        String json = gson.toJson(reports);
+        try (PrintWriter out = new PrintWriter("./DB/dailyReports.json")) {
+            out.println(json);
+            checker = 1;
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return checker;
+    }
+
+    public Report getSingleReport(String date) {
+        this.parseDataFromJSON();
+        Report singleReport = null;
+        for (Report report : reports) {
+            if (report.getDate().equals(date)) {
+                singleReport = report;
+            }
+        }
+        return singleReport;
+    }
+    
+    public int saveSingleReport(Report report, String date) {
+        int checker = 0;
+        Report temp = getSingleReport(date);
+        if (temp == null) {
+            reports.add(report);
+        } else {
+            int i = 0;
+            for (Report reportIter : reports) {
+                if (reportIter.getDate().equals(date)) {
+                    reports.remove(i);
+                    reports.add(report);
+                    break;
+                }
+                i++;
+            }
+        }
+        saveReports(reports);
+        return checker;
+
+    }
 }

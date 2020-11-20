@@ -20,6 +20,8 @@ public class HealthCare extends Application {
     Database db = new Database();
     ArrayList<User> users = new ArrayList();
     ArrayList<PatientChart> charts = new ArrayList();
+    ArrayList<Report> reports = new ArrayList();
+
     @Override
     public void start(Stage primaryStage) {
         Button btn = new Button();
@@ -34,13 +36,30 @@ public class HealthCare extends Application {
                 try {
                     users = db.getUsers();
                     charts = db.getCharts();
+                    reports = db.getReports();
                 } catch (Exception ex) {
                     Logger.getLogger(HealthCare.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
                 //PULLING DATA FROM USERS EXAMPLE AFTER GETTING FROM DB
                 //users.get(0).changePatient_name(new PatientChart(),"bob");
-                System.out.println(db.getSingleAvailability(124).get(0).getPatientCount());
+//                Report report = new Report();
+//                ReportInformation reportInfo1 = new ReportInformation();
+//                ReportInformation reportInfo2 = new ReportInformation();
+//                ArrayList<ReportInformation> reportInfo = new ArrayList();
+//
+//                reportInfo1.setAmountEarned(1000);
+//                reportInfo1.setName("Dr. Arthur");
+//                reportInfo1.setPatientAmount(2);
+//                reportInfo2.setAmountEarned(400);
+//                reportInfo2.setName("Dr. Liam");
+//                reportInfo2.setPatientAmount(3);
+//                report.setDate("12/12/2020");
+//                reportInfo.add(reportInfo1);
+//                reportInfo.add(reportInfo2);
+//                report.setReports(reportInfo);
+//                db.saveSingleReport(report, "12/12/2020");
+//                System.out.println(reports.get(0).getDate());
             }
         });
 

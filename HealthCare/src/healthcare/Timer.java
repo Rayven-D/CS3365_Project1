@@ -21,8 +21,9 @@ public class Timer {
         c.set(2020, 11, 1);
     }
     public String getTodayDate(){
+        c.set(2020,11,1);
         DateFormat form = new SimpleDateFormat("MM/dd/yyyy");
-        String todayDate = form.format(d);
+        String todayDate = form.format(c.getTime());
         return todayDate;
     }
     public String getTime(){

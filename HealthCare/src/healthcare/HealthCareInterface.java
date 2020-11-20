@@ -15,6 +15,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import javax.swing.*;
 
 /**
  *
@@ -31,7 +32,6 @@ public class HealthCareInterface extends Application {
     HBox passwordBox, usernameBox;
     VBox loginInfo;
     PasswordAuth passAuth;
-    ChartController cc = null;
     Stage userInterface;
     Label name, birthday, address, social, insurance, payment, id;
     Label appDate, reasonVisit, weight, height, bp, treatment, prescription, docVisiting;
@@ -44,10 +44,19 @@ public class HealthCareInterface extends Application {
     User curUser;
     PatientChart curPatient;
     
+    CheckInQueue patientQueue;
+    AppointmentInterface apptInterface;
+    
+    //Landing Page
+    Button checkInPatient, setUpAppt, checkInNew;
+    Scene landingPageScene;
+    
     
     @Override
     public void start(Stage primaryStage) {
         this.runLoginInterface();
+        this.patientQueue = new CheckInQueue();
+        apptInterface = new AppointmentInterface(this.patientQueue, this);
     }
     public void runLoginInterface(){
         usernameLabel = new Label("Username: ");
@@ -237,11 +246,22 @@ public class HealthCareInterface extends Application {
   
         
     }
-    
-    public void setStaffInterface(){
+    public void setLandingPage(){
+        this.checkInPatient = new Button("Check-In Existing");
+            this.checkInPatient.setOnAction(e -> {handle(e);});
+        this.checkInNew = new Button("Check-In New");
+            this.checkInNew.setOnAction(e -> {handle(e);});
+        this.setUpAppt = new Button("New Appointment");
+            this.setUpAppt.setOnAction(e -> {handle(e);});
         
+        VBox landingBox = new VBox();
+        landingBox.getChildren().addAll(this.checkInPatient, this.checkInNew, this.setUpAppt);
+            landingBox.setPadding(new Insets(20,20,20,20));
+        
+        this.landingPageScene = new Scene(landingBox, 300,300);
+        
+        this.userInterface.setScene(this.landingPageScene);
     }
-    
     public void fillChartInfo(PatientChart curPatient){
         this.nameField.setText(curPatient.getPatient_name());
         this.birthdayField.setText(curPatient.getBirthday());
@@ -282,12 +302,9 @@ public class HealthCareInterface extends Application {
             }else{
                 curUser = this.passAuth.allowUser();
                 if(curUser instanceof Staff){
-                    AppointmentInterface apptInterface = new AppointmentInterface();
-                    apptInterface.setAppointmentScene();
-                    System.out.println("Staf");
-                    this.userInterface.setScene(apptInterface.getAppointmentScene());
+                    this.setLandingPage();
                     this.userInterface.show();
-                    this.userInterface.setTitle(curUser.getName() + " | Staff");
+                    this.userInterface.setTitle("Staff | " + curUser.getName());
                 }else
                     this.runChartInterface();
             } 
@@ -327,7 +344,21 @@ public class HealthCareInterface extends Application {
         }else if(e.getSource() == this.saveChanges){
                         
         }
-        
+        else if(e.getSource() == this.checkInNew || e.getSource() == this.checkInPatient){
+            this.userInterface.setScene(apptInterface.getcheckInScene());
+            this.userInterface.show();
+            this.userInterface.setTitle("Check-In | " + this.curUser.getName() );
+            
+        }else if(e.getSource() == this.setUpAppt){
+            this.userInterface.setScene(apptInterface.getAppointmentScene());
+            this.userInterface.show();
+            this.userInterface.setTitle("Check-In | " + this.curUser.getName() );
+        }
+        else if(e.getSource() == apptInterface.inConfirm || e.getSource() == apptInterface.apptCancel || e.getSource() == apptInterface.inConfirm){            
+            this.userInterface.setScene(this.landingPageScene);
+            this.userInterface.show();
+            this.userInterface.setTitle("Staff | " + this.curUser.getName() );
+        }        
     }   
 
 

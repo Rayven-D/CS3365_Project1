@@ -35,7 +35,7 @@ public class HealthCareInterface extends Application {
     Stage userInterface;
     Label name, birthday, address, social, insurance, payment, id;
     Label appDate, reasonVisit, weight, height, bp, treatment, prescription, docVisiting;
-    TextField nameField, birthdayField, addressField, socialField, insuranceField, paymentField, idField;
+    TextField nameField,  addressField, socialField, insuranceField, paymentField, idField;
     TextField appDateField, weightField, heightField, bpField, docVisitedField;
     TextArea reasonVisitField, treatmentField, prescriptionField;
     ComboBox treatments;
@@ -43,6 +43,8 @@ public class HealthCareInterface extends Application {
     VBox chartBox, topBox, dropDownBox, allBox;
     User curUser;
     PatientChart curPatient;
+    
+    DatePicker birthdayField;
     
     CheckInQueue patientQueue;
     AppointmentInterface apptInterface;
@@ -112,8 +114,8 @@ public class HealthCareInterface extends Application {
         nameField = new TextField();
         
         //Birthday
-        birthday = new Label("Birthday: ");
-        birthdayField = new TextField();
+        birthday = new Label("\tBirthday: ");
+        birthdayField = new DatePicker();
        
         
         //Address
@@ -126,15 +128,15 @@ public class HealthCareInterface extends Application {
         socialField = new TextField();
         
         //Insurance
-        insurance = new Label("Insurance: ");
+        insurance = new Label("\tInsurance: ");
         insuranceField = new TextField();
         
         //Payment
-        payment = new Label("Payment: ");
+        payment = new Label("\tPayment: ");
         paymentField = new TextField();
         
         //ID
-        id = new Label("Patient ID: ");
+        id = new Label("\tPatient ID: ");
         idField = new TextField();
         
         //Treatment Menu Dropdown
@@ -199,10 +201,10 @@ public class HealthCareInterface extends Application {
         this.weight = new Label("Weight: ");
         this.weightField = new TextField();
         
-        this.height = new Label("Height: ");
+        this.height = new Label("\tHeight: ");
         this.heightField = new TextField();
         
-        this.bp = new Label("BP: ");
+        this.bp = new Label("\tBP: ");
         this.bpField = new TextField();
         
         this.whbpBox = new HBox();
@@ -264,7 +266,10 @@ public class HealthCareInterface extends Application {
     }
     public void fillChartInfo(PatientChart curPatient){
         this.nameField.setText(curPatient.getPatient_name());
-        this.birthdayField.setText(curPatient.getBirthday());
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+        LocalDate ld = LocalDate.parse(curPatient.getBirthday(), format);
+        System.out.println("KL");
+        this.birthdayField.setValue(ld);
         this.addressField.setText(curPatient.getAddress());
         String soc = "" + curPatient.getSsn();
         soc = soc.replaceAll("(\\d{3})(\\d{2})(\\d{4})", "###-##-$3");
@@ -345,10 +350,16 @@ public class HealthCareInterface extends Application {
                         
         }
         else if(e.getSource() == this.checkInNew || e.getSource() == this.checkInPatient){
-            this.userInterface.setScene(apptInterface.getcheckInScene());
-            this.userInterface.show();
-            this.userInterface.setTitle("Check-In | " + this.curUser.getName() );
-            
+            if(e.getSource() == this.checkInNew){
+                this.userInterface.setScene(apptInterface.getNewCheckInScene());
+                this.userInterface.show();
+                this.userInterface.setTitle("Check-In (New) | " + this.curUser.getName() );
+            }
+            else{
+                this.userInterface.setScene(apptInterface.getcheckInScene());
+                this.userInterface.show();
+                this.userInterface.setTitle("Check-In | " + this.curUser.getName() );
+            }
         }else if(e.getSource() == this.setUpAppt){
             this.userInterface.setScene(apptInterface.getAppointmentScene());
             this.userInterface.show();

@@ -33,8 +33,12 @@ public class AppointmentInterface{
     Scene checkInScene;
     Button inConfirm;
     
-    
-     
+    //Check-in NEW
+    Label newNameLabel, newBirthdayLabel, newAddressLabel, newSocialLabel, newInsuranceLabel, newPaymentLabel;
+    TextField newNameField, newAddressField, newSocialField, newInsuranceField, newPaymentField;
+    DatePicker newBirthdayPicker;
+    Scene newCheckInScene;
+    Button newConfirm;
     
     //Appointment
     Label apptNameLabel, apptDateLabel, apptTimeLabel, apptDocLabel;
@@ -64,6 +68,7 @@ public class AppointmentInterface{
         tm = new Timer();
        setAppointmentScene();
        setCheckInScene(); 
+       setNewCheckInScene();
        this.confirmed = false;
        this.hcInterface = hcInterface;
     }
@@ -152,6 +157,52 @@ public class AppointmentInterface{
         this.checkInScene = new Scene(inBox, 500, 500);
     }
     
+    public void setNewCheckInScene(){
+        this.newNameLabel = new Label("Name: ");
+        this.newNameField = new TextField("FirstName LastName");
+        
+       
+        
+        this.newBirthdayLabel = new Label("\tBirthday: ");
+        this.newBirthdayPicker = new DatePicker();
+        
+        HBox namebdBox = new HBox();
+            namebdBox.getChildren().addAll(this.newNameLabel, this.newNameField, this.newBirthdayLabel, this.newBirthdayPicker);
+        
+        this.newAddressLabel = new Label("Address: ");
+        this.newAddressField = new TextField();
+            this.newAddressField.setPrefColumnCount(40);
+        
+        HBox addressBox = new HBox();
+            addressBox.getChildren().addAll(this.newAddressLabel, this.newAddressField);
+        
+        this.newSocialLabel = new Label("SSN: ");
+        this.newSocialField = new TextField();
+        
+        this.newInsuranceLabel = new Label("\tInsurance: ");
+        this.newInsuranceField = new TextField();
+        
+        this.newPaymentLabel = new Label("\tPayment Info: ");
+        this.newPaymentField = new TextField();
+        
+        HBox sipBox = new HBox();
+        sipBox.getChildren().addAll(this.newSocialLabel, this.newSocialField);
+        sipBox.getChildren().addAll(this.newInsuranceLabel, this.newInsuranceField);
+        sipBox.getChildren().addAll(this.newPaymentLabel, this.newPaymentField);
+            
+        this.newConfirm = new Button("Finish");
+        this.newConfirm.setOnAction(e -> {this.hcInterface.handle(e);});
+        
+        VBox newCheckInBox = new VBox();
+        newCheckInBox.getChildren().addAll(namebdBox, addressBox, sipBox, this.newConfirm);
+        newCheckInBox.setSpacing(10);
+        newCheckInBox.setPadding(new Insets(20,20,20,20));
+        
+        
+        this.newCheckInScene = new Scene(newCheckInBox, 750,500);
+        
+    }
+    
     public void handle(Event e){
         if(e.getSource() == this.apptDocCombo || e.getSource() == this.apptDateCombo){
             this.apptTimeList.getItems().clear();
@@ -205,6 +256,10 @@ public class AppointmentInterface{
     public Scene getcheckInScene(){
         
         return this.checkInScene;
+    }
+    
+    public Scene getNewCheckInScene(){
+        return this.newCheckInScene;
     }
 
     public int getPatientID(){

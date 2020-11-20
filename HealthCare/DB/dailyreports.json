@@ -1,0 +1,36 @@
+[{
+  "date": "12/01/2020",
+  "reportInformation": [{
+    "patientAmount": 0,
+    "amountEarned": 100
+  }, {
+    "patientAmount": 0,
+    "amountEarned": 200
+  }, {
+    "patientAmount": 0,
+    "amountEarned": 300
+  }]
+}, {
+  "date": "12/02/2020",
+  "reportInformation": [{
+    "patientAmount": 0,
+    "amountEarned": 400
+  }, {
+    "patientAmount": 0,
+    "amountEarned": 500
+  }, {
+    "patientAmount": 0,
+    "amountEarned": 600
+  }]
+}, {
+  "date": "12/12/2020",
+  "reportInformation": [{
+    "name": "Dr. Arthur",
+    "patientAmount": 2,
+    "amountEarned": 1000
+  }, {
+    "name": "Dr. Liam",
+    "patientAmount": 3,
+    "amountEarned": 400
+  }]
+}]

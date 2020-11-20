@@ -5,14 +5,30 @@
  */
 package healthcare;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Arthr
  */
-class Report {
-    private String name;
-    private int patientAmount;
-    private int amountEarned;
+public class Report {
     private String date;
+    private ArrayList<ReportInformation> reportInformation;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public ArrayList<ReportInformation> getReports() {
+        return reportInformation;
+    }
+
+    public void setReports(ArrayList<ReportInformation> reports) {
+        this.reportInformation = reports;
+    }
     
 }

@@ -100,9 +100,10 @@ public class Database {
         }
         return singleTime;
     }
-    
+
     /**
      * saveSingleAvailability
+     *
      * @param doctorId The Doctor's ID
      * @param days The Days arraylist for their availability
      * @return a boolean to tell you if it saved properly
@@ -119,12 +120,12 @@ public class Database {
         } else {
             int i = 0;
             for (Availability availabilityIter : availabilityTimes) {
-                i++;
                 if (availabilityIter.getUserId() == doctorId) {
                     availabilityTimes.remove(i);
                     availabilityTimes.add(availability);
                     break;
                 }
+                i++;
             }
         }
         return checker;
@@ -212,12 +213,12 @@ public class Database {
         } else {
             int i = 0;
             for (PatientChart chartIter : charts) {
-                i++;
                 if (chartIter.getPatient_id() == chart.getPatient_id()) {
                     charts.remove(i);
                     charts.add(chart);
                     break;
                 }
+                i++;
             }
         }
         return checker;

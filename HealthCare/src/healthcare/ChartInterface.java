@@ -28,8 +28,9 @@ public class ChartInterface extends Application {
     ComboBox treatments;
     HBox nameBdayBox,  sipiBox, appDateBox, whbpBox;
     VBox chartBox, topBox, dropDownBox, allBox;
-    @Override
-    public void start(Stage primaryStage) {
+    User curUser;
+    
+    public ChartInterface(){
         ArrayList<Integer> temp = new ArrayList<Integer>();
         Timer tm = new Timer();
         for(int i = 0; i < 3; i++){
@@ -135,10 +136,11 @@ public class ChartInterface extends Application {
         this.prescriptionField = new TextArea();
             this.prescriptionField.setMaxWidth(1000);
             this.prescriptionField.setPrefRowCount(3);
-            
-        
-               
-                     
+    }
+    
+    @Override
+    public void start(Stage primaryStage) {
+              
         chartBox = new VBox();
         chartBox.getChildren().addAll(appDateBox);
         chartBox.getChildren().addAll(whbpBox,reasonVisit, reasonVisitField);

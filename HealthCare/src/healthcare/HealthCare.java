@@ -18,27 +18,14 @@ public class HealthCare extends Application {
     @Override
     public void start(Stage primaryStage) {}
     
-    public void getCharts(){
-        Database db = new Database();
-        ArrayList<User> patients = new ArrayList<User>();
-        try{
-        // patients = db.initDatabase();
-        }catch(Exception e){
-            e.printStackTrace();
-            System.exit(1);
-        }
-        for(int i = 0; i < patients.size(); i++){
-            User tempUser = patients.get(i);
-            
-        }
-        
+    public void getCharts(){        
     }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        Application.launch(LoginInterface.class, args);
+        Application.launch(HealthCareInterface.class, args);
     }
     
 }

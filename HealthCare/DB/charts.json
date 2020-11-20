@@ -2,7 +2,7 @@
     "patient_name": "Frank Franker",
     "birthday": "12/12/2020",
     "address": "21 hundo mac davo lano",
-    "ssn": 1337445,
+    "ssn": 133744445,
     "insurance": "KEKW Tech insurance",
     "patient_payment": {
       "date":"12/12/1111",
@@ -14,7 +14,7 @@
     "patient_id":500,
     "treatment_record_arr":[
       {
-        "appointment_date":"12/12/1111",
+        "appointment_date":"12/12/2019",
         "reason_for_visit":"Corona",
         "weight":120,
         "height":300,
@@ -23,7 +23,7 @@
         "prescription":"lol pills",
         "visited_doctor":"Dr. Rayven"
       },{
-        "appointment_date":"12/12/2222",
+        "appointment_date":"12/12/2020",
         "reason_for_visit":"Corona phase 2",
         "weight":120,
         "height":300,
@@ -34,7 +34,7 @@
       }
     ],
     "previous_visit":{
-      "appointment_date":"12/12/1111",
+      "appointment_date":"12/12/2019",
       "reason_for_visit":"Corona",
       "weight":120,
       "height":300,
@@ -44,7 +44,7 @@
       "visited_doctor":"Dr. Rayven"
     },
     "current_visit":{
-      "appointment_date":"12/12/2222",
+      "appointment_date":"12/12/2020",
       "reason_for_visit":"Corona phase 2",
       "weight":120,
       "height":300,

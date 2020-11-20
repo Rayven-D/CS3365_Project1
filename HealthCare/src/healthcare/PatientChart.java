@@ -129,7 +129,9 @@ public class PatientChart {
     public TreatmentRecord getCurrent_visit() {
         return current_visit;
     }
-
+    public TreatmentRecord getPreviousVisit(){
+        return this.previous_visit;
+    }
     public void setCurrent_visit(TreatmentRecord current_visit) {
         this.current_visit = current_visit;
         

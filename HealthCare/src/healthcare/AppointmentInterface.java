@@ -19,7 +19,7 @@ import java.util.HashSet;
  */
 public class AppointmentInterface{
     private ArrayList<String> times;
-    private Database db = new Database();
+    private Database db;
     private ArrayList<User> usersList;
     private int patientID; 
     private CheckInQueue queue;
@@ -51,7 +51,8 @@ public class AppointmentInterface{
     
 
 
-    public AppointmentInterface(CheckInQueue queue, HealthCareInterface hcInterface){
+    public AppointmentInterface(CheckInQueue queue, HealthCareInterface hcInterface, Database db){
+        this.db = db;
         this.times = new ArrayList<>();
         for(int i = 9 ; i < 17; i++){
             int l = i % 13;
@@ -249,6 +250,32 @@ public class AppointmentInterface{
             this.confirmed = true;
         }
     }
+    
+    public int getSelectedPatientID(){
+        String s = this.inTimeList.getSelectionModel().getSelectedItem();
+        s = s.replaceAll("[^a-zA-Z\\.\\s]", "");
+        s = s.trim();
+        try{
+            for(PatientChart pc: db.getCharts()){
+                if(s.equals(pc.getPatient_name())){
+                    return pc.getPatient_id();
+                }
+            }
+        }catch(Exception exep){exep.printStackTrace();}
+        return 0;
+    }
+    
+    public int getSelectedDocID(){
+        try{
+            for(User u: db.getUsers()){
+                if(u.getName().equals(this.inDocCombo.getValue())){
+                    return u.getId();   
+                }
+            }
+        }catch(Exception exep){exep.printStackTrace();}
+        return 0;
+    }
+    
     
     public Scene getAppointmentScene(){
         return this.appointmentScene;

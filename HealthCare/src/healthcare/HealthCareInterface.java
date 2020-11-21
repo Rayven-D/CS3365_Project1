@@ -23,7 +23,9 @@ import javax.swing.*;
  */
 public class HealthCareInterface extends Application {
     
-    
+    private Database db;
+    private Timer tm;
+        
     Label usernameLabel,passwordLabel;
     TextField usernameTextField;
     PasswordField passwordTextField;
@@ -49,16 +51,34 @@ public class HealthCareInterface extends Application {
     CheckInQueue patientQueue;
     AppointmentInterface apptInterface;
     
+    Scene chartScene;
+    
+    //Universal LogOut
+    Button universalLogout;
+    //Nurse 
+    ComboBox nurseDocBox;
+    Label   nurseDocLabel;
+    
     //Landing Page
     Button checkInPatient, setUpAppt, checkInNew;
     Scene landingPageScene;
     
+    //Chart Landing Page
+    ListView queuedPatients;
+    Button chartLandConfirm;
+    Scene chartLandScene;
     
     @Override
     public void start(Stage primaryStage) {
+        this.userInterface = new Stage();
         this.runLoginInterface();
         this.patientQueue = new CheckInQueue();
-        apptInterface = new AppointmentInterface(this.patientQueue, this);
+        this.db = new Database();
+        
+        this.tm = new Timer();
+        apptInterface = new AppointmentInterface(this.patientQueue, this, this.db);
+        this.universalLogout = new Button("Logout");
+            this.universalLogout.setOnAction(event -> {handle(event);});
     }
     public void runLoginInterface(){
         usernameLabel = new Label("Username: ");
@@ -94,12 +114,12 @@ public class HealthCareInterface extends Application {
         loginInfo.setSpacing(20);   
         
         Scene patientLogin = new Scene(loginInfo, 300, 300);
-        userInterface = new Stage();
         userInterface.setScene(patientLogin);
         userInterface.show();
         userInterface.setTitle("Login");
     }
-    public void runChartInterface(){
+    public void runChartInterface(int patientID){
+        patientID -= 500;
         ArrayList<PatientChart> charts = new ArrayList<PatientChart>();
        try{
            Database d = new Database();
@@ -107,7 +127,7 @@ public class HealthCareInterface extends Application {
        }catch(Exception exep){
            exep.printStackTrace();
        }
-       this.curPatient = charts.get(0);
+       this.curPatient = charts.get(patientID);
         LocalDate localDate = LocalDate.now();
         //Patient Name
         name = new Label("Name: ");
@@ -226,28 +246,68 @@ public class HealthCareInterface extends Application {
         //Save Changes Button
         this.saveChanges = new Button("Save Changes");
         this.saveChanges.setOnAction(e->{handle(e);});
+        
+        this.nurseDocLabel = new Label("Attending Doctor: ");
+        this.nurseDocBox = new ComboBox();
+            try{
+                for(User u: db.getUsers()){
+                    if(u.getPermissions() == 2){
+                        this.nurseDocBox.getItems().add(u.getName());
+                        System.out.println(u.getId() + " " + this.curPatient.getDoctorID());
+                        if(u.getId() == curPatient.getDoctorID()){
+                            
+                            this.nurseDocBox.getSelectionModel().selectLast();
+                            System.out.println(this.nurseDocBox.getSelectionModel().getSelectedItem());
+                        }
+                    }
+                }
+            }catch(Exception e){e.printStackTrace();}
+        HBox nurseDocHBox = new HBox();
+        nurseDocHBox.getChildren().addAll(this.nurseDocLabel, this.nurseDocBox);
+        
+        if(curUser.getPermissions() != 1){
+            nurseDocHBox.setVisible(false);
+        }
             
         chartBox = new VBox();
         chartBox.getChildren().addAll(appDateBox);
         chartBox.getChildren().addAll(whbpBox,reasonVisit, reasonVisitField);
-        chartBox.getChildren().addAll(treatment, treatmentField, prescription, prescriptionField, this.saveChanges);
+        chartBox.getChildren().addAll(treatment, treatmentField, prescription, prescriptionField, this.saveChanges, this.universalLogout);
         chartBox.setSpacing(5);
         
         allBox = new VBox();
-        allBox.getChildren().addAll(topBox, dropDownBox, chartBox);
+        allBox.getChildren().addAll(topBox,nurseDocHBox, dropDownBox, chartBox);
             allBox.setPadding(new Insets(20,20,20,20));
             allBox.setSpacing(10);
         this.setUserFields();
 
-        Scene chartScene = new Scene(allBox, 1250, 500);
-        this.userInterface.setScene(chartScene);
-        this.userInterface.show();
-        this.userInterface.setTitle(charts.get(0).getPatient_name() + " | " + curUser.getName()) ;
+        this.chartScene = new Scene(allBox, 1250, 750);
         
-        fillChartInfo(charts.get(0));
-  
+        
+        fillChartInfo(charts.get(patientID));    
+    }
+    
+    public void setChartLandingPage(){
+        Label queuedPatientsLabel = new Label("Patients");
+        this.queuedPatients = new ListView();
+            for(Integer i: this.patientQueue.getDocQueue(this.curUser.getId())){
+                if(i != 0){
+                    queuedPatients.getItems().add(this.db.getSingleChart(i).getPatient_name());
+                    
+                }
+            }
+            this.queuedPatients.getSelectionModel().selectFirst();
+        
+        this.chartLandConfirm = new Button("Continue");
+            this.chartLandConfirm.setOnAction(e -> {handle(e);});
+        
+        VBox chartLandBox = new VBox();
+        chartLandBox.getChildren().addAll(queuedPatientsLabel, this.queuedPatients, this.chartLandConfirm, this.universalLogout);
+        
+        this.chartLandScene = new Scene(chartLandBox, 400, 400);
         
     }
+    
     public void setLandingPage(){
         this.checkInPatient = new Button("Check-In Existing");
             this.checkInPatient.setOnAction(e -> {handle(e);});
@@ -257,7 +317,7 @@ public class HealthCareInterface extends Application {
             this.setUpAppt.setOnAction(e -> {handle(e);});
         
         VBox landingBox = new VBox();
-        landingBox.getChildren().addAll(this.checkInPatient, this.checkInNew, this.setUpAppt);
+        landingBox.getChildren().addAll(this.checkInPatient, this.checkInNew, this.setUpAppt,this.universalLogout);
             landingBox.setPadding(new Insets(20,20,20,20));
         
         this.landingPageScene = new Scene(landingBox, 300,300);
@@ -268,7 +328,6 @@ public class HealthCareInterface extends Application {
         this.nameField.setText(curPatient.getPatient_name());
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         LocalDate ld = LocalDate.parse(curPatient.getBirthday(), format);
-        System.out.println("KL");
         this.birthdayField.setValue(ld);
         this.addressField.setText(curPatient.getAddress());
         String soc = "" + curPatient.getSsn();
@@ -310,8 +369,12 @@ public class HealthCareInterface extends Application {
                     this.setLandingPage();
                     this.userInterface.show();
                     this.userInterface.setTitle("Staff | " + curUser.getName());
-                }else
-                    this.runChartInterface();
+                }else{
+                    this.setChartLandingPage();
+                    this.userInterface.setScene(this.chartLandScene);
+                    this.userInterface.show();
+                    this.userInterface.setTitle( curUser.getName());
+                }
             } 
         }else if(e.getSource() == this.treatments){
             int sel_index = this.treatments.getSelectionModel().getSelectedIndex();
@@ -346,8 +409,13 @@ public class HealthCareInterface extends Application {
                 this.prescriptionField.setText(this.curPatient.getCurrent_visit().getPrescription());
                     this.prescriptionField.setEditable(true);    
             }
-        }else if(e.getSource() == this.saveChanges){
-                        
+        }else if(e.getSource() == this.chartLandConfirm){
+            int patID = this.queuedPatients.getSelectionModel().getSelectedIndex();
+            patID = this.patientQueue.getDocQueue(this.curUser.getId()).get(patID);
+            this.runChartInterface(patID);
+            this.userInterface.setScene(this.chartScene);
+            this.userInterface.show();
+            this.userInterface.setTitle(this.curUser.getName() + " | " + this.curPatient.getPatient_name());
         }
         else if(e.getSource() == this.checkInNew || e.getSource() == this.checkInPatient){
             if(e.getSource() == this.checkInNew){
@@ -365,11 +433,50 @@ public class HealthCareInterface extends Application {
             this.userInterface.show();
             this.userInterface.setTitle("Check-In | " + this.curUser.getName() );
         }
-        else if(e.getSource() == apptInterface.inConfirm || e.getSource() == apptInterface.apptCancel || e.getSource() == apptInterface.inConfirm){            
+        else if(e.getSource() == apptInterface.inConfirm || e.getSource() == apptInterface.apptCancel || e.getSource() == apptInterface.apptConfirm){            
+            if(e.getSource() == apptInterface.inConfirm){
+                
+                this.patientQueue.addToQueue(-1, apptInterface.getSelectedPatientID());
+                ArrayList<Day> temp = db.getSingleAvailability(apptInterface.getSelectedDocID());
+               for(Day d: temp){
+                        if(d.getDate().equals(tm.getTodayDate())){
+                            int []avails = d.getAvailabilityTimes();
+                            for(int j = 0; j < avails.length; j++){
+                                if(avails[j] == apptInterface.getSelectedPatientID()){
+                                    avails[j] = 0;
+                                    break;
+                                }                                
+                            }
+                            //write to DB here to clear DP of the appointment
+                        }
+                    }
+                    //write to DB here for a new Patient Chart Object
+            }
             this.userInterface.setScene(this.landingPageScene);
             this.userInterface.show();
             this.userInterface.setTitle("Staff | " + this.curUser.getName() );
-        }        
+        }       
+        else if(e.getSource() == this.saveChanges ){
+            this.patientQueue.removeFromQueue(curUser.getId(), new Integer(curPatient.getPatient_id()));
+            if(curUser.getPermissions() == 1){
+                try{
+                    for(User u: db.getUsers()){
+                        if(u.getName().equals(this.nurseDocBox.getValue())){
+                            System.out.println("k");
+                            this.patientQueue.addToQueue(u.getId(), this.curPatient.getPatient_id());
+                            this.setChartLandingPage();
+                            this.userInterface.setScene(this.chartLandScene);
+                            this.userInterface.show();
+                            this.userInterface.setTitle(this.curUser.getName());
+                            break;
+                        }
+                    }
+                }catch(Exception exep){exep.printStackTrace();}
+            }
+        }
+        else if(e.getSource() == this.universalLogout){
+            this.runLoginInterface();
+        }
     }   
 
 

@@ -27,7 +27,6 @@ public class PasswordAuth {
     
     public boolean validateInfo(String userID, String enteredPass){
         for(int i = 0 ; i < data.size(); i++){
-            System.out.println(data.get(i).getId());
             if(userID.equals(Integer.toString(data.get(i).getId()))){               
                 curUser = data.get(i);         
                 return curUser.getPassword().equals(enteredPass);

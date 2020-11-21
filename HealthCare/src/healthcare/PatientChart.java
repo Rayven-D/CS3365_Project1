@@ -19,6 +19,7 @@ public class PatientChart {
     private String insurance;
     private PaymentInformation patient_payment;
     private int patient_id;
+    private int doctor_id;
     
     private ArrayList treatment_record_arr;
     private TreatmentRecord previous_visit;
@@ -62,6 +63,14 @@ public class PatientChart {
         this.treatment_record_arr.add(this.current_visit); //Adds current visit to ArrayList in order to update Treatment_Record JSON from just the ArrayList.
     }                                                      //NOTE: Current_visit in ArrayList will be replaced with updated version of this.current_visit once any values are changed.
 
+    public int getDoctorID(){
+        return this.doctor_id;
+    }
+    
+    public void setDoctorID(int docID){
+        this.doctor_id = docID;
+    }
+    
     public String getPatient_name() {
         return patient_name;
     }

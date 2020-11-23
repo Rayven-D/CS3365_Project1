@@ -15,6 +15,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import javax.swing.*;
 
 /**
@@ -445,17 +446,49 @@ public class HealthCareInterface extends Application {
                                 if(avails[j] == apptInterface.getSelectedPatientID()){
                                     avails[j] = 0;
                                     break;
-                                }                                
+                                }                               
                             }
                             //write to DB here to clear DP of the appointment
                         }
                     }
                     //write to DB here for a new Patient Chart Object
             }
-            this.userInterface.setScene(this.landingPageScene);
-            this.userInterface.show();
-            this.userInterface.setTitle("Staff | " + this.curUser.getName() );
-        }       
+            if(e.getSource() == this.apptInterface.apptConfirm){
+            try{
+                for(User u: db.getUsers()){
+                    if(u.getName().equals(apptInterface.apptDocCombo.getValue())){
+                        System.out.println(apptInterface.apptDocCombo.getValue());
+                        ArrayList<Day> tempDay = db.getSingleAvailability(u.getId());
+                       for(Day day: tempDay){
+                           if(day.getDate().equals(apptInterface.apptDateCombo.getValue())){
+                               System.out.println(apptInterface.apptDateCombo.getValue());
+                               int avail[] = day.getAvailabilityTimes();
+                               int tempPatientID = -1;
+                               for(PatientChart pc: db.getCharts()){
+                                   if(pc.getPatient_name().equals(apptInterface.apptNameField.getText())){
+                                        tempPatientID = pc.getPatient_id();
+                                        break;
+                                   }
+                               }
+                                avail [apptInterface.apptTimeList.getSelectionModel().getSelectedIndex()] = tempPatientID ;
+                                day.setAvailabilityTimes(avail); 
+                                for(Day ddd :tempDay){
+                                    int []tempDDD = ddd.getAvailabilityTimes();
+                                    for(int tempInt: tempDDD){
+                                        System.out.println(tempInt);
+                                    }
+                                }
+                                db.saveSingleAvailability(u.getId(), tempDay);
+                               break;
+                           }
+                                                  
+                            } 
+                            break;
+                         }
+                     }
+                 }catch(Exception exep){exep.printStackTrace();}
+             }  
+        }
         else if(e.getSource() == this.saveChanges ){
             this.patientQueue.removeFromQueue(curUser.getId(), new Integer(curPatient.getPatient_id()));
             if(curUser.getPermissions() == 1){

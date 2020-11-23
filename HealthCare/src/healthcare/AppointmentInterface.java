@@ -26,8 +26,7 @@ public class AppointmentInterface{
     private Timer tm;
     private boolean confirmed;
     //Check-in
-    Label inNameLabel, inTimeLabel, inDocLabel;
-    TextField inNameField;
+    Label  inTimeLabel, inDocLabel;
     ComboBox inDocCombo;
     ListView<String> inTimeList;
     Scene checkInScene;
@@ -113,6 +112,8 @@ public class AppointmentInterface{
             
         this.apptCancel = new Button("Cancel");
             this.apptCancel.setOnAction(e ->{this.hcInterface.handle(e);});
+            
+            
         
         VBox apptBox = new VBox();
         apptBox.getChildren().addAll(this.apptNameLabel, this.apptNameField, this.apptDateLabel, this.apptDateCombo);
@@ -125,8 +126,7 @@ public class AppointmentInterface{
             
     }
     public void setCheckInScene(){
-        this.inNameLabel = new Label("Name: ");
-        this.inNameField = new TextField();
+
         
         this.inDocLabel = new Label("Doctor: ");
         this.inDocCombo = new ComboBox();
@@ -150,7 +150,7 @@ public class AppointmentInterface{
             this.inConfirm.setOnAction(e ->{hcInterface.handle(e);});
         
         VBox inBox = new VBox();
-        inBox.getChildren().addAll(this.inNameLabel, this.inNameField, this.inDocLabel, this.inDocCombo);
+        inBox.getChildren().addAll( this.inDocLabel, this.inDocCombo);
         inBox.getChildren().addAll(this.inTimeLabel, this.inTimeList, this.inConfirm);
             inBox.setPadding(new Insets(20,20,20,20));
             

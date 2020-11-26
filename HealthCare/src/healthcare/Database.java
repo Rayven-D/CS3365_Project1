@@ -27,6 +27,9 @@ public class Database {
      */
     public Database() {
         this.users = new ArrayList();
+        this.charts = new ArrayList();
+        this.availabilityTimes = new ArrayList();
+        this.reports = new ArrayList();
     }
 
     private void parseDataFromJSON() {
@@ -69,7 +72,7 @@ public class Database {
      * @return An ArrayList containing all the user data.
      * @throws Exception To catch any file issues
      */
-    public ArrayList<User> getUsers() throws Exception {
+    public ArrayList<User> getUsers() {
         this.parseDataFromJSON();
         return users;
     }
@@ -130,6 +133,8 @@ public class Database {
             for (Availability availabilityIter : availabilityTimes) {
                 if (availabilityIter.getUserId() == doctorId) {
                     availabilityTimes.remove(i);
+                    availability.setUserId(doctorId);
+                    availability.setAvailabilityDates(days);
                     availabilityTimes.add(availability);
                     break;
                 }
@@ -233,11 +238,22 @@ public class Database {
         return checker;
     }
 
+    /**
+     * getReports
+     *
+     * @return Return an Arraylist of reports
+     */
     public ArrayList<Report> getReports() {
         this.parseDataFromJSON();
         return reports;
     }
 
+    /**
+     * saveReports
+     *
+     * @param reports An arrayList of reports
+     * @return a boolean to tell you if it saved properly
+     */
     public int saveReports(ArrayList reports) {
         int checker = 0;
         Gson gson = new Gson();
@@ -251,6 +267,12 @@ public class Database {
         return checker;
     }
 
+    /**
+     * getSingleReport
+     *
+     * @param date The date of the chart in a string format
+     * @return Will return the chart corresponding to that date
+     */
     public Report getSingleReport(String date) {
         this.parseDataFromJSON();
         Report singleReport = null;
@@ -261,7 +283,14 @@ public class Database {
         }
         return singleReport;
     }
-    
+
+    /**
+     * saveSingleReport
+     *
+     * @param report A report object
+     * @param date the date corresponding to the report
+     * @return a boolean to tell you if it saved properly
+     */
     public int saveSingleReport(Report report, String date) {
         int checker = 0;
         Report temp = getSingleReport(date);

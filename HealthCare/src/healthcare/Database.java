@@ -133,6 +133,8 @@ public class Database {
             for (Availability availabilityIter : availabilityTimes) {
                 if (availabilityIter.getUserId() == doctorId) {
                     availabilityTimes.remove(i);
+                    availability.setUserId(doctorId);
+                    availability.setAvailabilityDates(days);
                     availabilityTimes.add(availability);
                     break;
                 }
@@ -235,19 +237,20 @@ public class Database {
         saveCharts(charts);
         return checker;
     }
-    
+
     /**
      * getReports
-     * 
+     *
      * @return Return an Arraylist of reports
      */
     public ArrayList<Report> getReports() {
         this.parseDataFromJSON();
         return reports;
     }
-    
+
     /**
      * saveReports
+     *
      * @param reports An arrayList of reports
      * @return a boolean to tell you if it saved properly
      */
@@ -263,10 +266,10 @@ public class Database {
         }
         return checker;
     }
-    
+
     /**
      * getSingleReport
-     * 
+     *
      * @param date The date of the chart in a string format
      * @return Will return the chart corresponding to that date
      */
@@ -280,10 +283,10 @@ public class Database {
         }
         return singleReport;
     }
-    
+
     /**
      * saveSingleReport
-     * 
+     *
      * @param report A report object
      * @param date the date corresponding to the report
      * @return a boolean to tell you if it saved properly

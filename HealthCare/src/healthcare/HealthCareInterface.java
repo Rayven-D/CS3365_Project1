@@ -26,6 +26,8 @@ public class HealthCareInterface extends Application {
     
     private Database db;
     private Timer tm;
+     ArrayList<User> userList;
+    
         
     Label usernameLabel,passwordLabel;
     TextField usernameTextField;
@@ -71,11 +73,16 @@ public class HealthCareInterface extends Application {
     
     @Override
     public void start(Stage primaryStage) {
+
         this.userInterface = new Stage();
         this.runLoginInterface();
         this.patientQueue = new CheckInQueue();
         this.db = new Database();
-        
+        try{
+            this.userList = this.db.getUsers();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         this.tm = new Timer();
         apptInterface = new AppointmentInterface(this.patientQueue, this, this.db);
         this.universalLogout = new Button("Logout");
@@ -457,11 +464,10 @@ public class HealthCareInterface extends Application {
             try{
                 for(User u: db.getUsers()){
                     if(u.getName().equals(apptInterface.apptDocCombo.getValue())){
-                        System.out.println(apptInterface.apptDocCombo.getValue());
                         ArrayList<Day> tempDay = db.getSingleAvailability(u.getId());
                        for(Day day: tempDay){
                            if(day.getDate().equals(apptInterface.apptDateCombo.getValue())){
-                               System.out.println(apptInterface.apptDateCombo.getValue());
+
                                int avail[] = day.getAvailabilityTimes();
                                int tempPatientID = -1;
                                for(PatientChart pc: db.getCharts()){
@@ -470,15 +476,20 @@ public class HealthCareInterface extends Application {
                                         break;
                                    }
                                }
+                               apptInterface.apptTimeList.getSelectionModel().getSelectedIndex();
                                 avail [apptInterface.apptTimeList.getSelectionModel().getSelectedIndex()] = tempPatientID ;
                                 day.setAvailabilityTimes(avail); 
                                 for(Day ddd :tempDay){
+                                    System.out.println(ddd.getDate());
                                     int []tempDDD = ddd.getAvailabilityTimes();
                                     for(int tempInt: tempDDD){
-                                        System.out.println(tempInt);
+                                        
+                                        System.out.print(tempInt +  " ");
+                                        
                                     }
+                                    System.out.println();
                                 }
-                                db.saveSingleAvailability(u.getId(), tempDay);
+                               db.saveSingleAvailability(u.getId(), tempDay);
                                break;
                            }
                                                   

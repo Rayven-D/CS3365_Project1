@@ -53,7 +53,7 @@ public class AppointmentInterface{
     public AppointmentInterface(CheckInQueue queue, HealthCareInterface hcInterface, Database db){
         this.db = db;
         this.times = new ArrayList<>();
-        for(int i = 9 ; i < 17; i++){
+        for(int i = 9 ; i < 15; i++){
             int l = i % 13;
             if( i >= 13){
                 l++;
@@ -208,8 +208,9 @@ public class AppointmentInterface{
         if(e.getSource() == this.apptDocCombo || e.getSource() == this.apptDateCombo){
             this.apptTimeList.getItems().clear();
             for(int i = 0 ;i < this.usersList.size(); i++){
-                if(usersList.get(i).getName().equals(this.apptDocCombo.getValue())){
-                    ArrayList<Day> temp = db.getSingleAvailability(usersList.get(i).getId());
+                if(this.hcInterface.userList.get(i).getName().equals(this.apptDocCombo.getValue())){
+                    System.out.println(this.hcInterface.userList.get(i).getId());
+                    ArrayList<Day> temp = db.getSingleAvailability(this.hcInterface.userList.get(i).getId());
                     for(Day d: temp){
                         if(d.getDate().equals(this.apptDateCombo.getValue())){
                             int []avails = d.getAvailabilityTimes();

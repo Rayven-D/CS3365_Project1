@@ -2,93 +2,93 @@
   "userId": 124,
   "availabilityDates": [{
     "date": "12/01/2020",
-    "patientCount":1,
+    "patientCount": 1,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }, {
     "date": "12/02/2020",
-    "patientCount":2,
+    "patientCount": 2,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }, {
     "date": "12/03/2020",
-    "patientCount":3,
+    "patientCount": 3,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }, {
     "date": "12/04/2020",
-    "patientCount":4,
+    "patientCount": 4,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }, {
     "date": "12/05/2020",
-    "patientCount":5,
+    "patientCount": 5,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }, {
     "date": "12/06/2020",
-    "patientCount":6,
+    "patientCount": 6,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }, {
     "date": "12/07/2020",
-    "patientCount":7,
+    "patientCount": 7,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }]
 }, {
   "userId": 123,
   "availabilityDates": [{
     "date": "12/01/2020",
-    "patientCount":1,
+    "patientCount": 1,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }, {
     "date": "12/02/2020",
-    "patientCount":2,
+    "patientCount": 2,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }, {
     "date": "12/03/2020",
-    "patientCount":3,
+    "patientCount": 3,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }, {
     "date": "12/04/2020",
-    "patientCount":4,
+    "patientCount": 4,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }, {
     "date": "12/05/2020",
-    "patientCount":5,
+    "patientCount": 5,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }, {
     "date": "12/06/2020",
-    "patientCount":6,
+    "patientCount": 6,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }, {
     "date": "12/07/2020",
-    "patientCount":7,
+    "patientCount": 7,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }]
 }, {
   "userId": 125,
   "availabilityDates": [{
     "date": "12/01/2020",
-    "patientCount":1,
+    "patientCount": 1,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }, {
     "date": "12/02/2020",
-    "patientCount":2,
+    "patientCount": 2,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }, {
     "date": "12/03/2020",
-    "patientCount":3,
+    "patientCount": 3,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }, {
     "date": "12/04/2020",
-    "patientCount":4,
+    "patientCount": 4,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }, {
     "date": "12/05/2020",
-    "patientCount":5,
+    "patientCount": 5,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }, {
     "date": "12/06/2020",
-    "patientCount":6,
+    "patientCount": 6,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }, {
     "date": "12/07/2020",
-    "patientCount":7,
+    "patientCount": 7,
     "availabilityTimes": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   }]
 }]

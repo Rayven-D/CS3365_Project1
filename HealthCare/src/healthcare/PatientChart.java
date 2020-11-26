@@ -39,7 +39,7 @@ public class PatientChart {
         this.patient_id = patient_id;
         this.previous_visit = null;
         this.current_visit = new TreatmentRecord();
-        
+        this.treatment_record_arr = new ArrayList();
         this.treatment_record_arr.add(this.current_visit);
         this.treatment_record_arr.trimToSize();
     }

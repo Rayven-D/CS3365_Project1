@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.Popup;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
@@ -24,16 +25,25 @@ import javax.swing.*;
  */
 public class HealthCareInterface extends Application {
     
+    private boolean logoutPrimed, cancelPrimed;
     private Database db;
     private Timer tm;
+    private String popupMessage;
+    private Label popupMessageLabel;
+    private Button popupOK, popupYes, popupNo;
+    private Scene popupWindow;
+    private Stage popup;
+    
+    private VBox popupBox;
      ArrayList<User> userList;
+     ArrayList<PatientChart> patientList;
     
         
     Label usernameLabel,passwordLabel;
     TextField usernameTextField;
     PasswordField passwordTextField;
     Label errorMessage;
-    Button login, saveChanges;
+    Button login, saveChanges, goBack;
     HBox passwordBox, usernameBox;
     VBox loginInfo;
     PasswordAuth passAuth;
@@ -58,12 +68,13 @@ public class HealthCareInterface extends Application {
     
     //Universal LogOut
     Button universalLogout;
+   
     //Nurse 
     ComboBox nurseDocBox;
     Label   nurseDocLabel;
     
     //Landing Page
-    Button checkInPatient, setUpAppt, checkInNew;
+    Button checkInPatient, setUpAppt;
     Scene landingPageScene;
     
     //Chart Landing Page
@@ -73,20 +84,44 @@ public class HealthCareInterface extends Application {
     
     @Override
     public void start(Stage primaryStage) {
+        this.universalLogout = new Button("Logout");
+            this.universalLogout.setOnAction(event -> {handle(event);});
+        this.goBack = new Button("Go Back");
+            this.goBack.setOnAction(e -> {handle(e);});
+        this.popupMessage = "";
+        this.popupMessageLabel = new Label(popupMessage);
+            this.popupNo = new Button("No");
+                this.popupNo.setOnAction(e -> {handle(e);});
+            this.popupOK = new Button("OK");
+                this.popupOK.setOnAction(e -> {handle(e);});
+            this.popupYes = new Button("Yes");
+                this.popupYes.setOnAction(e -> {handle(e);});
+  
+            HBox popupButton = new HBox();
+            popupButton.getChildren().addAll( popupYes, popupNo, popupOK, universalLogout );
+                popupButton.setAlignment(Pos.BOTTOM_CENTER);
+            popupBox = new VBox();
+            popupBox.getChildren().addAll(popupMessageLabel, popupButton );
+                popupBox.setAlignment(Pos.CENTER);
+        
+            
+        this.popupWindow = new Scene(popupBox, 300,100);
 
+            
         this.userInterface = new Stage();
+            
         this.runLoginInterface();
         this.patientQueue = new CheckInQueue();
         this.db = new Database();
         try{
+            this.patientList = this.db.getCharts();
             this.userList = this.db.getUsers();
         }catch(Exception e){
             e.printStackTrace();
         }
         this.tm = new Timer();
         apptInterface = new AppointmentInterface(this.patientQueue, this, this.db);
-        this.universalLogout = new Button("Logout");
-            this.universalLogout.setOnAction(event -> {handle(event);});
+
     }
     public void runLoginInterface(){
         usernameLabel = new Label("Username: ");
@@ -276,11 +311,12 @@ public class HealthCareInterface extends Application {
         if(curUser.getPermissions() != 1){
             nurseDocHBox.setVisible(false);
         }
+        
             
         chartBox = new VBox();
         chartBox.getChildren().addAll(appDateBox);
         chartBox.getChildren().addAll(whbpBox,reasonVisit, reasonVisitField);
-        chartBox.getChildren().addAll(treatment, treatmentField, prescription, prescriptionField, this.saveChanges, this.universalLogout);
+        chartBox.getChildren().addAll(treatment, treatmentField, prescription, prescriptionField, this.saveChanges,this.goBack, this.universalLogout);
         chartBox.setSpacing(5);
         
         allBox = new VBox();
@@ -317,15 +353,13 @@ public class HealthCareInterface extends Application {
     }
     
     public void setLandingPage(){
-        this.checkInPatient = new Button("Check-In Existing");
+        this.checkInPatient = new Button("Check-In");
             this.checkInPatient.setOnAction(e -> {handle(e);});
-        this.checkInNew = new Button("Check-In New");
-            this.checkInNew.setOnAction(e -> {handle(e);});
         this.setUpAppt = new Button("New Appointment");
             this.setUpAppt.setOnAction(e -> {handle(e);});
         
         VBox landingBox = new VBox();
-        landingBox.getChildren().addAll(this.checkInPatient, this.checkInNew, this.setUpAppt,this.universalLogout);
+        landingBox.getChildren().addAll(this.checkInPatient, this.setUpAppt,this.universalLogout);
             landingBox.setPadding(new Insets(20,20,20,20));
         
         this.landingPageScene = new Scene(landingBox, 300,300);
@@ -425,23 +459,18 @@ public class HealthCareInterface extends Application {
             this.userInterface.show();
             this.userInterface.setTitle(this.curUser.getName() + " | " + this.curPatient.getPatient_name());
         }
-        else if(e.getSource() == this.checkInNew || e.getSource() == this.checkInPatient){
-            if(e.getSource() == this.checkInNew){
-                this.userInterface.setScene(apptInterface.getNewCheckInScene());
-                this.userInterface.show();
-                this.userInterface.setTitle("Check-In (New) | " + this.curUser.getName() );
-            }
-            else{
+        else if( e.getSource() == this.checkInPatient){
+            
                 this.userInterface.setScene(apptInterface.getcheckInScene());
                 this.userInterface.show();
                 this.userInterface.setTitle("Check-In | " + this.curUser.getName() );
-            }
+            
         }else if(e.getSource() == this.setUpAppt){
             this.userInterface.setScene(apptInterface.getAppointmentScene());
             this.userInterface.show();
             this.userInterface.setTitle("Check-In | " + this.curUser.getName() );
         }
-        else if(e.getSource() == apptInterface.inConfirm || e.getSource() == apptInterface.apptCancel || e.getSource() == apptInterface.apptConfirm){            
+        else if(e.getSource() == apptInterface.inConfirm || e.getSource() == apptInterface.apptConfirm){            
             if(e.getSource() == apptInterface.inConfirm){
                 
                 this.patientQueue.addToQueue(-1, apptInterface.getSelectedPatientID());
@@ -467,30 +496,30 @@ public class HealthCareInterface extends Application {
                         ArrayList<Day> tempDay = db.getSingleAvailability(u.getId());
                        for(Day day: tempDay){
                            if(day.getDate().equals(apptInterface.apptDateCombo.getValue())){
-
+                               this.patientList = db.getCharts();
                                int avail[] = day.getAvailabilityTimes();
-                               int tempPatientID = -1;
+                               int tempPatientID = this.patientList.get(patientList.size() - 1).getPatient_id() + 1;
+                                
+                               boolean newPatient = true;
                                for(PatientChart pc: db.getCharts()){
                                    if(pc.getPatient_name().equals(apptInterface.apptNameField.getText())){
                                         tempPatientID = pc.getPatient_id();
+                                        newPatient = false;
                                         break;
                                    }
                                }
-                               apptInterface.apptTimeList.getSelectionModel().getSelectedIndex();
-                                avail [apptInterface.apptTimeList.getSelectionModel().getSelectedIndex()] = tempPatientID ;
-                                day.setAvailabilityTimes(avail); 
-                                for(Day ddd :tempDay){
-                                    System.out.println(ddd.getDate());
-                                    int []tempDDD = ddd.getAvailabilityTimes();
-                                    for(int tempInt: tempDDD){
-                                        
-                                        System.out.print(tempInt +  " ");
-                                        
-                                    }
-                                    System.out.println();
-                                }
-                               db.saveSingleAvailability(u.getId(), tempDay);
-                               break;
+                                System.out.println(tempPatientID);
+                                apptInterface.apptTimeList.getSelectionModel().getSelectedIndex();
+                                 avail [apptInterface.apptTimeList.getSelectionModel().getSelectedIndex()] = tempPatientID ;
+                                 day.setAvailabilityTimes(avail); 
+                                 if(newPatient){
+                                     PatientChart newPC = new PatientChart(this.apptInterface.apptNameField.getText(),"", "", 0, "", null,  tempPatientID);
+                                     db.saveSingleChart(newPC, tempPatientID);
+                                 }
+                                db.saveSingleAvailability(u.getId(), tempDay);
+                                
+                                this.popupConfirm("Added patient appointment.");
+                                break;
                            }
                                                   
                             } 
@@ -498,7 +527,10 @@ public class HealthCareInterface extends Application {
                          }
                      }
                  }catch(Exception exep){exep.printStackTrace();}
-             }  
+            }
+            if(e.getSource() == apptInterface.apptCancel){
+                
+            }
         }
         else if(e.getSource() == this.saveChanges ){
             this.patientQueue.removeFromQueue(curUser.getId(), new Integer(curPatient.getPatient_id()));
@@ -518,10 +550,66 @@ public class HealthCareInterface extends Application {
                 }catch(Exception exep){exep.printStackTrace();}
             }
         }
-        else if(e.getSource() == this.universalLogout){
-            this.runLoginInterface();
+        else if(e.getSource() == this.universalLogout || e.getSource() == this.apptInterface.apptCancel || e.getSource() == this.apptInterface.inCancel || e.getSource() == this.goBack){
+            System.out.println("pressed");
+            this.logoutPrimed = true;
+            String message = "logout";
+            if(e.getSource() == this.apptInterface.apptCancel || e.getSource() == this.apptInterface.inCancel || e.getSource() == this.goBack){
+                message = "go back";
+                this.logoutPrimed = false;
+                this.cancelPrimed = true;
+            }
+            this.popupYesNo("Are you sure you want to " + message +  " ?" );
+            
+        }
+        else if(e.getSource() == this.popupYes || e.getSource() == this.popupNo || e.getSource() == this.popupOK){
+            if(e.getSource() == this.popupYes){
+                popup.close();
+                if(this.logoutPrimed){
+                    this.runLoginInterface();
+                }else if(this.cancelPrimed){
+                    if(this.curUser.getPermissions() == 0)
+                        this.setLandingPage();
+                    else if(this.curUser.getPermissions() <= 2){
+                        this.setChartLandingPage();
+                    }
+                }
+                this.logoutPrimed = false;
+                this.cancelPrimed = false;
+            }           
+            else{
+                popup.close();
+            }
         }
     }   
 
+    public void popupConfirm(String s){
+        this.popupYes.setVisible(false);
+        this.popupNo.setVisible(false);
+        this.popupOK.setVisible(true);
+        
+        this.popupMessageLabel.setText(s);
+        popup = new Stage();
+        popup.setScene(this.popupWindow);
+        popup.show();
+        popup.setTitle("Confirmation");
+        
+        
+    }
+    
+    public void popupYesNo(String s){
+        this.popupYes.setVisible(true);
+        this.popupNo.setVisible(true);
+        this.popupOK.setVisible(false);
+        
+        
+        this.popupMessageLabel.setText(s);
+        popup = new Stage();
+        popup.setScene(this.popupWindow);
+        popup.show();
+        popup.setTitle("Are you sure?");
+        
+        
+    }
 
 }

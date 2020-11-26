@@ -519,6 +519,9 @@ public class HealthCareInterface extends Application {
                                 db.saveSingleAvailability(u.getId(), tempDay);
                                 
                                 this.popupConfirm("Added patient appointment.");
+                                Thread.sleep(100);
+                                apptInterface.setAppointmentScene();
+                                this.userInterface.setScene(apptInterface.getAppointmentScene());
                                 break;
                            }
                                                   
@@ -593,7 +596,7 @@ public class HealthCareInterface extends Application {
         popup.setScene(this.popupWindow);
         popup.show();
         popup.setTitle("Confirmation");
-        
+        popup.setAlwaysOnTop(true);
         
     }
     
@@ -608,6 +611,7 @@ public class HealthCareInterface extends Application {
         popup.setScene(this.popupWindow);
         popup.show();
         popup.setTitle("Are you sure?");
+        popup.setAlwaysOnTop(true);
         
         
     }

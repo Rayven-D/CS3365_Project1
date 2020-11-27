@@ -69,7 +69,7 @@ public class Doctor extends User{
         current.setHeight(height);
     }
     
-    public void changeBlood_Pressure(PatientChart patient, double bp) {
+    public void changeBlood_Pressure(PatientChart patient, String bp) {
         TreatmentRecord current = patient.getCurrent_visit();
         current.setBlood_pressure(bp);
     }

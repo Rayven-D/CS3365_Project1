@@ -28,16 +28,17 @@ public class CEOInterface extends Application {
     TextField dateField, numPatServedField, amountEarnedField;
     ComboBox docCombo;
     
+    private CEOController controller;
     
     @Override
     public void start(Stage primaryStage) {
-        
+        this.controller = new CEOController(this); 
         
       
     }
     
     public void handle(Event e){
-        
+        this.controller.handle(e);
     }
 
     /**

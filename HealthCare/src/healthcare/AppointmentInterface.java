@@ -18,7 +18,7 @@ import java.util.HashSet;
  * @author Rayven
  */
 public class AppointmentInterface{
-    private ArrayList<String> times;
+     ArrayList<String> times;
     private Database db;
     private ArrayList<User> usersList;
     private int patientID; 
@@ -26,18 +26,12 @@ public class AppointmentInterface{
     private Timer tm;
     private boolean confirmed;
     //Check-in
-    Label  inTimeLabel, inDocLabel;
-    ComboBox inDocCombo;
-    ListView<String> inTimeList;
+    Label  inNameLabel, inBdayLabel;
+    TextField inNameField;
+    DatePicker inBdayPicker;
     Scene checkInScene;
-    Button inConfirm;
+    Button inConfirm, inCancel;
     
-    //Check-in NEW
-    Label newNameLabel, newBirthdayLabel, newAddressLabel, newSocialLabel, newInsuranceLabel, newPaymentLabel;
-    TextField newNameField, newAddressField, newSocialField, newInsuranceField, newPaymentField;
-    DatePicker newBirthdayPicker;
-    Scene newCheckInScene;
-    Button newConfirm;
     
     //Appointment
     Label apptNameLabel, apptDateLabel, apptTimeLabel, apptDocLabel;
@@ -48,7 +42,21 @@ public class AppointmentInterface{
     Scene appointmentScene;
     HealthCareInterface hcInterface;
     
-
+    //Change Appointment
+    Label changeNameLabel, changeDocLabel, changeTimeLabel, curApptLabel;
+    Button changeNameButton, changeConfirm, changeCancel;
+    TextField changeNameField;
+    ComboBox changeDocBox;
+    ComboBox changeDateCombo;
+    ListView<String> changeTimeList;
+    Scene changeAppointmentScene;
+    
+    //Delete Appointment
+    Label deleteNameLabel, deleteCurAppointmentInfo;
+    Button deleteNameOK;
+    TextField deleteNameField;
+    Button cancelAppointment, deleteGoBack;
+    Scene deleteAppointmentScene;
 
     public AppointmentInterface(CheckInQueue queue, HealthCareInterface hcInterface, Database db){
         this.db = db;
@@ -68,7 +76,6 @@ public class AppointmentInterface{
         tm = new Timer();
        setAppointmentScene();
        setCheckInScene(); 
-       setNewCheckInScene();
        this.confirmed = false;
        this.hcInterface = hcInterface;
     }
@@ -110,7 +117,7 @@ public class AppointmentInterface{
         this.apptConfirm = new Button("Set Appointment");
             this.apptConfirm.setOnAction(e -> {this.hcInterface.handle(e);});
             
-        this.apptCancel = new Button("Cancel");
+        this.apptCancel = new Button("Go Back");
             this.apptCancel.setOnAction(e ->{this.hcInterface.handle(e);});
             
             
@@ -125,11 +132,21 @@ public class AppointmentInterface{
         
             
     }
-    public void setCheckInScene(){
-
+    
+    public void setChangeAppointment(){
+        this.changeNameLabel = new Label("Patient Name: ");
+        this.changeNameField = new TextField();
+        this.changeNameButton = new Button("Ok");
+            this.changeNameButton.setOnAction(e ->{this.hcInterface.handle(e);});
+            
+        this.curApptLabel = new Label("");
         
-        this.inDocLabel = new Label("Doctor: ");
-        this.inDocCombo = new ComboBox();
+            
+        HBox changeNameHBox = new HBox();
+            changeNameHBox.getChildren().addAll(changeNameLabel, changeNameField, changeNameButton);
+        
+        this.changeDocLabel = new Label("Doctor:");
+        this.changeDocBox = new ComboBox();
             try{
                 usersList = db.getUsers();
                 
@@ -137,72 +154,80 @@ public class AppointmentInterface{
             for(int i = 0 ; i < usersList.size(); i++){
                 if(usersList.get(i).getPermissions() == 2){
                     
-                    this.inDocCombo.getItems().add(usersList.get(i).getName());
+                    this.changeDocBox.getItems().add(usersList.get(i).getName());
                 }
             }
-            this.inDocCombo.setOnAction((e) -> {handle(e);});
-            
-            
-        this.inTimeLabel = new Label("Appointments: ");
-        this.inTimeList = new ListView<>();
+            this.changeDocBox.setOnAction(e -> {this.hcInterface.handle(e);});
+        
+        Label changeDateLabel = new Label("Date:");
+        this.changeDateCombo = new ComboBox();
+            for(String s: tm.getTwoWeekList()){
+                this.changeDateCombo.getItems().add(s);
+            }
+            this.changeDateCombo.setOnAction(e -> {hcInterface.handle(e);});
+        
+        this.changeTimeLabel = new Label("Times");
+        this.changeTimeList = new ListView();
+        
+        this.changeConfirm = new Button("Confirm");
+            this.changeConfirm.setOnAction(e -> {hcInterface.handle(e);});
+        this.changeCancel = new Button("Cancel");
+            this.changeCancel.setOnAction(e -> {hcInterface.handle(e);});
+        
+        VBox changeApptBox = new VBox();
+        changeApptBox.getChildren().addAll(changeNameHBox, curApptLabel,
+                changeDocLabel, changeDocBox, changeDateLabel, changeDateCombo, changeTimeLabel, changeTimeList, changeConfirm, changeCancel);
+        
+        this.changeAppointmentScene = new Scene(changeApptBox, 500,500);
+    }
+    
+    public void setDeleteAppointmentScene(){
+        this.deleteNameLabel = new Label("Name: ");
+        this.deleteNameField = new TextField();
+        
+        this.deleteCurAppointmentInfo = new Label("");
+        
+        this.cancelAppointment = new Button("Cancel Appointment");
+            this.cancelAppointment.setOnAction((e) -> {hcInterface.handle(e);});
+        this.deleteGoBack = new Button("Go Back");
+            this.deleteGoBack.setOnAction(e-> {hcInterface.handle(e);});
+        this.deleteNameOK = new Button("OK");
+            this.deleteNameOK.setOnAction((e) -> {hcInterface.handle(e);});
+        
+        VBox deleteBox = new VBox();
+        deleteBox.getChildren().addAll(deleteNameLabel, deleteNameField,this.deleteNameOK, deleteCurAppointmentInfo, cancelAppointment, deleteGoBack);
+        
+        this.deleteAppointmentScene = new Scene(deleteBox, 500, 500);
+    }
+    
+    public void setCheckInScene(){
+
+        this.inNameLabel = new Label("Name: ");
+        this.inNameField = new TextField();
+        
+        this.inBdayLabel = new Label("Birthday: ");
+        this.inBdayPicker = new DatePicker();
+      
+        HBox nameBox = new HBox();
+        nameBox.getChildren().addAll(inNameLabel, inNameField);
+        HBox bdayBox = new HBox();
+        bdayBox.getChildren().addAll(inBdayLabel, inBdayPicker);
         
         this.inConfirm = new Button("Check-In");
             this.inConfirm.setOnAction(e ->{hcInterface.handle(e);});
+        this.inCancel = new Button("Go Back");
+            this.inCancel.setOnAction(e -> {hcInterface.handle(e);});
         
         VBox inBox = new VBox();
-        inBox.getChildren().addAll( this.inDocLabel, this.inDocCombo);
-        inBox.getChildren().addAll(this.inTimeLabel, this.inTimeList, this.inConfirm);
+        
+        inBox.getChildren().addAll( nameBox, bdayBox, this.inConfirm, this.inCancel);
             inBox.setPadding(new Insets(20,20,20,20));
             
         
-        this.checkInScene = new Scene(inBox, 500, 500);
+        this.checkInScene = new Scene(inBox, 300, 200);
     }
     
-    public void setNewCheckInScene(){
-        this.newNameLabel = new Label("Name: ");
-        this.newNameField = new TextField("FirstName LastName");
-        
-       
-        
-        this.newBirthdayLabel = new Label("\tBirthday: ");
-        this.newBirthdayPicker = new DatePicker();
-        
-        HBox namebdBox = new HBox();
-            namebdBox.getChildren().addAll(this.newNameLabel, this.newNameField, this.newBirthdayLabel, this.newBirthdayPicker);
-        
-        this.newAddressLabel = new Label("Address: ");
-        this.newAddressField = new TextField();
-            this.newAddressField.setPrefColumnCount(40);
-        
-        HBox addressBox = new HBox();
-            addressBox.getChildren().addAll(this.newAddressLabel, this.newAddressField);
-        
-        this.newSocialLabel = new Label("SSN: ");
-        this.newSocialField = new TextField();
-        
-        this.newInsuranceLabel = new Label("\tInsurance: ");
-        this.newInsuranceField = new TextField();
-        
-        this.newPaymentLabel = new Label("\tPayment Info: ");
-        this.newPaymentField = new TextField();
-        
-        HBox sipBox = new HBox();
-        sipBox.getChildren().addAll(this.newSocialLabel, this.newSocialField);
-        sipBox.getChildren().addAll(this.newInsuranceLabel, this.newInsuranceField);
-        sipBox.getChildren().addAll(this.newPaymentLabel, this.newPaymentField);
-            
-        this.newConfirm = new Button("Finish");
-        this.newConfirm.setOnAction(e -> {this.hcInterface.handle(e);});
-        
-        VBox newCheckInBox = new VBox();
-        newCheckInBox.getChildren().addAll(namebdBox, addressBox, sipBox, this.newConfirm);
-        newCheckInBox.setSpacing(10);
-        newCheckInBox.setPadding(new Insets(20,20,20,20));
-        
-        
-        this.newCheckInScene = new Scene(newCheckInBox, 750,500);
-        
-    }
+   
     
     public void handle(Event e){
         if(e.getSource() == this.apptDocCombo || e.getSource() == this.apptDateCombo){
@@ -226,57 +251,12 @@ public class AppointmentInterface{
                     }
                 }
             }
-        }else if(e.getSource() == this.inDocCombo){
-            for(User d : this.usersList){
-                if(d.getName().equals(this.inDocCombo.getValue())){
-                    ArrayList<Day> temp = db.getSingleAvailability(d.getId());
-                    for(Day day : temp){
-                        if(day.getDate().equals(tm.getTodayDate())){
-                            int []apptTimes = day.getAvailabilityTimes();
-                            for(int j = 0; j < apptTimes.length;j++){
-                                if(apptTimes[j] != 0){
-                                    String s = times.get(j) + " - " + db.getSingleChart(apptTimes[j]).getPatient_name();
-                                    this.inTimeList.getItems().add(s);
-                                }
-                            }
-                            break;
-                        }
-                        
-                    }
-                    break;
-                }
-            }
         }
         else if(e.getSource() == this.inConfirm || e.getSource() == this.apptConfirm || e.getSource() == this.apptCancel){
             this.confirmed = true;
         }
     }
-    
-    public int getSelectedPatientID(){
-        String s = this.inTimeList.getSelectionModel().getSelectedItem();
-        s = s.replaceAll("[^a-zA-Z\\.\\s]", "");
-        s = s.trim();
-        try{
-            for(PatientChart pc: db.getCharts()){
-                if(s.equals(pc.getPatient_name())){
-                    return pc.getPatient_id();
-                }
-            }
-        }catch(Exception exep){exep.printStackTrace();}
-        return 0;
-    }
-    
-    public int getSelectedDocID(){
-        try{
-            for(User u: db.getUsers()){
-                if(u.getName().equals(this.inDocCombo.getValue())){
-                    return u.getId();   
-                }
-            }
-        }catch(Exception exep){exep.printStackTrace();}
-        return 0;
-    }
-    
+      
     
     public Scene getAppointmentScene(){
         return this.appointmentScene;
@@ -286,10 +266,6 @@ public class AppointmentInterface{
         return this.checkInScene;
     }
     
-    public Scene getNewCheckInScene(){
-        return this.newCheckInScene;
-    }
-
     public int getPatientID(){
         return this.patientID;
     }
@@ -298,4 +274,10 @@ public class AppointmentInterface{
         return this.confirmed;
     }
     
+    public Scene getChangeAppointmentScene(){
+        return this.changeAppointmentScene;
+    }
+    public Scene getDeleteAppointmentScene(){
+        return this.deleteAppointmentScene;
+    }
 }

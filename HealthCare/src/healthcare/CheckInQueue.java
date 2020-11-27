@@ -53,6 +53,7 @@ public class CheckInQueue {
     public void addToQueue(int docID, int patientID){
         if(docID == 123){
             this.doc123.add(patientID);
+            System.out.println(doc123.toString());
         }else if(docID == 124){
             this.doc124.add(patientID);
         }else if(docID == 125){

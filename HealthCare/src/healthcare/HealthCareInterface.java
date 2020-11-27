@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import javafx.stage.Popup;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
@@ -24,16 +25,25 @@ import javax.swing.*;
  */
 public class HealthCareInterface extends Application {
     
+    private boolean logoutPrimed, cancelPrimed;
     private Database db;
     private Timer tm;
+    private String popupMessage;
+    private Label popupMessageLabel;
+    private Button popupOK, popupYes, popupNo;
+    private Scene popupWindow;
+    private Stage popup;
+    
+    private VBox popupBox;
      ArrayList<User> userList;
+     ArrayList<PatientChart> patientList;
     
         
     Label usernameLabel,passwordLabel;
     TextField usernameTextField;
     PasswordField passwordTextField;
     Label errorMessage;
-    Button login, saveChanges;
+    Button login, saveChanges, goBack, inCheckIn;
     HBox passwordBox, usernameBox;
     VBox loginInfo;
     PasswordAuth passAuth;
@@ -58,12 +68,13 @@ public class HealthCareInterface extends Application {
     
     //Universal LogOut
     Button universalLogout;
+   
     //Nurse 
     ComboBox nurseDocBox;
     Label   nurseDocLabel;
     
     //Landing Page
-    Button checkInPatient, setUpAppt, checkInNew;
+    Button checkInPatient, setUpAppt, changeAppt, deleteAppt;
     Scene landingPageScene;
     
     //Chart Landing Page
@@ -73,20 +84,44 @@ public class HealthCareInterface extends Application {
     
     @Override
     public void start(Stage primaryStage) {
+        this.universalLogout = new Button("Logout");
+            this.universalLogout.setOnAction(event -> {handle(event);});
+        this.goBack = new Button("Go Back");
+            this.goBack.setOnAction(e -> {handle(e);});
+        this.popupMessage = "";
+        this.popupMessageLabel = new Label(popupMessage);
+            this.popupNo = new Button("No");
+                this.popupNo.setOnAction(e -> {handle(e);});
+            this.popupOK = new Button("OK");
+                this.popupOK.setOnAction(e -> {handle(e);});
+            this.popupYes = new Button("Yes");
+                this.popupYes.setOnAction(e -> {handle(e);});
+  
+            HBox popupButton = new HBox();
+            popupButton.getChildren().addAll( popupYes, popupNo, popupOK, universalLogout );
+                popupButton.setAlignment(Pos.BOTTOM_CENTER);
+            popupBox = new VBox();
+            popupBox.getChildren().addAll(popupMessageLabel, popupButton );
+                popupBox.setAlignment(Pos.CENTER);
+        
+            
+        this.popupWindow = new Scene(popupBox, 300,100);
 
+            
         this.userInterface = new Stage();
+            
         this.runLoginInterface();
         this.patientQueue = new CheckInQueue();
         this.db = new Database();
         try{
+            this.patientList = this.db.getCharts();
             this.userList = this.db.getUsers();
         }catch(Exception e){
             e.printStackTrace();
         }
         this.tm = new Timer();
         apptInterface = new AppointmentInterface(this.patientQueue, this, this.db);
-        this.universalLogout = new Button("Logout");
-            this.universalLogout.setOnAction(event -> {handle(event);});
+
     }
     public void runLoginInterface(){
         usernameLabel = new Label("Username: ");
@@ -127,7 +162,6 @@ public class HealthCareInterface extends Application {
         userInterface.setTitle("Login");
     }
     public void runChartInterface(int patientID){
-        patientID -= 500;
         ArrayList<PatientChart> charts = new ArrayList<PatientChart>();
        try{
            Database d = new Database();
@@ -135,7 +169,7 @@ public class HealthCareInterface extends Application {
        }catch(Exception exep){
            exep.printStackTrace();
        }
-       this.curPatient = charts.get(patientID);
+       this.curPatient = db.getSingleChart(patientID);
         LocalDate localDate = LocalDate.now();
         //Patient Name
         name = new Label("Name: ");
@@ -252,7 +286,7 @@ public class HealthCareInterface extends Application {
             
             
         //Save Changes Button
-        this.saveChanges = new Button("Save Changes");
+        this.saveChanges = new Button("Save and Exit");
         this.saveChanges.setOnAction(e->{handle(e);});
         
         this.nurseDocLabel = new Label("Attending Doctor: ");
@@ -273,18 +307,26 @@ public class HealthCareInterface extends Application {
         HBox nurseDocHBox = new HBox();
         nurseDocHBox.getChildren().addAll(this.nurseDocLabel, this.nurseDocBox);
         
-        if(curUser.getPermissions() != 1){
+        if(curUser.getPermissions() >1 ){
             nurseDocHBox.setVisible(false);
         }
+        
+        this.inCheckIn = new Button("Check-In");
+        this.inCheckIn.setOnAction(e -> {handle(e);});
+        if(curUser.getPermissions() != 0){
+            this.inCheckIn.setVisible(false);
+        }
+        
+        
             
         chartBox = new VBox();
         chartBox.getChildren().addAll(appDateBox);
         chartBox.getChildren().addAll(whbpBox,reasonVisit, reasonVisitField);
-        chartBox.getChildren().addAll(treatment, treatmentField, prescription, prescriptionField, this.saveChanges, this.universalLogout);
+        chartBox.getChildren().addAll(treatment, treatmentField, prescription, prescriptionField,  this.saveChanges,this.goBack, this.universalLogout);
         chartBox.setSpacing(5);
         
         allBox = new VBox();
-        allBox.getChildren().addAll(topBox,nurseDocHBox, dropDownBox, chartBox);
+        allBox.getChildren().addAll(topBox,nurseDocHBox, dropDownBox, chartBox, this.inCheckIn);
             allBox.setPadding(new Insets(20,20,20,20));
             allBox.setSpacing(10);
         this.setUserFields();
@@ -292,7 +334,7 @@ public class HealthCareInterface extends Application {
         this.chartScene = new Scene(allBox, 1250, 750);
         
         
-        fillChartInfo(charts.get(patientID));    
+        this.fillChartInfo(curPatient);
     }
     
     public void setChartLandingPage(){
@@ -317,15 +359,18 @@ public class HealthCareInterface extends Application {
     }
     
     public void setLandingPage(){
-        this.checkInPatient = new Button("Check-In Existing");
+        this.checkInPatient = new Button("Check-In");
             this.checkInPatient.setOnAction(e -> {handle(e);});
-        this.checkInNew = new Button("Check-In New");
-            this.checkInNew.setOnAction(e -> {handle(e);});
-        this.setUpAppt = new Button("New Appointment");
+        this.setUpAppt = new Button("Make Appointment");
             this.setUpAppt.setOnAction(e -> {handle(e);});
+        this.changeAppt = new Button("Change an Appointment");
+            this.changeAppt.setOnAction(e -> {handle(e);});
+            
+        this.deleteAppt = new Button("Delete Appointment");
+            this.deleteAppt.setOnAction(e ->{handle(e);});
         
         VBox landingBox = new VBox();
-        landingBox.getChildren().addAll(this.checkInPatient, this.checkInNew, this.setUpAppt,this.universalLogout);
+        landingBox.getChildren().addAll(this.checkInPatient, this.setUpAppt, this.changeAppt, this.deleteAppt, this.universalLogout);
             landingBox.setPadding(new Insets(20,20,20,20));
         
         this.landingPageScene = new Scene(landingBox, 300,300);
@@ -339,7 +384,7 @@ public class HealthCareInterface extends Application {
         this.birthdayField.setValue(ld);
         this.addressField.setText(curPatient.getAddress());
         String soc = "" + curPatient.getSsn();
-        soc = soc.replaceAll("(\\d{3})(\\d{2})(\\d{4})", "###-##-$3");
+        
         this.socialField.setText(soc);
 
         this.insuranceField.setText(curPatient.getInsurance());
@@ -418,6 +463,11 @@ public class HealthCareInterface extends Application {
                     this.prescriptionField.setEditable(true);    
             }
         }else if(e.getSource() == this.chartLandConfirm){
+            if(curUser.getPermissions != 1){
+                this.popupConfirm("Access Denied");
+                this.runLoginInterface();
+                ;
+            }
             int patID = this.queuedPatients.getSelectionModel().getSelectedIndex();
             patID = this.patientQueue.getDocQueue(this.curUser.getId()).get(patID);
             this.runChartInterface(patID);
@@ -425,72 +475,141 @@ public class HealthCareInterface extends Application {
             this.userInterface.show();
             this.userInterface.setTitle(this.curUser.getName() + " | " + this.curPatient.getPatient_name());
         }
-        else if(e.getSource() == this.checkInNew || e.getSource() == this.checkInPatient){
-            if(e.getSource() == this.checkInNew){
-                this.userInterface.setScene(apptInterface.getNewCheckInScene());
-                this.userInterface.show();
-                this.userInterface.setTitle("Check-In (New) | " + this.curUser.getName() );
-            }
-            else{
+        else if( e.getSource() == this.checkInPatient){
+                apptInterface.setCheckInScene();
                 this.userInterface.setScene(apptInterface.getcheckInScene());
                 this.userInterface.show();
                 this.userInterface.setTitle("Check-In | " + this.curUser.getName() );
-            }
+            
         }else if(e.getSource() == this.setUpAppt){
             this.userInterface.setScene(apptInterface.getAppointmentScene());
             this.userInterface.show();
             this.userInterface.setTitle("Check-In | " + this.curUser.getName() );
         }
-        else if(e.getSource() == apptInterface.inConfirm || e.getSource() == apptInterface.apptCancel || e.getSource() == apptInterface.apptConfirm){            
+        else if(e.getSource() == apptInterface.inConfirm || e.getSource() == apptInterface.apptConfirm){            
             if(e.getSource() == apptInterface.inConfirm){
-                
-                this.patientQueue.addToQueue(-1, apptInterface.getSelectedPatientID());
-                ArrayList<Day> temp = db.getSingleAvailability(apptInterface.getSelectedDocID());
-               for(Day d: temp){
-                        if(d.getDate().equals(tm.getTodayDate())){
-                            int []avails = d.getAvailabilityTimes();
-                            for(int j = 0; j < avails.length; j++){
-                                if(avails[j] == apptInterface.getSelectedPatientID()){
-                                    avails[j] = 0;
-                                    break;
-                                }                               
+                if(apptInterface.inNameField.getText().length() == 0 || apptInterface.inBdayPicker.getValue() == null){
+                    this.popupConfirm("Please enter name and birthday.");
+                    
+                }else{
+                    DateTimeFormatter form = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+                    String selectedBday = apptInterface.inBdayPicker.getValue().format(form);
+                    if(this.curUser.getPermissions() == 0){
+                        int patID = -1;
+                        PatientChart inPatient = null;
+                        for(PatientChart pc: this.patientList){
+                            if(pc.getPatient_name().equals(apptInterface.inNameField.getText())){
+                                patID = pc.getPatient_id();
+                                inPatient = pc;
+                                break;
                             }
-                            //write to DB here to clear DP of the appointment
                         }
+                        String patDoc ="";
+                        int patDocID = -1;
+                        boolean found = false;
+                        for(User u: this.userList){
+                            if(u.getPermissions() == 2){
+                                ArrayList<Day> day = db.getSingleAvailability(u.getId());
+                                for(Day d: day){
+                                    int []availTimes = d.getAvailabilityTimes();
+                                    for(int i =0 ;i < availTimes.length; i++){
+                                        if(availTimes[i] == patID){
+                                            availTimes[i] = -patID;
+                                            found = true;
+                                            d.setAvailabilityTimes(availTimes);
+                                            db.saveSingleAvailability(u.getId(), day);
+                                            patDoc = u.getName();
+                                            patDocID = u.getId();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        
+                        if(found){
+                            
+                            this.runChartInterface(patID);
+                            this.nurseDocBox.getSelectionModel().select(patDoc);
+                                int selectedDocID = -1;
+                            for(User u: this.userList){
+                                if(u.getName().equals(this.nurseDocBox.getSelectionModel().getSelectedItem())){
+                                    selectedDocID = u.getId();
+                                }
+                            }
+                            this.curPatient.setDoctorID(selectedDocID);
+                            
+                            this.userInterface.setScene(this.chartScene);
+                            this.userInterface.show();
+                            this.nurseDocBox.getSelectionModel().select(patDoc);
+                        }else{
+                            this.popupConfirm("Patient not found");
+                        }
+                        
+                    }else{
+                        this.popupConfirm("Access Denied");
                     }
-                    //write to DB here for a new Patient Chart Object
+                    
+                }
             }
             if(e.getSource() == this.apptInterface.apptConfirm){
             try{
+                 
+                int patID = -1;
+                for(PatientChart pc: this.patientList){
+                    if(pc.getPatient_name().equals(apptInterface.apptNameField.getText())){
+                        patID = pc.getPatient_id();
+                    }
+                }
+                System.out.println(patID);
+                if(patID != -1){
+                    for(User u: this.userList){
+                        if(u.getPermissions() == 2){
+                            for(Day d: db.getSingleAvailability(u.getId()) ){
+                                for(int i: d.getAvailabilityTimes()){
+                                    if(i == patID){
+                                        apptInterface.setAppointmentScene();
+                                        this.userInterface.setScene(apptInterface.getAppointmentScene());
+                                        this.userInterface.show();
+                                        this.popupConfirm("Already have an appointment");
+                                        return;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                if(apptInterface.apptDocCombo.getSelectionModel().getSelectedIndex() < 0 || apptInterface.apptDateCombo.getSelectionModel().getSelectedIndex() < 0 || apptInterface.apptTimeList.getSelectionModel().getSelectedIndex() < 0){
+                    this.popupConfirm("Please select a doctor and/or time");
+                    return;
+                } 
                 for(User u: db.getUsers()){
                     if(u.getName().equals(apptInterface.apptDocCombo.getValue())){
                         ArrayList<Day> tempDay = db.getSingleAvailability(u.getId());
                        for(Day day: tempDay){
                            if(day.getDate().equals(apptInterface.apptDateCombo.getValue())){
-
+                               this.patientList = db.getCharts();
                                int avail[] = day.getAvailabilityTimes();
-                               int tempPatientID = -1;
+                               int tempPatientID = this.patientList.get(patientList.size() - 1).getPatient_id() + 1;
+                                
+                               
                                for(PatientChart pc: db.getCharts()){
                                    if(pc.getPatient_name().equals(apptInterface.apptNameField.getText())){
                                         tempPatientID = pc.getPatient_id();
+                                        
                                         break;
                                    }
                                }
-                               apptInterface.apptTimeList.getSelectionModel().getSelectedIndex();
-                                avail [apptInterface.apptTimeList.getSelectionModel().getSelectedIndex()] = tempPatientID ;
-                                day.setAvailabilityTimes(avail); 
-                                for(Day ddd :tempDay){
-                                    System.out.println(ddd.getDate());
-                                    int []tempDDD = ddd.getAvailabilityTimes();
-                                    for(int tempInt: tempDDD){
-                                        
-                                        System.out.print(tempInt +  " ");
-                                        
-                                    }
-                                    System.out.println();
-                                }
-                               db.saveSingleAvailability(u.getId(), tempDay);
-                               break;
+                                apptInterface.apptTimeList.getSelectionModel().getSelectedIndex();
+                                 avail [apptInterface.apptTimeList.getSelectionModel().getSelectedIndex()] = tempPatientID ;
+                                 day.setAvailabilityTimes(avail); 
+                                 
+                                db.saveSingleAvailability(u.getId(), tempDay);
+                                
+                                this.popupConfirm("Added patient appointment.");
+                                Thread.sleep(100);
+                                apptInterface.setAppointmentScene();
+                                this.userInterface.setScene(apptInterface.getAppointmentScene());
+                                break;
                            }
                                                   
                             } 
@@ -498,7 +617,241 @@ public class HealthCareInterface extends Application {
                          }
                      }
                  }catch(Exception exep){exep.printStackTrace();}
-             }  
+            }
+            
+        }else if(e.getSource() == this.inCheckIn){
+            this.curPatient.setPatient_name(this.nameField.getText());
+            
+            DateTimeFormatter form = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            this.curPatient.setBirthday(this.birthdayField.getValue().format(form));
+            
+            this.curPatient.setAddress(this.addressField.getText());
+                  
+            String ssn = this.socialField.getText();
+            
+            this.curPatient.setSsn(Integer.parseInt(ssn));
+            
+            this.curPatient.setInsurance(this.insuranceField.getText());
+            
+            
+            
+            db.saveSingleChart(curPatient, curPatient.getPatient_id());
+            
+            this.patientQueue.addToQueue(-1 , curPatient.getPatient_id());
+            this.setLandingPage();
+            this.userInterface.setScene(this.landingPageScene);
+            this.userInterface.show();
+            this.popupConfirm("Checked In patient.");
+        }
+        else if(e.getSource() == this.changeAppt){
+            apptInterface.setChangeAppointment();
+            this.userInterface.setScene(apptInterface.getChangeAppointmentScene());
+        }
+        else if(e.getSource() == apptInterface.changeNameButton){
+            int tempPatientID = -1; 
+            for(PatientChart pc: this.patientList){
+                if(pc.getPatient_name().equals(apptInterface.changeNameField.getText())){
+                    tempPatientID = pc.getPatient_id();
+                    
+                }
+            }
+            System.out.println(tempPatientID);
+            boolean found = false;
+            for(User u: this.userList){
+                if(u.getPermissions()== 2){
+                    for(Day d: this.db.getSingleAvailability(u.getId())){
+                        int count = 0;
+                        for(int i: d.getAvailabilityTimes()){
+                            if(i == tempPatientID){
+                                apptInterface.changeDocBox.getSelectionModel().select(u.getName());
+                                apptInterface.changeDocBox.getSelectionModel().clearAndSelect(apptInterface.changeDocBox.getSelectionModel().getSelectedIndex());
+                                apptInterface.curApptLabel.setText("Current Appointment: " + d.getDate() + " at " + apptInterface.times.get(count));
+                                System.out.println("k");
+                                found =true;
+                                break;
+                            }
+                            count++;
+                        }
+                        if(found)
+                            break;
+                        
+                    }
+                }
+                if(found)
+                    break;
+            }
+            if(!found){
+               this.popupConfirm("No appointment"); 
+            }
+        }
+        else if(e.getSource() == apptInterface.changeCancel || e.getSource() == apptInterface.deleteGoBack || e.getSource() == apptInterface.apptCancel){
+            this.cancelPrimed = true;
+            this.logoutPrimed = false;
+            this.popupYesNo("Are you sure you want to exit?");
+            
+        }
+        else if(e.getSource() == apptInterface.changeDateCombo){
+            apptInterface.changeTimeList.getItems().clear();
+            int tempUserID = -1;
+            for(User u: this.userList){
+                if(u.getName().equals(apptInterface.changeDocBox.getValue())){
+                    tempUserID = u.getId();
+                    break;
+                }
+            }
+            for(Day d: db.getSingleAvailability(tempUserID)){
+                if(d.getDate().equals(apptInterface.changeDateCombo.getValue())){
+                    int availTime[] = d.getAvailabilityTimes();
+                    for(int i = 0; i < availTime.length ; i++){
+                        String s = apptInterface.times.get(i);
+                        if(availTime[i] != 0){
+                            for(PatientChart pc: this.patientList){
+                                if(pc.getPatient_id() == availTime[i]){
+                                    s += " - " + pc.getPatient_name();
+                                }
+                            }
+                        }
+                        apptInterface.changeTimeList.getItems().add(s);
+                    }
+                }
+            }
+        }else if(e.getSource() == apptInterface.changeConfirm){
+            if(apptInterface.changeTimeList.getSelectionModel().getSelectedIndex() < 0){
+                this.popupConfirm("Please select a time.");
+            }else{
+                int tempUserID = -1;
+                for(User u: this.userList){
+                    if(u.getName().equals(apptInterface.changeDocBox.getValue()))
+                    {
+                        tempUserID = u.getId();
+                        break;
+                    }
+                }
+                
+               int tempPatientID = -1;
+               for(PatientChart pc: this.patientList){
+                   if(pc.getPatient_name().equals(apptInterface.changeNameField.getText()))
+                   {
+                       tempPatientID = pc.getPatient_id();
+                       break;
+                   }
+               }
+                
+                ArrayList<Day> days = db.getSingleAvailability(tempUserID);
+                boolean setNew = false;
+                for(Day d: days){
+                    //delete last appointment
+                    int [] tempTimes = d.getAvailabilityTimes();
+                        for(int i = 0;i < tempTimes.length; i++){
+                            if(tempTimes[i] ==tempPatientID){
+                                tempTimes[i] = 0;
+                            }
+                            d.setAvailabilityTimes(tempTimes);
+                        }
+                    if(d.getDate().equals(apptInterface.changeDateCombo.getValue())){
+                        int []availTime = d.getAvailabilityTimes();
+
+                        if( availTime[apptInterface.changeTimeList.getSelectionModel().getSelectedIndex()]  == 0){
+                            availTime[apptInterface.changeTimeList.getSelectionModel().getSelectedIndex()] = tempPatientID;
+                            d.setAvailabilityTimes(availTime);
+                            setNew = true;
+                        }
+                        else{
+                            this.popupConfirm("Please select a different date/time");
+                        }
+                    }
+                    
+                    
+                }
+                
+                if(setNew){
+                    db.saveSingleAvailability(tempUserID, days);
+                    this.popupConfirm("Changed Appointment");
+                    apptInterface.setChangeAppointment();
+                    this.userInterface.setScene(apptInterface.getChangeAppointmentScene());
+                    this.userInterface.show();
+                }
+            }
+            
+        }else if(e.getSource() == this.deleteAppt){
+            apptInterface.setDeleteAppointmentScene();
+            this.userInterface.setScene(apptInterface.getDeleteAppointmentScene());
+            this.userInterface.show();
+        }
+        else if(e.getSource() == apptInterface.deleteNameOK){
+            int patID = -1;
+            String docName = "";
+            String apptDate = "";
+            String apptTime = "";
+            for(PatientChart pc: this.patientList){
+                if(pc.getPatient_name().equals(apptInterface.deleteNameField.getText())){
+                    patID = pc.getPatient_id();
+                }
+            }
+            if(patID == -1){
+                this.popupConfirm("No Patient Found");
+            }else {
+                for(User u: this.userList){
+                    if(u.getPermissions() == 2){
+                        for(Day d: db.getSingleAvailability(u.getId())){
+                            int count = 0;
+                            for(int i: d.getAvailabilityTimes()){
+                                if(patID == i){
+                                    docName = u.getName();
+                                    apptDate = d.getDate();
+                                    apptTime = apptInterface.times.get(count);
+                                }
+                                count++;
+                            }
+                        }
+                    }
+                }
+                if(apptTime.length() > 0){
+                    apptInterface.deleteCurAppointmentInfo.setText("Current Appointment: \n" + docName + " on " + apptDate + " at " + apptTime);
+                    
+                }
+                else
+                    this.popupConfirm("No Appointment Found");
+            }
+        }
+        else if(e.getSource() == apptInterface.cancelAppointment){
+            if(apptInterface.deleteNameField.getText().length() > 0){
+                int patID = -1;
+                for(PatientChart pc: this.patientList){
+                    if(pc.getPatient_name().equals(apptInterface.deleteNameField.getText())){
+                        patID = pc.getPatient_id();
+                        break;
+                    }
+                }
+                boolean found = false;
+                for(User u: this.userList){
+                    if(u.getPermissions() == 2){
+                        ArrayList<Day> days = db.getSingleAvailability(u.getId());
+                        for(Day d: days){
+                            int availDates [] = d.getAvailabilityTimes();
+                            for(int i = 0; i < availDates.length; i++){
+                                if(availDates[i] == patID){
+                                    found = true;
+                                    availDates[i] = 0;
+                                    d.setAvailabilityTimes(availDates);
+                                    db.saveSingleAvailability(u.getId(), days);
+                                    break;
+                                }
+                            }
+                            if(found)
+                                break;
+                        }
+                    }
+                    if(found)
+                        break;
+                }
+                this.popupConfirm("Deleted Appointment");
+                apptInterface.setDeleteAppointmentScene();
+                this.userInterface.setScene(apptInterface.getDeleteAppointmentScene());
+                this.userInterface.show();
+            }else{
+                this.popupConfirm("Please enter a name");
+            }
         }
         else if(e.getSource() == this.saveChanges ){
             this.patientQueue.removeFromQueue(curUser.getId(), new Integer(curPatient.getPatient_id()));
@@ -512,16 +865,74 @@ public class HealthCareInterface extends Application {
                             this.userInterface.setScene(this.chartLandScene);
                             this.userInterface.show();
                             this.userInterface.setTitle(this.curUser.getName());
+                            
                             break;
                         }
                     }
                 }catch(Exception exep){exep.printStackTrace();}
             }
         }
-        else if(e.getSource() == this.universalLogout){
-            this.runLoginInterface();
+        else if(e.getSource() == this.universalLogout || e.getSource() == this.apptInterface.apptCancel || e.getSource() == this.apptInterface.inCancel || e.getSource() == this.goBack){
+            System.out.println("pressed");
+            this.logoutPrimed = true;
+            String message = "logout";
+            if(e.getSource() == this.apptInterface.apptCancel || e.getSource() == this.apptInterface.inCancel || e.getSource() == this.goBack){
+                message = "go back";
+                this.logoutPrimed = false;
+                this.cancelPrimed = true;
+            }
+            this.popupYesNo("Are you sure you want to " + message +  " ?" );
+            
+        }
+        else if(e.getSource() == this.popupYes || e.getSource() == this.popupNo || e.getSource() == this.popupOK){
+            if(e.getSource() == this.popupYes){
+                popup.close();
+                if(this.logoutPrimed){
+                    this.runLoginInterface();
+                }else if(this.cancelPrimed){
+                    if(this.curUser.getPermissions() == 0)
+                        this.setLandingPage();
+                    else if(this.curUser.getPermissions() <= 2){
+                        this.setChartLandingPage();
+                    }
+                }
+                this.logoutPrimed = false;
+                this.cancelPrimed = false;
+            }           
+            else{
+                popup.close();
+            }
         }
     }   
 
+    public void popupConfirm(String s){
+        this.popupYes.setVisible(false);
+        this.popupNo.setVisible(false);
+        this.popupOK.setVisible(true);
+        
+        this.popupMessageLabel.setText(s);
+        popup = new Stage();
+        popup.setScene(this.popupWindow);
+        popup.show();
+        popup.setTitle("Confirmation");
+        popup.setAlwaysOnTop(true);
+        
+    }
+    
+    public void popupYesNo(String s){
+        this.popupYes.setVisible(true);
+        this.popupNo.setVisible(true);
+        this.popupOK.setVisible(false);
+        
+        
+        this.popupMessageLabel.setText(s);
+        popup = new Stage();
+        popup.setScene(this.popupWindow);
+        popup.show();
+        popup.setTitle("Are you sure?");
+        popup.setAlwaysOnTop(true);
+        
+        
+    }
 
 }

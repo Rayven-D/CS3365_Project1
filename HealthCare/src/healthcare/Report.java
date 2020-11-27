@@ -12,8 +12,17 @@ import java.util.ArrayList;
  * @author Arthr
  */
 public class Report {
+
     private String date;
     private ArrayList<ReportInformation> reportInformation;
+
+    public Report() {
+    }
+
+    public Report(String date, ArrayList<ReportInformation> reportInformation) {
+        this.date = date;
+        this.reportInformation = reportInformation;
+    }
 
     public String getDate() {
         return date;
@@ -30,5 +39,5 @@ public class Report {
     public void setReports(ArrayList<ReportInformation> reports) {
         this.reportInformation = reports;
     }
-    
+
 }

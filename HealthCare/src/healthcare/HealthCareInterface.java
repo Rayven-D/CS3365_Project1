@@ -388,6 +388,8 @@ public class HealthCareInterface extends Application {
         this.socialField.setText(soc);
 
         this.insuranceField.setText(curPatient.getInsurance());
+        
+       
     }
     
     public void setUserFields(){
@@ -463,10 +465,10 @@ public class HealthCareInterface extends Application {
                     this.prescriptionField.setEditable(true);    
             }
         }else if(e.getSource() == this.chartLandConfirm){
-            if(curUser.getPermissions != 1){
+            if(curUser.getPermissions()  < 1 || curUser.getPermissions() > 2){
                 this.popupConfirm("Access Denied");
                 this.runLoginInterface();
-                ;
+                return;
             }
             int patID = this.queuedPatients.getSelectionModel().getSelectedIndex();
             patID = this.patientQueue.getDocQueue(this.curUser.getId()).get(patID);
@@ -855,12 +857,18 @@ public class HealthCareInterface extends Application {
         }
         else if(e.getSource() == this.saveChanges ){
             this.patientQueue.removeFromQueue(curUser.getId(), new Integer(curPatient.getPatient_id()));
-            if(curUser.getPermissions() == 1){
+            if(curUser.getPermissions() == 1 || curUser.getPermissions() == 2){
                 try{
                     for(User u: db.getUsers()){
                         if(u.getName().equals(this.nurseDocBox.getValue())){
-                            System.out.println("k");
+                            TreatmentRecord curTreatment = new TreatmentRecord(tm.getTodayDate(), this.reasonVisitField.getText(), Double.parseDouble(this.weightField.getText()), Double.parseDouble(this.heightField.getText()), this.bpField.getText(), this.treatmentField.getText(), this.prescriptionField.getText(), this.curUser.getName());
+                            ArrayList treatRec = this.curPatient.getTreatment_record_arr();
+                            
+                            curPatient.setCurrent_visit(curTreatment);
+                            
                             this.patientQueue.addToQueue(u.getId(), this.curPatient.getPatient_id());
+                            this.db.saveSingleChart(curPatient, curPatient.getPatient_id());
+                            this.popupConfirm("Saved changes");
                             this.setChartLandingPage();
                             this.userInterface.setScene(this.chartLandScene);
                             this.userInterface.show();

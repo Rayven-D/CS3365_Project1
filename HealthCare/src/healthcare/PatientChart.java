@@ -145,7 +145,7 @@ public class PatientChart {
         this.current_visit = current_visit;
         
         int temp = this.treatment_record_arr.size(); //Updates the current_visit in the arraylist with the version that has updated values. 
-        this.treatment_record_arr.set(temp, current_visit);
+        this.treatment_record_arr.add(current_visit);
     }
     
     

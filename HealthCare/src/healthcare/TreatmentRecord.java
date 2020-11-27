@@ -15,7 +15,7 @@ public class TreatmentRecord {
     private String reason_for_visit;
     private double weight;
     private double height;
-    private double blood_pressure;
+    private String blood_pressure;
     private String treatment;
     private String prescription;
     private String visited_doctor;
@@ -26,14 +26,14 @@ public class TreatmentRecord {
         this.reason_for_visit = null;
         this.weight = 0.0;
         this.height = 0.0;
-        this.blood_pressure = 0.0;
+        this.blood_pressure = "0/0";
         this.treatment = null;
         this.prescription = null;
         this.visited_doctor = null;
     }
     
     // Standard constructor
-    public TreatmentRecord(String appointment_date, String reason_for_visit, double weight, double height, double blood_pressure, String treatment, String prescription, String visited_doctor) {
+    public TreatmentRecord(String appointment_date, String reason_for_visit, double weight, double height, String blood_pressure, String treatment, String prescription, String visited_doctor) {
         this.appointment_date = appointment_date;
         this.reason_for_visit = reason_for_visit;
         this.weight = weight;
@@ -88,11 +88,11 @@ public class TreatmentRecord {
         this.height = height;
     }
 
-    public double getBlood_pressure() {
+    public String getBlood_pressure() {
         return blood_pressure;
     }
 
-    public void setBlood_pressure(double blood_pressure) {
+    public void setBlood_pressure(String blood_pressure) {
         this.blood_pressure = blood_pressure;
     }
 

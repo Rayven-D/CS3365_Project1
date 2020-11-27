@@ -17,7 +17,7 @@ import java.util.HashSet;
  *
  * @author Rayven
  */
-public class AppointmentInterface{
+public class StaffInterface{
      ArrayList<String> times;
     private Database db;
     private ArrayList<User> usersList;
@@ -58,7 +58,7 @@ public class AppointmentInterface{
     Button cancelAppointment, deleteGoBack;
     Scene deleteAppointmentScene;
 
-    public AppointmentInterface(CheckInQueue queue, HealthCareInterface hcInterface, Database db){
+    public StaffInterface(CheckInQueue queue, HealthCareInterface hcInterface, Database db){
         this.db = db;
         this.times = new ArrayList<>();
         for(int i = 9 ; i < 15; i++){

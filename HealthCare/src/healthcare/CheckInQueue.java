@@ -58,7 +58,7 @@ public class CheckInQueue {
             this.doc124.add(patientID);
         }else if(docID == 125){
             this.doc125.add(patientID);
-        }else
+        }
             this.nurseQueue.add(patientID);
     }
 }

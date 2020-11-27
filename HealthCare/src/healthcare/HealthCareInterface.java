@@ -43,14 +43,14 @@ public class HealthCareInterface extends Application {
     TextField usernameTextField;
     PasswordField passwordTextField;
     Label errorMessage;
-    Button login, saveChanges, goBack, inCheckIn;
+    Button login, saveChanges, goBack, inCheckIn, paymentInfo;
     HBox passwordBox, usernameBox;
     VBox loginInfo;
     PasswordAuth passAuth;
     Stage userInterface;
     Label name, birthday, address, social, insurance, payment, id;
     Label appDate, reasonVisit, weight, height, bp, treatment, prescription, docVisiting;
-    TextField nameField,  addressField, socialField, insuranceField, paymentField, idField;
+    TextField nameField,  addressField, socialField, insuranceField, idField;
     TextField appDateField, weightField, heightField, bpField, docVisitedField;
     TextArea reasonVisitField, treatmentField, prescriptionField;
     ComboBox treatments;
@@ -62,7 +62,7 @@ public class HealthCareInterface extends Application {
     DatePicker birthdayField;
     
     CheckInQueue patientQueue;
-    AppointmentInterface apptInterface;
+    StaffInterface staffInterface;
     
     Scene chartScene;
     
@@ -120,7 +120,7 @@ public class HealthCareInterface extends Application {
             e.printStackTrace();
         }
         this.tm = new Timer();
-        apptInterface = new AppointmentInterface(this.patientQueue, this, this.db);
+        staffInterface = new StaffInterface(this.patientQueue, this, this.db);
 
     }
     public void runLoginInterface(){
@@ -195,7 +195,8 @@ public class HealthCareInterface extends Application {
         
         //Payment
         payment = new Label("\tPayment: ");
-        paymentField = new TextField();
+        paymentInfo = new Button("Payment Info");
+            paymentInfo.setOnAction((e) -> {handle(e);});
         
         //ID
         id = new Label("\tPatient ID: ");
@@ -204,15 +205,15 @@ public class HealthCareInterface extends Application {
         //Treatment Menu Dropdown
         treatments = new ComboBox();
         treatments.setOnAction((event) -> {handle(event);});
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");
         try{
-            treatments.getItems().add(dtf.format(localDate));
-            treatments.getItems().add(curPatient.getPreviousVisit().getAppointment_date());
+            for(TreatmentRecord tr: curPatient.getTreatment_record_arr()){
+                treatments.getItems().add(tr.getAppointment_date());
+            }
         }catch(Exception exep){
             exep.printStackTrace();
         }
         
-        treatments.getSelectionModel().selectFirst();
+        treatments.getSelectionModel().selectLast();
         
         
         //Date
@@ -228,7 +229,7 @@ public class HealthCareInterface extends Application {
 
             
         sipiBox = new HBox();
-        sipiBox.getChildren().addAll(social, socialField, insurance, insuranceField, payment, paymentField, id, idField);
+        sipiBox.getChildren().addAll(social, socialField, insurance, insuranceField, payment, paymentInfo, id, idField);
             //properties
             sipiBox.setSpacing(10);
         
@@ -247,7 +248,7 @@ public class HealthCareInterface extends Application {
         //AppDate
         this.appDate = new Label("Date: ");
         this.appDateField = new TextField();
-            this.appDateField.setText(dtf.format(localDate));
+            this.appDateField.setText(tm.getTodayDate());
             this.appDateField.setEditable(false);
         appDateBox = new HBox();
         appDateBox.getChildren().addAll(appDate, appDateField);
@@ -388,6 +389,19 @@ public class HealthCareInterface extends Application {
         this.socialField.setText(soc);
 
         this.insuranceField.setText(curPatient.getInsurance());
+        
+        this.weightField.setText(curPatient.getCurrent_visit().getWeight() + "");
+        
+        this.heightField.setText(curPatient.getCurrent_visit().getHeight() + "");
+        
+        this.bpField.setText(curPatient.getCurrent_visit().getBlood_pressure());
+        
+        this.reasonVisitField.setText(curPatient.getCurrent_visit().getReason_for_visit());
+        
+        this.treatmentField.setText(curPatient.getCurrent_visit().getTreatment());
+        
+        this.prescriptionField.setText(curPatient.getCurrent_visit().getPrescription());
+       
     }
     
     public void setUserFields(){
@@ -401,7 +415,7 @@ public class HealthCareInterface extends Application {
                 this.prescriptionField.setVisible(false);                
             }
             this.payment.setVisible(false);
-            this.paymentField.setVisible(false);
+            this.paymentInfo.setVisible(false);
         }else if( curUser instanceof Staff){
             this.chartBox.setVisible(false);
             this.dropDownBox.setVisible(false);
@@ -430,43 +444,20 @@ public class HealthCareInterface extends Application {
                 }
             } 
         }else if(e.getSource() == this.treatments){
-            int sel_index = this.treatments.getSelectionModel().getSelectedIndex();
-            if(sel_index == 1){
-                this.appDateField.setText(this.curPatient.getPreviousVisit().getAppointment_date());
-                   
-                this.weightField.setText(""+this.curPatient.getPreviousVisit().getWeight());
-                    this.weightField.setEditable(false);
-                this.heightField.setText(""+this.curPatient.getPreviousVisit().getHeight());
-                    this.weightField.setEditable(false);
-                this.bpField.setText(""+this.curPatient.getPreviousVisit().getBlood_pressure());
-                    this.bpField.setEditable(false);
-                this.reasonVisitField.setText(this.curPatient.getPreviousVisit().getReason_for_visit());
-                    this.reasonVisitField.setEditable(false);
-                this.treatmentField.setText(this.curPatient.getPreviousVisit().getTreatment());
-                    this.treatmentField.setEditable(false);
-                this.prescriptionField.setText(this.curPatient.getPreviousVisit().getPrescription());
-                    this.prescriptionField.setEditable(false);              
-            }else if(sel_index == 0){
-                this.appDateField.setText(this.curPatient.getCurrent_visit().getAppointment_date());
-                   
-                this.weightField.setText(""+this.curPatient.getCurrent_visit().getWeight());
-                    this.weightField.setEditable(true);
-                this.heightField.setText(""+this.curPatient.getCurrent_visit().getHeight());
-                    this.weightField.setEditable(true);
-                this.bpField.setText(""+this.curPatient.getCurrent_visit().getBlood_pressure());
-                    this.bpField.setEditable(true);
-                this.reasonVisitField.setText(this.curPatient.getCurrent_visit().getReason_for_visit());
-                    this.reasonVisitField.setEditable(true);
-                this.treatmentField.setText(this.curPatient.getCurrent_visit().getTreatment());
-                    this.treatmentField.setEditable(true);
-                this.prescriptionField.setText(this.curPatient.getCurrent_visit().getPrescription());
-                    this.prescriptionField.setEditable(true);    
-            }
+            TreatmentRecord curTreatment = this.curPatient.getTreatment_record_arr().get(treatments.getSelectionModel().getSelectedIndex());
+            
+            this.bpField.setText(curTreatment.getBlood_pressure());
+            this.weightField.setText(curTreatment.getWeight() + "");
+            this.heightField.setText(curTreatment.getHeight() + "");
+            this.reasonVisitField.setText(curTreatment.getReason_for_visit());
+            this.treatmentField.setText(curTreatment.getTreatment());
+            this.prescriptionField.setText(curTreatment.getPrescription());
+            
         }else if(e.getSource() == this.chartLandConfirm){
-            if(curUser.getPermissions != 1){
+            if(curUser.getPermissions()  < 1 || curUser.getPermissions() > 2){
                 this.popupConfirm("Access Denied");
                 this.runLoginInterface();
-                ;
+                return;
             }
             int patID = this.queuedPatients.getSelectionModel().getSelectedIndex();
             patID = this.patientQueue.getDocQueue(this.curUser.getId()).get(patID);
@@ -476,29 +467,29 @@ public class HealthCareInterface extends Application {
             this.userInterface.setTitle(this.curUser.getName() + " | " + this.curPatient.getPatient_name());
         }
         else if( e.getSource() == this.checkInPatient){
-                apptInterface.setCheckInScene();
-                this.userInterface.setScene(apptInterface.getcheckInScene());
+                staffInterface.setCheckInScene();
+                this.userInterface.setScene(staffInterface.getcheckInScene());
                 this.userInterface.show();
                 this.userInterface.setTitle("Check-In | " + this.curUser.getName() );
             
         }else if(e.getSource() == this.setUpAppt){
-            this.userInterface.setScene(apptInterface.getAppointmentScene());
+            this.userInterface.setScene(staffInterface.getAppointmentScene());
             this.userInterface.show();
             this.userInterface.setTitle("Check-In | " + this.curUser.getName() );
         }
-        else if(e.getSource() == apptInterface.inConfirm || e.getSource() == apptInterface.apptConfirm){            
-            if(e.getSource() == apptInterface.inConfirm){
-                if(apptInterface.inNameField.getText().length() == 0 || apptInterface.inBdayPicker.getValue() == null){
+        else if(e.getSource() == staffInterface.inConfirm || e.getSource() == staffInterface.apptConfirm){            
+            if(e.getSource() == staffInterface.inConfirm){
+                if(staffInterface.inNameField.getText().length() == 0 || staffInterface.inBdayPicker.getValue() == null){
                     this.popupConfirm("Please enter name and birthday.");
                     
                 }else{
                     DateTimeFormatter form = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-                    String selectedBday = apptInterface.inBdayPicker.getValue().format(form);
+                    String selectedBday = staffInterface.inBdayPicker.getValue().format(form);
                     if(this.curUser.getPermissions() == 0){
                         int patID = -1;
                         PatientChart inPatient = null;
                         for(PatientChart pc: this.patientList){
-                            if(pc.getPatient_name().equals(apptInterface.inNameField.getText())){
+                            if(pc.getPatient_name().equals(staffInterface.inNameField.getText())){
                                 patID = pc.getPatient_id();
                                 inPatient = pc;
                                 break;
@@ -551,12 +542,12 @@ public class HealthCareInterface extends Application {
                     
                 }
             }
-            if(e.getSource() == this.apptInterface.apptConfirm){
+            if(e.getSource() == this.staffInterface.apptConfirm){
             try{
                  
                 int patID = -1;
                 for(PatientChart pc: this.patientList){
-                    if(pc.getPatient_name().equals(apptInterface.apptNameField.getText())){
+                    if(pc.getPatient_name().equals(staffInterface.apptNameField.getText())){
                         patID = pc.getPatient_id();
                     }
                 }
@@ -567,8 +558,8 @@ public class HealthCareInterface extends Application {
                             for(Day d: db.getSingleAvailability(u.getId()) ){
                                 for(int i: d.getAvailabilityTimes()){
                                     if(i == patID){
-                                        apptInterface.setAppointmentScene();
-                                        this.userInterface.setScene(apptInterface.getAppointmentScene());
+                                        staffInterface.setAppointmentScene();
+                                        this.userInterface.setScene(staffInterface.getAppointmentScene());
                                         this.userInterface.show();
                                         this.popupConfirm("Already have an appointment");
                                         return;
@@ -578,37 +569,37 @@ public class HealthCareInterface extends Application {
                         }
                     }
                 }
-                if(apptInterface.apptDocCombo.getSelectionModel().getSelectedIndex() < 0 || apptInterface.apptDateCombo.getSelectionModel().getSelectedIndex() < 0 || apptInterface.apptTimeList.getSelectionModel().getSelectedIndex() < 0){
+                if(staffInterface.apptDocCombo.getSelectionModel().getSelectedIndex() < 0 || staffInterface.apptDateCombo.getSelectionModel().getSelectedIndex() < 0 || staffInterface.apptTimeList.getSelectionModel().getSelectedIndex() < 0){
                     this.popupConfirm("Please select a doctor and/or time");
                     return;
                 } 
                 for(User u: db.getUsers()){
-                    if(u.getName().equals(apptInterface.apptDocCombo.getValue())){
+                    if(u.getName().equals(staffInterface.apptDocCombo.getValue())){
                         ArrayList<Day> tempDay = db.getSingleAvailability(u.getId());
                        for(Day day: tempDay){
-                           if(day.getDate().equals(apptInterface.apptDateCombo.getValue())){
+                           if(day.getDate().equals(staffInterface.apptDateCombo.getValue())){
                                this.patientList = db.getCharts();
                                int avail[] = day.getAvailabilityTimes();
                                int tempPatientID = this.patientList.get(patientList.size() - 1).getPatient_id() + 1;
                                 
                                
                                for(PatientChart pc: db.getCharts()){
-                                   if(pc.getPatient_name().equals(apptInterface.apptNameField.getText())){
+                                   if(pc.getPatient_name().equals(staffInterface.apptNameField.getText())){
                                         tempPatientID = pc.getPatient_id();
                                         
                                         break;
                                    }
                                }
-                                apptInterface.apptTimeList.getSelectionModel().getSelectedIndex();
-                                 avail [apptInterface.apptTimeList.getSelectionModel().getSelectedIndex()] = tempPatientID ;
+                                staffInterface.apptTimeList.getSelectionModel().getSelectedIndex();
+                                 avail [staffInterface.apptTimeList.getSelectionModel().getSelectedIndex()] = tempPatientID ;
                                  day.setAvailabilityTimes(avail); 
                                  
                                 db.saveSingleAvailability(u.getId(), tempDay);
                                 
                                 this.popupConfirm("Added patient appointment.");
                                 Thread.sleep(100);
-                                apptInterface.setAppointmentScene();
-                                this.userInterface.setScene(apptInterface.getAppointmentScene());
+                                staffInterface.setAppointmentScene();
+                                this.userInterface.setScene(staffInterface.getAppointmentScene());
                                 break;
                            }
                                                   
@@ -634,7 +625,9 @@ public class HealthCareInterface extends Application {
             this.curPatient.setInsurance(this.insuranceField.getText());
             
             
-            
+            TreatmentRecord newRec = new TreatmentRecord();
+            newRec.setAppointment_date(tm.getTodayDate());
+            this.curPatient.setCurrent_visit(newRec);
             db.saveSingleChart(curPatient, curPatient.getPatient_id());
             
             this.patientQueue.addToQueue(-1 , curPatient.getPatient_id());
@@ -644,13 +637,13 @@ public class HealthCareInterface extends Application {
             this.popupConfirm("Checked In patient.");
         }
         else if(e.getSource() == this.changeAppt){
-            apptInterface.setChangeAppointment();
-            this.userInterface.setScene(apptInterface.getChangeAppointmentScene());
+            staffInterface.setChangeAppointment();
+            this.userInterface.setScene(staffInterface.getChangeAppointmentScene());
         }
-        else if(e.getSource() == apptInterface.changeNameButton){
+        else if(e.getSource() == staffInterface.changeNameButton){
             int tempPatientID = -1; 
             for(PatientChart pc: this.patientList){
-                if(pc.getPatient_name().equals(apptInterface.changeNameField.getText())){
+                if(pc.getPatient_name().equals(staffInterface.changeNameField.getText())){
                     tempPatientID = pc.getPatient_id();
                     
                 }
@@ -663,9 +656,9 @@ public class HealthCareInterface extends Application {
                         int count = 0;
                         for(int i: d.getAvailabilityTimes()){
                             if(i == tempPatientID){
-                                apptInterface.changeDocBox.getSelectionModel().select(u.getName());
-                                apptInterface.changeDocBox.getSelectionModel().clearAndSelect(apptInterface.changeDocBox.getSelectionModel().getSelectedIndex());
-                                apptInterface.curApptLabel.setText("Current Appointment: " + d.getDate() + " at " + apptInterface.times.get(count));
+                                staffInterface.changeDocBox.getSelectionModel().select(u.getName());
+                                staffInterface.changeDocBox.getSelectionModel().clearAndSelect(staffInterface.changeDocBox.getSelectionModel().getSelectedIndex());
+                                staffInterface.curApptLabel.setText("Current Appointment: " + d.getDate() + " at " + staffInterface.times.get(count));
                                 System.out.println("k");
                                 found =true;
                                 break;
@@ -684,26 +677,26 @@ public class HealthCareInterface extends Application {
                this.popupConfirm("No appointment"); 
             }
         }
-        else if(e.getSource() == apptInterface.changeCancel || e.getSource() == apptInterface.deleteGoBack || e.getSource() == apptInterface.apptCancel){
+        else if(e.getSource() == staffInterface.changeCancel || e.getSource() == staffInterface.deleteGoBack || e.getSource() == staffInterface.apptCancel){
             this.cancelPrimed = true;
             this.logoutPrimed = false;
             this.popupYesNo("Are you sure you want to exit?");
             
         }
-        else if(e.getSource() == apptInterface.changeDateCombo){
-            apptInterface.changeTimeList.getItems().clear();
+        else if(e.getSource() == staffInterface.changeDateCombo){
+            staffInterface.changeTimeList.getItems().clear();
             int tempUserID = -1;
             for(User u: this.userList){
-                if(u.getName().equals(apptInterface.changeDocBox.getValue())){
+                if(u.getName().equals(staffInterface.changeDocBox.getValue())){
                     tempUserID = u.getId();
                     break;
                 }
             }
             for(Day d: db.getSingleAvailability(tempUserID)){
-                if(d.getDate().equals(apptInterface.changeDateCombo.getValue())){
+                if(d.getDate().equals(staffInterface.changeDateCombo.getValue())){
                     int availTime[] = d.getAvailabilityTimes();
                     for(int i = 0; i < availTime.length ; i++){
-                        String s = apptInterface.times.get(i);
+                        String s = staffInterface.times.get(i);
                         if(availTime[i] != 0){
                             for(PatientChart pc: this.patientList){
                                 if(pc.getPatient_id() == availTime[i]){
@@ -711,17 +704,17 @@ public class HealthCareInterface extends Application {
                                 }
                             }
                         }
-                        apptInterface.changeTimeList.getItems().add(s);
+                        staffInterface.changeTimeList.getItems().add(s);
                     }
                 }
             }
-        }else if(e.getSource() == apptInterface.changeConfirm){
-            if(apptInterface.changeTimeList.getSelectionModel().getSelectedIndex() < 0){
+        }else if(e.getSource() == staffInterface.changeConfirm){
+            if(staffInterface.changeTimeList.getSelectionModel().getSelectedIndex() < 0){
                 this.popupConfirm("Please select a time.");
             }else{
                 int tempUserID = -1;
                 for(User u: this.userList){
-                    if(u.getName().equals(apptInterface.changeDocBox.getValue()))
+                    if(u.getName().equals(staffInterface.changeDocBox.getValue()))
                     {
                         tempUserID = u.getId();
                         break;
@@ -730,7 +723,7 @@ public class HealthCareInterface extends Application {
                 
                int tempPatientID = -1;
                for(PatientChart pc: this.patientList){
-                   if(pc.getPatient_name().equals(apptInterface.changeNameField.getText()))
+                   if(pc.getPatient_name().equals(staffInterface.changeNameField.getText()))
                    {
                        tempPatientID = pc.getPatient_id();
                        break;
@@ -748,11 +741,11 @@ public class HealthCareInterface extends Application {
                             }
                             d.setAvailabilityTimes(tempTimes);
                         }
-                    if(d.getDate().equals(apptInterface.changeDateCombo.getValue())){
+                    if(d.getDate().equals(staffInterface.changeDateCombo.getValue())){
                         int []availTime = d.getAvailabilityTimes();
 
-                        if( availTime[apptInterface.changeTimeList.getSelectionModel().getSelectedIndex()]  == 0){
-                            availTime[apptInterface.changeTimeList.getSelectionModel().getSelectedIndex()] = tempPatientID;
+                        if( availTime[staffInterface.changeTimeList.getSelectionModel().getSelectedIndex()]  == 0){
+                            availTime[staffInterface.changeTimeList.getSelectionModel().getSelectedIndex()] = tempPatientID;
                             d.setAvailabilityTimes(availTime);
                             setNew = true;
                         }
@@ -767,24 +760,24 @@ public class HealthCareInterface extends Application {
                 if(setNew){
                     db.saveSingleAvailability(tempUserID, days);
                     this.popupConfirm("Changed Appointment");
-                    apptInterface.setChangeAppointment();
-                    this.userInterface.setScene(apptInterface.getChangeAppointmentScene());
+                    staffInterface.setChangeAppointment();
+                    this.userInterface.setScene(staffInterface.getChangeAppointmentScene());
                     this.userInterface.show();
                 }
             }
             
         }else if(e.getSource() == this.deleteAppt){
-            apptInterface.setDeleteAppointmentScene();
-            this.userInterface.setScene(apptInterface.getDeleteAppointmentScene());
+            staffInterface.setDeleteAppointmentScene();
+            this.userInterface.setScene(staffInterface.getDeleteAppointmentScene());
             this.userInterface.show();
         }
-        else if(e.getSource() == apptInterface.deleteNameOK){
+        else if(e.getSource() == staffInterface.deleteNameOK){
             int patID = -1;
             String docName = "";
             String apptDate = "";
             String apptTime = "";
             for(PatientChart pc: this.patientList){
-                if(pc.getPatient_name().equals(apptInterface.deleteNameField.getText())){
+                if(pc.getPatient_name().equals(staffInterface.deleteNameField.getText())){
                     patID = pc.getPatient_id();
                 }
             }
@@ -799,7 +792,7 @@ public class HealthCareInterface extends Application {
                                 if(patID == i){
                                     docName = u.getName();
                                     apptDate = d.getDate();
-                                    apptTime = apptInterface.times.get(count);
+                                    apptTime = staffInterface.times.get(count);
                                 }
                                 count++;
                             }
@@ -807,18 +800,18 @@ public class HealthCareInterface extends Application {
                     }
                 }
                 if(apptTime.length() > 0){
-                    apptInterface.deleteCurAppointmentInfo.setText("Current Appointment: \n" + docName + " on " + apptDate + " at " + apptTime);
+                    staffInterface.deleteCurAppointmentInfo.setText("Current Appointment: \n" + docName + " on " + apptDate + " at " + apptTime);
                     
                 }
                 else
                     this.popupConfirm("No Appointment Found");
             }
         }
-        else if(e.getSource() == apptInterface.cancelAppointment){
-            if(apptInterface.deleteNameField.getText().length() > 0){
+        else if(e.getSource() == staffInterface.cancelAppointment){
+            if(staffInterface.deleteNameField.getText().length() > 0){
                 int patID = -1;
                 for(PatientChart pc: this.patientList){
-                    if(pc.getPatient_name().equals(apptInterface.deleteNameField.getText())){
+                    if(pc.getPatient_name().equals(staffInterface.deleteNameField.getText())){
                         patID = pc.getPatient_id();
                         break;
                     }
@@ -846,21 +839,41 @@ public class HealthCareInterface extends Application {
                         break;
                 }
                 this.popupConfirm("Deleted Appointment");
-                apptInterface.setDeleteAppointmentScene();
-                this.userInterface.setScene(apptInterface.getDeleteAppointmentScene());
+                staffInterface.setDeleteAppointmentScene();
+                this.userInterface.setScene(staffInterface.getDeleteAppointmentScene());
                 this.userInterface.show();
             }else{
                 this.popupConfirm("Please enter a name");
             }
+        }else if(e.getSource() == this.paymentInfo){
+            
         }
         else if(e.getSource() == this.saveChanges ){
             this.patientQueue.removeFromQueue(curUser.getId(), new Integer(curPatient.getPatient_id()));
-            if(curUser.getPermissions() == 1){
+            if(curUser.getPermissions() == 1 || curUser.getPermissions() == 2){
                 try{
                     for(User u: db.getUsers()){
                         if(u.getName().equals(this.nurseDocBox.getValue())){
-                            System.out.println("k");
-                            this.patientQueue.addToQueue(u.getId(), this.curPatient.getPatient_id());
+                            
+                            ArrayList<TreatmentRecord> treatRec = this.curPatient.getTreatment_record_arr();
+                            TreatmentRecord curTreatment =  treatRec.remove(treatRec.size() -1);
+                            curTreatment.setAppointment_date(tm.getTodayDate());
+                            curTreatment.setWeight(Double.parseDouble(this.weightField.getText()));
+                            curTreatment.setHeight(Double.parseDouble(this.heightField.getText()));
+                            curTreatment.setBlood_pressure(this.bpField.getText());
+                            curTreatment.setReason_for_visit(this.reasonVisitField.getText());
+                            curTreatment.setTreatment(this.treatmentField.getText());
+                            curTreatment.setPrescription(this.prescriptionField.getText());
+                            curTreatment.setVisited_doctor(u.getName());
+                            curPatient.setCurrent_visit(curTreatment);
+                            curPatient.setTreatment_record_arr(treatRec);
+                            
+                            if(curUser.getPermissions() == 1)
+                                this.patientQueue.addToQueue(u.getId(), this.curPatient.getPatient_id());
+                            
+                            this.patientQueue.removeFromQueue(curUser.getId(), curPatient.getPatient_id() );
+                            this.db.saveSingleChart(curPatient, curPatient.getPatient_id());
+                            this.popupConfirm("Saved changes");
                             this.setChartLandingPage();
                             this.userInterface.setScene(this.chartLandScene);
                             this.userInterface.show();
@@ -872,11 +885,11 @@ public class HealthCareInterface extends Application {
                 }catch(Exception exep){exep.printStackTrace();}
             }
         }
-        else if(e.getSource() == this.universalLogout || e.getSource() == this.apptInterface.apptCancel || e.getSource() == this.apptInterface.inCancel || e.getSource() == this.goBack){
+        else if(e.getSource() == this.universalLogout || e.getSource() == this.staffInterface.apptCancel || e.getSource() == this.staffInterface.inCancel || e.getSource() == this.goBack){
             System.out.println("pressed");
             this.logoutPrimed = true;
             String message = "logout";
-            if(e.getSource() == this.apptInterface.apptCancel || e.getSource() == this.apptInterface.inCancel || e.getSource() == this.goBack){
+            if(e.getSource() == this.staffInterface.apptCancel || e.getSource() == this.staffInterface.inCancel || e.getSource() == this.goBack){
                 message = "go back";
                 this.logoutPrimed = false;
                 this.cancelPrimed = true;

@@ -21,7 +21,7 @@ public class PatientChart {
     private int patient_id;
     private int doctor_id;
     
-    private ArrayList treatment_record_arr;
+    private ArrayList<TreatmentRecord> treatment_record_arr;
     private TreatmentRecord previous_visit;
     private TreatmentRecord current_visit;
 
@@ -127,7 +127,7 @@ public class PatientChart {
         this.patient_id = patient_id;
     }
 
-    public ArrayList getTreatment_record_arr() {
+    public ArrayList<TreatmentRecord> getTreatment_record_arr() {
         return treatment_record_arr;
     }
 
@@ -145,7 +145,7 @@ public class PatientChart {
         this.current_visit = current_visit;
         
         int temp = this.treatment_record_arr.size(); //Updates the current_visit in the arraylist with the version that has updated values. 
-        this.treatment_record_arr.set(temp, current_visit);
+        this.treatment_record_arr.add(current_visit);
     }
     
     

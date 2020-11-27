@@ -18,7 +18,7 @@ import java.util.HashSet;
  * @author Rayven
  */
 public class AppointmentInterface{
-    private ArrayList<String> times;
+     ArrayList<String> times;
     private Database db;
     private ArrayList<User> usersList;
     private int patientID; 
@@ -26,9 +26,9 @@ public class AppointmentInterface{
     private Timer tm;
     private boolean confirmed;
     //Check-in
-    Label  inTimeLabel, inDocLabel;
-    ComboBox inDocCombo;
-    ListView<String> inTimeList;
+    Label  inNameLabel, inBdayLabel;
+    TextField inNameField;
+    DatePicker inBdayPicker;
     Scene checkInScene;
     Button inConfirm, inCancel;
     
@@ -42,7 +42,21 @@ public class AppointmentInterface{
     Scene appointmentScene;
     HealthCareInterface hcInterface;
     
-
+    //Change Appointment
+    Label changeNameLabel, changeDocLabel, changeTimeLabel, curApptLabel;
+    Button changeNameButton, changeConfirm, changeCancel;
+    TextField changeNameField;
+    ComboBox changeDocBox;
+    ComboBox changeDateCombo;
+    ListView<String> changeTimeList;
+    Scene changeAppointmentScene;
+    
+    //Delete Appointment
+    Label deleteNameLabel, deleteCurAppointmentInfo;
+    Button deleteNameOK;
+    TextField deleteNameField;
+    Button cancelAppointment, deleteGoBack;
+    Scene deleteAppointmentScene;
 
     public AppointmentInterface(CheckInQueue queue, HealthCareInterface hcInterface, Database db){
         this.db = db;
@@ -118,11 +132,21 @@ public class AppointmentInterface{
         
             
     }
-    public void setCheckInScene(){
-
+    
+    public void setChangeAppointment(){
+        this.changeNameLabel = new Label("Patient Name: ");
+        this.changeNameField = new TextField();
+        this.changeNameButton = new Button("Ok");
+            this.changeNameButton.setOnAction(e ->{this.hcInterface.handle(e);});
+            
+        this.curApptLabel = new Label("");
         
-        this.inDocLabel = new Label("Doctor: ");
-        this.inDocCombo = new ComboBox();
+            
+        HBox changeNameHBox = new HBox();
+            changeNameHBox.getChildren().addAll(changeNameLabel, changeNameField, changeNameButton);
+        
+        this.changeDocLabel = new Label("Doctor:");
+        this.changeDocBox = new ComboBox();
             try{
                 usersList = db.getUsers();
                 
@@ -130,14 +154,64 @@ public class AppointmentInterface{
             for(int i = 0 ; i < usersList.size(); i++){
                 if(usersList.get(i).getPermissions() == 2){
                     
-                    this.inDocCombo.getItems().add(usersList.get(i).getName());
+                    this.changeDocBox.getItems().add(usersList.get(i).getName());
                 }
             }
-            this.inDocCombo.setOnAction((e) -> {handle(e);});
-            
-            
-        this.inTimeLabel = new Label("Appointments: ");
-        this.inTimeList = new ListView<>();
+            this.changeDocBox.setOnAction(e -> {this.hcInterface.handle(e);});
+        
+        Label changeDateLabel = new Label("Date:");
+        this.changeDateCombo = new ComboBox();
+            for(String s: tm.getTwoWeekList()){
+                this.changeDateCombo.getItems().add(s);
+            }
+            this.changeDateCombo.setOnAction(e -> {hcInterface.handle(e);});
+        
+        this.changeTimeLabel = new Label("Times");
+        this.changeTimeList = new ListView();
+        
+        this.changeConfirm = new Button("Confirm");
+            this.changeConfirm.setOnAction(e -> {hcInterface.handle(e);});
+        this.changeCancel = new Button("Cancel");
+            this.changeCancel.setOnAction(e -> {hcInterface.handle(e);});
+        
+        VBox changeApptBox = new VBox();
+        changeApptBox.getChildren().addAll(changeNameHBox, curApptLabel,
+                changeDocLabel, changeDocBox, changeDateLabel, changeDateCombo, changeTimeLabel, changeTimeList, changeConfirm, changeCancel);
+        
+        this.changeAppointmentScene = new Scene(changeApptBox, 500,500);
+    }
+    
+    public void setDeleteAppointmentScene(){
+        this.deleteNameLabel = new Label("Name: ");
+        this.deleteNameField = new TextField();
+        
+        this.deleteCurAppointmentInfo = new Label("");
+        
+        this.cancelAppointment = new Button("Cancel Appointment");
+            this.cancelAppointment.setOnAction((e) -> {hcInterface.handle(e);});
+        this.deleteGoBack = new Button("Go Back");
+            this.deleteGoBack.setOnAction(e-> {hcInterface.handle(e);});
+        this.deleteNameOK = new Button("OK");
+            this.deleteNameOK.setOnAction((e) -> {hcInterface.handle(e);});
+        
+        VBox deleteBox = new VBox();
+        deleteBox.getChildren().addAll(deleteNameLabel, deleteNameField,this.deleteNameOK, deleteCurAppointmentInfo, cancelAppointment, deleteGoBack);
+        
+        this.deleteAppointmentScene = new Scene(deleteBox, 500, 500);
+    }
+    
+    public void setCheckInScene(){
+
+        this.inNameLabel = new Label("Name: ");
+        this.inNameField = new TextField();
+        
+        this.inBdayLabel = new Label("Birthday: ");
+        this.inBdayPicker = new DatePicker();
+      
+        HBox nameBox = new HBox();
+        nameBox.getChildren().addAll(inNameLabel, inNameField);
+        HBox bdayBox = new HBox();
+        bdayBox.getChildren().addAll(inBdayLabel, inBdayPicker);
         
         this.inConfirm = new Button("Check-In");
             this.inConfirm.setOnAction(e ->{hcInterface.handle(e);});
@@ -145,12 +219,12 @@ public class AppointmentInterface{
             this.inCancel.setOnAction(e -> {hcInterface.handle(e);});
         
         VBox inBox = new VBox();
-        inBox.getChildren().addAll( this.inDocLabel, this.inDocCombo);
-        inBox.getChildren().addAll(this.inTimeLabel, this.inTimeList, this.inConfirm, this.inCancel);
+        
+        inBox.getChildren().addAll( nameBox, bdayBox, this.inConfirm, this.inCancel);
             inBox.setPadding(new Insets(20,20,20,20));
             
         
-        this.checkInScene = new Scene(inBox, 500, 500);
+        this.checkInScene = new Scene(inBox, 300, 200);
     }
     
    
@@ -177,57 +251,12 @@ public class AppointmentInterface{
                     }
                 }
             }
-        }else if(e.getSource() == this.inDocCombo){
-            for(User d : this.usersList){
-                if(d.getName().equals(this.inDocCombo.getValue())){
-                    ArrayList<Day> temp = db.getSingleAvailability(d.getId());
-                    for(Day day : temp){
-                        if(day.getDate().equals(tm.getTodayDate())){
-                            int []apptTimes = day.getAvailabilityTimes();
-                            for(int j = 0; j < apptTimes.length;j++){
-                                if(apptTimes[j] != 0){
-                                    String s = times.get(j) + " - " + db.getSingleChart(apptTimes[j]).getPatient_name();
-                                    this.inTimeList.getItems().add(s);
-                                }
-                            }
-                            break;
-                        }
-                        
-                    }
-                    break;
-                }
-            }
         }
         else if(e.getSource() == this.inConfirm || e.getSource() == this.apptConfirm || e.getSource() == this.apptCancel){
             this.confirmed = true;
         }
     }
-    
-    public int getSelectedPatientID(){
-        String s = this.inTimeList.getSelectionModel().getSelectedItem();
-        s = s.replaceAll("[^a-zA-Z\\.\\s]", "");
-        s = s.trim();
-        try{
-            for(PatientChart pc: db.getCharts()){
-                if(s.equals(pc.getPatient_name())){
-                    return pc.getPatient_id();
-                }
-            }
-        }catch(Exception exep){exep.printStackTrace();}
-        return 0;
-    }
-    
-    public int getSelectedDocID(){
-        try{
-            for(User u: db.getUsers()){
-                if(u.getName().equals(this.inDocCombo.getValue())){
-                    return u.getId();   
-                }
-            }
-        }catch(Exception exep){exep.printStackTrace();}
-        return 0;
-    }
-    
+      
     
     public Scene getAppointmentScene(){
         return this.appointmentScene;
@@ -245,4 +274,10 @@ public class AppointmentInterface{
         return this.confirmed;
     }
     
+    public Scene getChangeAppointmentScene(){
+        return this.changeAppointmentScene;
+    }
+    public Scene getDeleteAppointmentScene(){
+        return this.deleteAppointmentScene;
+    }
 }

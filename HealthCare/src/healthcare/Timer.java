@@ -41,6 +41,7 @@ public class Timer {
         ArrayList<String> temp = new ArrayList<>();
         DateFormat form = new SimpleDateFormat("MM/dd/yyyy");
         Calendar tempCal = c;
+        c.set(2020, 11,1);
         Date tempDate = tempCal.getTime();
         for(int i = 0 ; i < 10; i++){
             temp.add(form.format(tempDate));

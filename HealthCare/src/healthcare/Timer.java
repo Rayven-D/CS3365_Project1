@@ -50,4 +50,8 @@ public class Timer {
         }
         return temp;
     }
+    
+    public void generateDailyReport() {
+        
+    }
 }

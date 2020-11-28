@@ -8,6 +8,7 @@
  */
 package healthcare;
 
+import java.util.ArrayList;
 import javafx.event.*;
 
 /**
@@ -15,25 +16,62 @@ import javafx.event.*;
  * @author rjder
  */
 public class CEOController {
-    
+
     private CEOInterface ceoInterface;
-    
-    public CEOController(){
-        
+    Database db = new Database();
+
+    public CEOController() {
+
     }
-    
-    public CEOController(CEOInterface ceoInterface ){
+
+    public void viewReportsHandler(Event e) {
+        System.out.println("hello");
+    }
+
+    public CEOController(CEOInterface ceoInterface) {
         this.ceoInterface = ceoInterface;
     }
+
+    public ArrayList<Report> getReports() {
+        ArrayList<Report> reports = new ArrayList();
+        reports = db.getReports();
+        return reports;
+    }
+
+    public void dateSelectorBoxHandler(Event e) {
+        System.out.println(e);
+    }
+
+    public ArrayList<ReportInformation> getReportData(String date) {
+        Report report = new Report();
+        report = db.getSingleReport(date);
+        return report.getReports();
+    }
+
+    public int getReportIndex(String date) {
+        int value = 0;
+        ArrayList<Report> reports = db.getReports();
+        for (Report report : reports) {
+            if (report.getDate().equals(date)) {
+                break;
+            }
+            value++;
+        }
+
+        return value;
+    }
     
-    public void handle(Event e){
+    public void generateReport() {
+        Timer timer = new Timer();
+        timer.generateDailyReport();
+    };
+    public void handle(Event e) {
         /*
             Function of GUI goes here. what happens when certain aspects of the GUI is interacted with
             ->basically the  View Report use case
         
-        */
-        
+         */
+
     }
-    
-    
+
 }

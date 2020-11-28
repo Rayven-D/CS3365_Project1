@@ -9,7 +9,7 @@ package healthcare;
  *
  * @author Arthr
  */
-class ReportInformation {
+public class ReportInformation {
     private String name;
     private int patientAmount;
     private int amountEarned;

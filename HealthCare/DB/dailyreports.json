@@ -1,25 +1,31 @@
 [{
   "date": "12/01/2020",
   "reportInformation": [{
-    "patientAmount": 0,
+    "name": "Dr. Arthur",
+    "patientAmount": 1,
     "amountEarned": 100
   }, {
-    "patientAmount": 0,
+    "name": "Dr. Liam",
+    "patientAmount": 2,
     "amountEarned": 200
   }, {
-    "patientAmount": 0,
+    "name": "Dr. Rayven",
+    "patientAmount": 3,
     "amountEarned": 300
   }]
 }, {
   "date": "12/02/2020",
   "reportInformation": [{
-    "patientAmount": 0,
+    "name": "Dr. Arthur",
+    "patientAmount": 4,
     "amountEarned": 400
   }, {
-    "patientAmount": 0,
+    "name": "Dr. Liam",
+    "patientAmount": 5,
     "amountEarned": 500
   }, {
-    "patientAmount": 0,
+    "name": "Dr. Rayven",
+    "patientAmount": 6,
     "amountEarned": 600
   }]
 }, {
@@ -32,5 +38,9 @@
     "name": "Dr. Liam",
     "patientAmount": 3,
     "amountEarned": 400
+  }, {
+    "name": "Dr. Rayven",
+    "patientAmount": 6,
+    "amountEarned": 600
   }]
 }]

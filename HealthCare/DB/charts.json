@@ -233,5 +233,26 @@
             "prescription": "Nice. N/A",
             "visited_doctor": "Dr. Rayven"
         }
+    },
+    {
+        "patient_name": "Banana Joe",
+        "birthday": "",
+        "address": "",
+        "ssn": 0,
+        "insurance": "",
+        "patient_id": 505,
+        "doctor_id": 0,
+        "treatment_record_arr": [
+            {
+                "weight": 0,
+                "height": 0,
+                "blood_pressure": "0/0"
+            }
+        ],
+        "current_visit": {
+            "weight": 0,
+            "height": 0,
+            "blood_pressure": "0/0"
+        }
     }
 ]

@@ -578,6 +578,18 @@ public class HealthCareInterface extends Application {
                         }
                     }
                 }
+                else{
+                    int lastPatientID = -1;
+                    for(PatientChart pc: this.patientList){
+                        if(pc.getPatient_id() > lastPatientID){
+                            lastPatientID = pc.getPatient_id();
+                        }
+                    }
+                    lastPatientID++;
+                    PatientChart newPatient = new PatientChart(staffInterface.apptNameField.getText(), "", "", 0, "", null, lastPatientID);
+                    db.saveSingleChart(newPatient, lastPatientID);
+                    
+                }
                 if(staffInterface.apptDocCombo.getSelectionModel().getSelectedIndex() < 0 || staffInterface.apptDateCombo.getSelectionModel().getSelectedIndex() < 0 || staffInterface.apptTimeList.getSelectionModel().getSelectedIndex() < 0){
                     this.popupConfirm("Please select a doctor and/or time");
                     return;
@@ -602,7 +614,7 @@ public class HealthCareInterface extends Application {
                                 staffInterface.apptTimeList.getSelectionModel().getSelectedIndex();
                                  avail [staffInterface.apptTimeList.getSelectionModel().getSelectedIndex()] = tempPatientID ;
                                  day.setAvailabilityTimes(avail); 
-                                 
+                                
                                 db.saveSingleAvailability(u.getId(), tempDay);
                                 
                                 this.popupConfirm("Added patient appointment.");

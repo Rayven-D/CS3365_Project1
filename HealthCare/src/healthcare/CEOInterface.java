@@ -48,6 +48,7 @@ public class CEOInterface extends Application {
     //CEO Menu
     Button viewReportsButton;
     Button generateReportButton;
+    Button universalLogout;
 
     //Reports Screen
     ComboBox reportDateSelectorBox;
@@ -76,10 +77,11 @@ public class CEOInterface extends Application {
     public void setCEOMenuScene() {
         this.viewReportsButton = new Button("View Reports");
         this.generateReportButton = new Button("Generate New Report");
+        this.universalLogout = new Button("Logout");
         this.viewReportsButton.setOnAction((e) -> this.setCEOReportsScene());
         this.generateReportButton.setOnAction((e) -> controller.generateReport());
         VBox menuBox = new VBox();
-        menuBox.getChildren().addAll(this.viewReportsButton, this.generateReportButton);
+        menuBox.getChildren().addAll(this.viewReportsButton, this.generateReportButton, this.universalLogout);
         menuBox.setPadding(new Insets(20, 20, 20, 20));
         this.CEOScene = new Scene(menuBox, 500, 500);
     }
@@ -129,9 +131,9 @@ public class CEOInterface extends Application {
         TableColumn docName = new TableColumn("Doctor Name");
         TableColumn patientAmount = new TableColumn("Patients Amount");
         TableColumn amountEarned = new TableColumn("Money Earned");
-        docName.setMinWidth(150);
-        patientAmount.setMinWidth(150);
-        amountEarned.setMinWidth(150);
+        docName.setMinWidth(153);
+        patientAmount.setMinWidth(153);
+        amountEarned.setMinWidth(153);
         docName.setCellValueFactory(new PropertyValueFactory<>("name"));
         patientAmount.setCellValueFactory(new PropertyValueFactory<>("patientAmount"));
         amountEarned.setCellValueFactory(new PropertyValueFactory<>("amountEarned"));

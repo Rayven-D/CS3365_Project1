@@ -19,12 +19,12 @@ import java.util.HashSet;
  */
 public class StaffInterface{
      ArrayList<String> times;
-    private Database db;
-    private ArrayList<User> usersList;
-    private int patientID; 
-    private CheckInQueue queue;
-    private Timer tm;
-    private boolean confirmed;
+     Database db;
+     ArrayList<User> usersList;
+     int patientID; 
+     CheckInQueue queue;
+     Timer tm;
+     boolean confirmed;
     //Check-in
     Label  inNameLabel, inBdayLabel;
     TextField inNameField;

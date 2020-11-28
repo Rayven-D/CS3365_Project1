@@ -27,12 +27,12 @@ public class SystemTimerController implements Runnable{
     }
     
     public void run(){
+        Database db = new Database();
         if(hour == 21){
-            System.out.println("This is where the things for the report will go.");
+            stm.generateDailyReport(db);
             
         }else if(hour == 20){
             System.out.println("This is where removing no-shows will go.");
-            Database db = new Database();
             ArrayList<User> userList = null;
             try{
                 userList = db.getUsers();

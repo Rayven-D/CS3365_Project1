@@ -23,7 +23,7 @@ public class StaffInterface{
      ArrayList<User> usersList;
      int patientID; 
      CheckInQueue queue;
-     Timer tm;
+     SystemTimer tm;
      boolean confirmed;
     //Check-in
     Label  inNameLabel, inBdayLabel;
@@ -80,7 +80,7 @@ public class StaffInterface{
             times.add(s + ":30");
         }
         this.queue = queue;
-        tm = new Timer();
+        tm = new SystemTimer();
        setAppointmentScene();
        setCheckInScene(); 
        setPaymentScene();

@@ -62,10 +62,10 @@ public class CEOInterface extends Application {
     
     public CEOInterface(){}
     
-    public CEOInterface(HealthCareInterface hci){
+    public CEOInterface(HealthCareInterface hci, Stage stage){
         this.hcInterface = hci;
         this.controller = new CEOController(this);
-        
+        this.stage = stage;
         data = FXCollections.observableArrayList(this.controller.getReports().get(reportSelection).getReports());
         this.setCEOMenuScene(); 
     }
@@ -104,6 +104,7 @@ public class CEOInterface extends Application {
             @Override
             public void handle(Event e) {
                setCEOReportsScene();
+               stage.setScene(getCEOScene());
             }
         });
 

@@ -1,301 +1,329 @@
-[
-    {
-        "patient_name": "Dean Deanster",
-        "birthday": "12/12/2020",
-        "address": "21 hundo mac davo lano",
-        "ssn": 555667777,
-        "insurance": "LOL Insurance",
-        "patient_payment": {
-            "date": "12/12/1111",
-            "amount": 1337,
-            "paymentType": "Card",
-            "referenceNumber": 1,
-            "pin": 1100
-        },
-        "patient_id": 501,
-        "doctor_id": 0,
-        "treatment_record_arr": [
-            {
-                "appointment_date": "12/12/2019",
-                "reason_for_visit": "Corona",
-                "weight": 120,
-                "height": 300,
-                "blood_pressure": "140/80",
-                "treatment": "Get gud",
-                "prescription": "lol pills",
-                "visited_doctor": "Dr. Rayven"
-            },
-            {
-                "appointment_date": "12/12/2020",
-                "reason_for_visit": "Corona phase 2",
-                "weight": 120,
-                "height": 300,
-                "blood_pressure": "140/80",
-                "treatment": "Get gud",
-                "prescription": "lol more pills",
-                "visited_doctor": "Dr. Rayven"
-            }
-        ],
-        "previous_visit": {
-            "appointment_date": "12/12/2019",
-            "reason_for_visit": "Corona",
-            "weight": 120,
-            "height": 300,
-            "blood_pressure": "140/80",
-            "treatment": "Get gud",
-            "prescription": "lol pills",
-            "visited_doctor": "Dr. Rayven"
-        },
-        "current_visit": {
-            "appointment_date": "12/12/2020",
-            "reason_for_visit": "Corona phase 2",
-            "weight": 120,
-            "height": 300,
-            "blood_pressure": "140/80",
-            "treatment": "Get gud",
-            "prescription": "lol more pills",
-            "visited_doctor": "Dr. Rayven"
-        }
+[{
+    "patient_name": "Bobby Jones",
+    "birthday": "08/18/1993",
+    "address": "342 High Street, Richville, Texas, 948",
+    "ssn": 555667777,
+    "insurance": "Navy Cross Blue",
+    "patient_id": 501,
+    "doctor_id": 125,
+    "patient_payment": {
+      "date": "10/20/2020",
+      "amount": 1337,
+      "paymentType": "Card",
+      "referenceNumber": 1,
+      "pin": 1100
     },
-    {
-        "patient_name": "Test Two",
-        "birthday": "",
-        "address": "",
-        "ssn": 0,
-        "insurance": "",
-        "patient_id": 502,
-        "doctor_id": 0,
-        "treatment_record_arr": [
-            {
-                "weight": 0,
-                "height": 0,
-                "blood_pressure": "0.0"
-            }
-        ],
-        "current_visit": {
-            "weight": 0,
-            "height": 0,
-            "blood_pressure": "0.0"
-        }
+    "treatment_record_arr": [{
+        "appointment_date": "10/12/2020",
+        "reason_for_visit": "Corona",
+        "weight": 120,
+        "height": 300,
+        "blood_pressure": "140/80",
+        "treatment": "Lots of rest and Fluids",
+        "prescription": "Pills",
+        "visited_doctor": "Dr. Rayven"
+      },
+      {
+        "appointment_date": "10/20/2020",
+        "reason_for_visit": "Corona #2",
+        "weight": 120,
+        "height": 300,
+        "blood_pressure": "140/80",
+        "treatment": "More Rest and more FLuids",
+        "prescription": "Pain pills",
+        "visited_doctor": "Dr. Rayven"
+      }
+    ],
+    "previous_visit": {
+      "appointment_date": "10/12/2020",
+      "reason_for_visit": "Corona",
+      "weight": 120,
+      "height": 300,
+      "blood_pressure": "140/80",
+      "treatment": "Lots of rest and Fluids",
+      "prescription": "Pills",
+      "visited_doctor": "Dr. Rayven"
     },
-    {
-        "patient_name": "Frank Franker",
-        "birthday": "12/12/2020",
-        "address": "2222 Baker Ln",
-        "ssn": 133744445,
-        "insurance": "GIECO",
-        "patient_payment": {
-            "date": "12/01/2020",
-            "amount": 156.7,
-            "paymentType": "Debit",
-            "referenceNumber": 88207143,
-            "pin": 4976
-        },
-        "patient_id": 500,
-        "doctor_id": 123,
-        "treatment_record_arr": [
-            {
-                "appointment_date": "12/12/2019",
-                "reason_for_visit": "Corona",
-                "weight": 120,
-                "height": 300,
-                "blood_pressure": "140/80",
-                "treatment": "Get gud",
-                "prescription": "lol pills",
-                "visited_doctor": "Dr. Rayven"
-            },
-            {
-                "appointment_date": "12/12/2020",
-                "reason_for_visit": "Corona phase 2",
-                "weight": 120,
-                "height": 300,
-                "blood_pressure": "140/80",
-                "treatment": "Get gud",
-                "prescription": "lol more pills",
-                "visited_doctor": "Dr. Rayven"
-            },
-            {
-                "appointment_date": "12/01/2020",
-                "reason_for_visit": "yearly physical",
-                "weight": 169.8,
-                "height": 69.6,
-                "blood_pressure": "120/80",
-                "treatment": "Nothing out of ordinary. \t",
-                "prescription": "N/A",
-                "visited_doctor": "Dr. Arthur"
-            },
-            {
-                "appointment_date": "12/01/2020",
-                "weight": 0,
-                "height": 0,
-                "blood_pressure": "0/0"
-            }
-        ],
-        "previous_visit": {
-            "appointment_date": "12/12/2019",
-            "reason_for_visit": "Corona",
-            "weight": 120,
-            "height": 300,
-            "blood_pressure": "120/70",
-            "treatment": "Get gud",
-            "prescription": "lol pills",
-            "visited_doctor": "Dr. Rayven"
-        },
-        "current_visit": {
-            "appointment_date": "12/01/2020",
-            "weight": 0,
-            "height": 0,
-            "blood_pressure": "0/0"
-        }
-    },
-    {
-        "patient_name": "Jack Daniels",
-        "birthday": "10/02/2099",
-        "address": "3333 Q Ave, Lubbock, TX, 79604",
-        "ssn": 111111111,
-        "insurance": "AARP",
-        "patient_payment": {
-            "date": "12/01/2020",
-            "amount": 67.49,
-            "paymentType": "Credit",
-            "referenceNumber": 83263030,
-            "pin": -1
-        },
-        "patient_id": 504,
-        "doctor_id": 124,
-        "treatment_record_arr": [
-            {
-                "weight": 0,
-                "height": 0,
-                "blood_pressure": ""
-            },
-            {
-                "appointment_date": "12/01/2020",
-                "reason_for_visit": "Pain on top left area of stomach, near liver.",
-                "weight": 177,
-                "height": 67,
-                "blood_pressure": "130/75",
-                "treatment": "Pain when pressing down on pain area. Blood results are normal, so will treat on a food restrictive diet of only vegtables and protein. No fats.",
-                "prescription": "Diet sheet.",
-                "visited_doctor": "Dr. Liam"
-            }
-        ],
-        "current_visit": {
-            "appointment_date": "12/01/2020",
-            "reason_for_visit": "Pain on top left area of stomach, near liver.",
-            "weight": 177,
-            "height": 67,
-            "blood_pressure": "130/75",
-            "treatment": "Pain when pressing down on pain area. Blood results are normal, so will treat on a food restrictive diet of only vegtables and protein. No fats.",
-            "prescription": "Diet sheet.",
-            "visited_doctor": "Dr. Liam"
-        }
-    },
-    {
-        "patient_name": "Jason Derulo",
-        "birthday": "09/21/1989",
-        "address": "111 Hollywood Ave, California. ",
-        "ssn": 555555555,
-        "insurance": "Rich",
-        "patient_payment": {
-            "date": "12/01/2020",
-            "amount": 236.21,
-            "paymentType": "Cash",
-            "referenceNumber": 63060767,
-            "pin": -1
-        },
-        "patient_id": 503,
-        "doctor_id": 125,
-        "treatment_record_arr": [
-            {
-                "weight": 0,
-                "height": 0,
-                "blood_pressure": ""
-            },
-            {
-                "appointment_date": "12/01/2020",
-                "reason_for_visit": "Yearly physical",
-                "weight": 170,
-                "height": 72,
-                "blood_pressure": "125/77",
-                "treatment": "Physical. Nothing out of the ordinary.\t",
-                "prescription": "Nice. N/A",
-                "visited_doctor": "Dr. Rayven"
-            }
-        ],
-        "current_visit": {
-            "appointment_date": "12/01/2020",
-            "reason_for_visit": "Yearly physical",
-            "weight": 170,
-            "height": 72,
-            "blood_pressure": "125/77",
-            "treatment": "Physical. Nothing out of the ordinary.\t",
-            "prescription": "Nice. N/A",
-            "visited_doctor": "Dr. Rayven"
-        }
-    },
-    {
-        "patient_name": "Banana Joe",
-        "birthday": "",
-        "address": "",
-        "ssn": 0,
-        "insurance": "",
-        "patient_id": 505,
-        "doctor_id": 0,
-        "treatment_record_arr": [
-            {
-                "weight": 0,
-                "height": 0,
-                "blood_pressure": "0/0"
-            }
-        ],
-        "current_visit": {
-            "weight": 0,
-            "height": 0,
-            "blood_pressure": "0/0"
-        }
-    },
-    {
-        "patient_name": "Luke Cage",
-        "birthday": "05/06/1972",
-        "address": "2119 Marvel Dr",
-        "ssn": 123456789,
-        "insurance": "Progressive",
-        "patient_payment": {
-            "date": "12/01/2020",
-            "amount": 218.74,
-            "paymentType": "Debit",
-            "referenceNumber": 38576798,
-            "pin": 5268
-        },
-        "patient_id": 506,
-        "doctor_id": 124,
-        "treatment_record_arr": [
-            {
-                "weight": 0,
-                "height": 0,
-                "blood_pressure": "0/0"
-            },
-            {
-                "appointment_date": "12/01/2020",
-                "reason_for_visit": "Pain in back of left quad. possible hamstring.",
-                "weight": 180,
-                "height": 68,
-                "blood_pressure": "124/80",
-                "treatment": "stretched muscle a bit. muscle strain, possibly from too much workout.",
-                "prescription": "daily leg stretches, a leg brace, and ibuprophen if needed.",
-                "visited_doctor": "Dr. Liam"
-            }
-        ],
-        "current_visit": {
-            "appointment_date": "12/01/2020",
-            "reason_for_visit": "Pain in back of left quad. possible hamstring.",
-            "weight": 180,
-            "height": 68,
-            "blood_pressure": "124/80",
-            "treatment": "stretched muscle a bit. muscle strain, possibly from too much workout.",
-            "prescription": "daily leg stretches, a leg brace, and ibuprophen if needed.",
-            "visited_doctor": "Dr. Liam"
-        }
+    "current_visit": {
+      "appointment_date": "10/20/2020",
+      "reason_for_visit": "Corona #2",
+      "weight": 120,
+      "height": 300,
+      "blood_pressure": "140/80",
+      "treatment": "More Rest and more FLuids",
+      "prescription": "Pain pills",
+      "visited_doctor": "Dr. Rayven"
     }
+  },
+  {
+    "patient_name": "Steve Johnson",
+    "birthday": "10/11/1920",
+    "address": "776 Cadman Plaza, Lindisfarne, Arkansas, 5167",
+    "ssn": 133744445,
+    "insurance": "TTU Employee Insurance",
+    "patient_id": 502,
+    "doctor_id": 123,
+    "patient_payment": {
+      "date": "10/11/2020",
+      "amount": 120,
+      "paymentType": "Card",
+      "referenceNumber": 1,
+      "pin": 1100
+    },
+    "treatment_record_arr": [{
+        "appointment_date": "09/12/2020",
+        "reason_for_visit": "Flu",
+        "weight": 150,
+        "height": 175,
+        "blood_pressure": "140/80",
+        "treatment": "Flu Shot",
+        "prescription": "Pain Medication",
+        "visited_doctor": "Dr. Arthur"
+      },
+      {
+        "appointment_date": "10/11/2020",
+        "reason_for_visit": "Corona",
+        "weight": 150,
+        "height": 175,
+        "blood_pressure": "140/80",
+        "treatment": "Rest and Fluids",
+        "prescription": "Pain pills",
+        "visited_doctor": "Dr. Arthur"
+      }
+    ],
+    "previous_visit": {
+      "appointment_date": "09/12/2020",
+      "reason_for_visit": "Flu",
+      "weight": 150,
+      "height": 175,
+      "blood_pressure": "140/80",
+      "treatment": "Flu Shot",
+      "prescription": "Pain Medication",
+      "visited_doctor": "Dr. Arthur"
+    },
+    "current_visit": {
+      "appointment_date": "10/11/2020",
+      "reason_for_visit": "Corona",
+      "weight": 120,
+      "height": 175,
+      "blood_pressure": "140/80",
+      "treatment": "Rest and FLuids",
+      "prescription": "Pain pills",
+      "visited_doctor": "Dr. Arthur"
+    }
+  },
+  {
+    "patient_name": "Frank Franker",
+    "birthday": "12/12/2020",
+    "address": "135 Perry Place, Brantleyville, North Carolina, 4808",
+    "ssn": 133744445,
+    "insurance": "GIECO",
+    "patient_payment": {
+      "date": "12/01/2020",
+      "amount": 156.7,
+      "paymentType": "Debit",
+      "referenceNumber": 88207143,
+      "pin": 4976
+    },
+    "patient_id": 500,
+    "doctor_id": 123,
+    "treatment_record_arr": [{
+        "appointment_date": "12/12/2019",
+        "reason_for_visit": "Corona",
+        "weight": 120,
+        "height": 300,
+        "blood_pressure": "140/80",
+        "treatment": "Get gud",
+        "prescription": "lol pills",
+        "visited_doctor": "Dr. Rayven"
+      },
+      {
+        "appointment_date": "12/12/2020",
+        "reason_for_visit": "Corona phase 2",
+        "weight": 120,
+        "height": 300,
+        "blood_pressure": "140/80",
+        "treatment": "Get gud",
+        "prescription": "lol more pills",
+        "visited_doctor": "Dr. Rayven"
+      },
+      {
+        "appointment_date": "12/01/2020",
+        "reason_for_visit": "yearly physical",
+        "weight": 169.8,
+        "height": 69.6,
+        "blood_pressure": "120/80",
+        "treatment": "Nothing out of ordinary. \t",
+        "prescription": "N/A",
+        "visited_doctor": "Dr. Arthur"
+      },
+      {
+        "appointment_date": "12/01/2020",
+        "weight": 0,
+        "height": 0,
+        "blood_pressure": "0/0"
+      }
+    ],
+    "previous_visit": {
+      "appointment_date": "12/12/2019",
+      "reason_for_visit": "Corona",
+      "weight": 120,
+      "height": 300,
+      "blood_pressure": "120/70",
+      "treatment": "Get gud",
+      "prescription": "lol pills",
+      "visited_doctor": "Dr. Rayven"
+    },
+    "current_visit": {
+      "appointment_date": "12/01/2020",
+      "weight": 0,
+      "height": 0,
+      "blood_pressure": "0/0"
+    }
+  },
+  {
+    "patient_name": "Jack Daniels",
+    "birthday": "10/02/2099",
+    "address": "3333 Q Ave, Lubbock, TX, 79604",
+    "ssn": 111111111,
+    "insurance": "AARP",
+    "patient_payment": {
+      "date": "12/01/2020",
+      "amount": 67.49,
+      "paymentType": "Credit",
+      "referenceNumber": 83263030,
+      "pin": -1
+    },
+    "patient_id": 504,
+    "doctor_id": 124,
+    "treatment_record_arr": [{
+        "weight": 0,
+        "height": 0,
+        "blood_pressure": ""
+      },
+      {
+        "appointment_date": "12/01/2020",
+        "reason_for_visit": "Pain on top left area of stomach, near liver.",
+        "weight": 177,
+        "height": 67,
+        "blood_pressure": "130/75",
+        "treatment": "Pain when pressing down on pain area. Blood results are normal, so will treat on a food restrictive diet of only vegtables and protein. No fats.",
+        "prescription": "Diet sheet.",
+        "visited_doctor": "Dr. Liam"
+      }
+    ],
+    "current_visit": {
+      "appointment_date": "12/01/2020",
+      "reason_for_visit": "Pain on top left area of stomach, near liver.",
+      "weight": 177,
+      "height": 67,
+      "blood_pressure": "130/75",
+      "treatment": "Pain when pressing down on pain area. Blood results are normal, so will treat on a food restrictive diet of only vegtables and protein. No fats.",
+      "prescription": "Diet sheet.",
+      "visited_doctor": "Dr. Liam"
+    }
+  },
+  {
+    "patient_name": "Jason Derulo",
+    "birthday": "09/21/1989",
+    "address": "111 Hollywood Ave, California. ",
+    "ssn": 555555555,
+    "insurance": "Rich",
+    "patient_payment": {
+      "date": "12/01/2020",
+      "amount": 236.21,
+      "paymentType": "Cash",
+      "referenceNumber": 63060767,
+      "pin": -1
+    },
+    "patient_id": 503,
+    "doctor_id": 125,
+    "treatment_record_arr": [{
+        "weight": 0,
+        "height": 0,
+        "blood_pressure": ""
+      },
+      {
+        "appointment_date": "12/01/2020",
+        "reason_for_visit": "Yearly physical",
+        "weight": 170,
+        "height": 72,
+        "blood_pressure": "125/77",
+        "treatment": "Physical. Nothing out of the ordinary.\t",
+        "prescription": "Nice. N/A",
+        "visited_doctor": "Dr. Rayven"
+      }
+    ],
+    "current_visit": {
+      "appointment_date": "12/01/2020",
+      "reason_for_visit": "Yearly physical",
+      "weight": 170,
+      "height": 72,
+      "blood_pressure": "125/77",
+      "treatment": "Physical. Nothing out of the ordinary.\t",
+      "prescription": "Nice. N/A",
+      "visited_doctor": "Dr. Rayven"
+    }
+  },
+  {
+    "patient_name": "Banana Joe",
+    "birthday": "",
+    "address": "",
+    "ssn": 0,
+    "insurance": "",
+    "patient_id": 505,
+    "doctor_id": 0,
+    "treatment_record_arr": [{
+      "weight": 0,
+      "height": 0,
+      "blood_pressure": "0/0"
+    }],
+    "current_visit": {
+      "weight": 0,
+      "height": 0,
+      "blood_pressure": "0/0"
+    }
+  },
+  {
+    "patient_name": "Luke Cage",
+    "birthday": "05/06/1972",
+    "address": "2119 Marvel Dr",
+    "ssn": 123456789,
+    "insurance": "Progressive",
+    "patient_payment": {
+      "date": "12/01/2020",
+      "amount": 218.74,
+      "paymentType": "Debit",
+      "referenceNumber": 38576798,
+      "pin": 5268
+    },
+    "patient_id": 506,
+    "doctor_id": 124,
+    "treatment_record_arr": [{
+        "weight": 0,
+        "height": 0,
+        "blood_pressure": "0/0"
+      },
+      {
+        "appointment_date": "12/01/2020",
+        "reason_for_visit": "Pain in back of left quad. possible hamstring.",
+        "weight": 180,
+        "height": 68,
+        "blood_pressure": "124/80",
+        "treatment": "stretched muscle a bit. muscle strain, possibly from too much workout.",
+        "prescription": "daily leg stretches, a leg brace, and ibuprophen if needed.",
+        "visited_doctor": "Dr. Liam"
+      }
+    ],
+    "current_visit": {
+      "appointment_date": "12/01/2020",
+      "reason_for_visit": "Pain in back of left quad. possible hamstring.",
+      "weight": 180,
+      "height": 68,
+      "blood_pressure": "124/80",
+      "treatment": "stretched muscle a bit. muscle strain, possibly from too much workout.",
+      "prescription": "daily leg stretches, a leg brace, and ibuprophen if needed.",
+      "visited_doctor": "Dr. Liam"
+    }
+  }
 ]

@@ -1,1 +1,46 @@
-[{"date":"12/02/2020","reportInformation":[{"name":"Dr. Arthur","patientAmount":4,"amountEarned":400.0},{"name":"Dr. Liam","patientAmount":5,"amountEarned":500.0},{"name":"Dr. Rayven","patientAmount":6,"amountEarned":600.0}]},{"date":"12/12/2020","reportInformation":[{"name":"Dr. Arthur","patientAmount":2,"amountEarned":1000.0},{"name":"Dr. Liam","patientAmount":3,"amountEarned":400.0},{"name":"Dr. Rayven","patientAmount":6,"amountEarned":600.0}]},{"date":"12/01/2020","reportInformation":[{"name":"Dr. Liam","patientAmount":1,"amountEarned":0.0},{"name":"Dr. Arthur","patientAmount":1,"amountEarned":0.0},{"name":"Dr. Rayven","patientAmount":1,"amountEarned":0.0}]}]
+[{
+  "date": "12/02/2020",
+  "reportInformation": [{
+    "name": "Dr. Arthur",
+    "patientAmount": 4,
+    "amountEarned": 400.0
+  }, {
+    "name": "Dr. Liam",
+    "patientAmount": 5,
+    "amountEarned": 500.0
+  }, {
+    "name": "Dr. Rayven",
+    "patientAmount": 6,
+    "amountEarned": 600.0
+  }]
+}, {
+  "date": "12/12/2020",
+  "reportInformation": [{
+    "name": "Dr. Arthur",
+    "patientAmount": 2,
+    "amountEarned": 1000.0
+  }, {
+    "name": "Dr. Liam",
+    "patientAmount": 3,
+    "amountEarned": 400.0
+  }, {
+    "name": "Dr. Rayven",
+    "patientAmount": 6,
+    "amountEarned": 600.0
+  }]
+}, {
+  "date": "12/01/2020",
+  "reportInformation": [{
+    "name": "Dr. Liam",
+    "patientAmount": 1,
+    "amountEarned": 0.0
+  }, {
+    "name": "Dr. Arthur",
+    "patientAmount": 1,
+    "amountEarned": 0.0
+  }, {
+    "name": "Dr. Rayven",
+    "patientAmount": 1,
+    "amountEarned": 0.0
+  }]
+}]

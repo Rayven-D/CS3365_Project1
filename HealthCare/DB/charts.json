@@ -325,5 +325,1076 @@
       "prescription": "daily leg stretches, a leg brace, and ibuprophen if needed.",
       "visited_doctor": "Dr. Liam"
     }
+  },
+  {
+    "patient_name": "Corinne Petty",
+    "birthday": "08/18/1972",
+    "address": "283 Seaview Avenue, Fairhaven, Indiana, 2879",
+    "ssn": 925608889,
+    "insurance": "TERRAGO",
+    "patient_id": 510,
+    "doctor_id": 124,
+    "patient_payment": {
+      "date": "11/25/2020",
+      "amount": 1453.91,
+      "paymentType": "Debit",
+      "referenceNUmber": 1,
+      "pin": 2871
+    },
+    "treatment_record_arr": [{
+        "appointment_date": "10/31/2020",
+        "reason_for_visit": "Flu",
+        "weight": 174,
+        "height": 175,
+        "blood_pressure": "120/80",
+        "treatment": "Flu shot",
+        "prescription": "Flu shot",
+        "visited_doctor": "Dr. Liam"
+      },
+      {
+        "appointment_date": "10/30/2020",
+        "reason_for_visit": "Back Pain",
+        "weight": 174,
+        "height": 175,
+        "blood_pressure": "120/80",
+        "treatment": "Cracked back",
+        "prescription": "Pain meds",
+        "visited_doctor": "Dr. Liam"
+      },
+      {
+        "appointment_date": "11/25/2020",
+        "reason_for_visit": "Tooth Ache",
+        "weight": 174,
+        "height": 175,
+        "blood_pressure": "120/80",
+        "treatment": "Checked tooth",
+        "prescription": "Pain meds",
+        "visited_doctor": "Dr. Liam"
+      }
+    ],
+    "previous_visit": {
+      "appointment_date": "10/30/2020",
+      "reason_for_visit": "Back Pain",
+      "weight": 174,
+      "height": 175,
+      "blood_pressure": "120/80",
+      "treatment": "Cracked back",
+      "prescription": "Pain meds",
+      "visited_doctor": "Dr. Liam"
+    },
+    "current_visit": {
+      "appointment_date": "11/25/2020",
+      "reason_for_visit": "Tooth Ache",
+      "weight": 174,
+      "height": 175,
+      "blood_pressure": "120/80",
+      "treatment": "Checked tooth",
+      "prescription": "Pain meds",
+      "visited_doctor": "Dr. Liam"
+    }
+  },
+  {
+    "patient_name": "Lindsay Cantu",
+    "birthday": "09/12/1972",
+    "address": "575 Lombardy Street, Yogaville, District Of Columbia, 5430",
+    "ssn": 469136805,
+    "insurance": "RODEMCO",
+    "patient_id": 511,
+    "doctor_id": 124,
+    "patient_payment": {
+      "date": "11/25/2020",
+      "amount": 3765.28,
+      "paymentType": "Debit",
+      "referenceNUmber": 123,
+      "pin": 7563
+    },
+    "treatment_record_arr": [{
+        "appointment_date": "09/02/2020",
+        "reason_for_visit": "Fingers Hurt",
+        "weight": 141,
+        "height": 113,
+        "blood_pressure": "120/80",
+        "treatment": "Checked fingers",
+        "prescription": "Bengay",
+        "visited_doctor": "Dr. Liam"
+      },
+      {
+        "appointment_date": "09/28/2020",
+        "reason_for_visit": "Ear Pain",
+        "weight": 141,
+        "height": 113,
+        "blood_pressure": "120/80",
+        "treatment": "Checked ear canal",
+        "prescription": "Ear Drops",
+        "visited_doctor": "Dr. Liam"
+      },
+      {
+        "appointment_date": "11/25/2020",
+        "reason_for_visit": "Stomach hurts",
+        "weight": 141,
+        "height": 113,
+        "blood_pressure": "120/80",
+        "treatment": "Listened to stomach",
+        "prescription": "peptobismo",
+        "visited_doctor": "Dr. Liam"
+      }
+    ],
+    "previous_visit": {
+      "appointment_date": "09/28/2020",
+      "reason_for_visit": "Ear Pain",
+      "weight": 141,
+      "height": 113,
+      "blood_pressure": "120/80",
+      "treatment": "Checked ear canal",
+      "prescription": "Ear Drops",
+      "visited_doctor": "Dr. Liam"
+    },
+    "current_visit": {
+      "appointment_date": "11/25/2020",
+      "reason_for_visit": "Stomach hurts",
+      "weight": 141,
+      "height": 113,
+      "blood_pressure": "120/80",
+      "treatment": "Listened to stomach",
+      "prescription": "peptobismo",
+      "visited_doctor": "Dr. Liam"
+    }
+  },
+  {
+    "patient_name": "Ward Velasquez",
+    "birthday": "08/04/1950",
+    "address": "595 Madison Place, Jugtown, Utah, 5242",
+    "ssn": 445598384,
+    "insurance": "FARMEX",
+    "patient_id": 512,
+    "doctor_id": 124,
+    "patient_payment": {
+      "date": "11/25/2020",
+      "amount": 3424.08,
+      "paymentType": "Debit",
+      "referenceNUmber": 112,
+      "pin": 3211
+    },
+    "treatment_record_arr": [{
+        "appointment_date": "08/24/2020",
+        "reason_for_visit": "Torn Nail",
+        "weight": 166,
+        "height": 138,
+        "blood_pressure": "120/82",
+        "treatment": "Bandaid",
+        "prescription": "Medications",
+        "visited_doctor": "Dr. Liam"
+      },
+      {
+        "appointment_date": "08/10/2020",
+        "reason_for_visit": "Cut arm",
+        "weight": 182,
+        "height": 138,
+        "blood_pressure": "120/83",
+        "treatment": "Wrapped arm up",
+        "prescription": "Antibiotics",
+        "visited_doctor": "Dr. Liam"
+      },
+      {
+        "appointment_date": "11/25/2020",
+        "reason_for_visit": "Bruised knee",
+        "weight": 149,
+        "height": 138,
+        "blood_pressure": "120/84",
+        "treatment": "Casted knee",
+        "prescription": "Pain medications",
+        "visited_doctor": "Dr. Liam"
+      }
+    ],
+    "previous_visit": {
+      "appointment_date": "08/10/2020",
+      "reason_for_visit": "Cut arm",
+      "weight": 182,
+      "height": 138,
+      "blood_pressure": "120/83",
+      "treatment": "Wrapped arm up",
+      "prescription": "Antibiotics",
+      "visited_doctor": "Dr. Liam"
+    },
+    "current_visit": {
+      "appointment_date": "11/25/2020",
+      "reason_for_visit": "Bruised knee",
+      "weight": 149,
+      "height": 138,
+      "blood_pressure": "120/84",
+      "treatment": "Casted knee",
+      "prescription": "Pain medications",
+      "visited_doctor": "Dr. Liam"
+    }
+  },
+  {
+    "patient_name": "Rowland Tillman",
+    "birthday": "08/09/2002",
+    "address": "975 Eldert Street, Emerald, Oklahoma, 5729",
+    "ssn": 568470004,
+    "insurance": "MEDICROIX",
+    "patient_id": 513,
+    "doctor_id": 124,
+    "patient_payment": {
+      "date": "11/26/2020",
+      "amount": 1058.07,
+      "paymentType": "Cash",
+      "referenceNUmber": 1222,
+      "pin": -1
+    },
+    "treatment_record_arr": [{
+        "appointment_date": "11/19/2020",
+        "reason_for_visit": "Broken rib",
+        "weight": 107,
+        "height": 108,
+        "blood_pressure": "121/80",
+        "treatment": "Casted their rib",
+        "prescription": "Pain medications",
+        "visited_doctor": "Dr. Liam"
+      },
+      {
+        "appointment_date": "11/20/2020",
+        "reason_for_visit": "Burned hand",
+        "weight": 199,
+        "height": 112,
+        "blood_pressure": "122/80",
+        "treatment": "Applied cream and bandaid",
+        "prescription": "Burn cream",
+        "visited_doctor": "Dr. Liam"
+      },
+      {
+        "appointment_date": "11/26/2020",
+        "reason_for_visit": "Choking",
+        "weight": 199,
+        "height": 135,
+        "blood_pressure": "123/80",
+        "treatment": "CPR",
+        "prescription": "None given",
+        "visited_doctor": "Dr. Liam"
+      }
+    ],
+    "previous_visit": {
+      "appointment_date": "11/20/2020",
+      "reason_for_visit": "Burned hand",
+      "weight": 199,
+      "height": 112,
+      "blood_pressure": "122/80",
+      "treatment": "Applied cream and bandaid",
+      "prescription": "Burn cream",
+      "visited_doctor": "Dr. Liam"
+    },
+    "current_visit": {
+      "appointment_date": "11/26/2020",
+      "reason_for_visit": "Choking",
+      "weight": 199,
+      "height": 135,
+      "blood_pressure": "123/80",
+      "treatment": "CPR",
+      "prescription": "None given",
+      "visited_doctor": "Dr. Liam"
+    }
+  },
+  {
+    "patient_name": "Evangeline Villarreal",
+    "birthday": "03/29/1998",
+    "address": "685 Lee Avenue, Hollins, Georgia, 3286",
+    "ssn": 475215465,
+    "insurance": "XYMONK",
+    "patient_id": 514,
+    "doctor_id": 124,
+    "patient_payment": {
+      "date": "11/26/2020",
+      "amount": 1626.03,
+      "paymentType": "Debit",
+      "referenceNUmber": 1235,
+      "pin": 9814
+    },
+    "treatment_record_arr": [{
+        "appointment_date": "09/14/2020",
+        "reason_for_visit": "Broken Leg",
+        "weight": 106,
+        "height": 111,
+        "blood_pressure": "121/81",
+        "treatment": "Casted leg",
+        "prescription": "Pain medications",
+        "visited_doctor": "Dr. Liam"
+      },
+      {
+        "appointment_date": "03/31/2020",
+        "reason_for_visit": "Migraine",
+        "weight": 106,
+        "height": 111,
+        "blood_pressure": "122/82",
+        "treatment": "Looked at ear",
+        "prescription": "Head medications",
+        "visited_doctor": "Dr. Liam"
+      },
+      {
+        "appointment_date": "11/26/2020",
+        "reason_for_visit": "Pink eye",
+        "weight": 110,
+        "height": 111,
+        "blood_pressure": "123/83",
+        "treatment": "covered eye",
+        "prescription": "Eye medications",
+        "visited_doctor": "Dr. Liam"
+      }
+    ],
+    "previous_visit": {
+      "appointment_date": "03/31/2020",
+      "reason_for_visit": "Migraine",
+      "weight": 106,
+      "height": 111,
+      "blood_pressure": "122/82",
+      "treatment": "Looked at ear",
+      "prescription": "Head medications",
+      "visited_doctor": "Dr. Liam"
+    },
+    "current_visit": {
+      "appointment_date": "11/26/2020",
+      "reason_for_visit": "Pink eye",
+      "weight": 110,
+      "height": 111,
+      "blood_pressure": "123/83",
+      "treatment": "covered eye",
+      "prescription": "Eye medications",
+      "visited_doctor": "Dr. Liam"
+    }
+  },
+  {
+    "patient_name": "Madelyn Webster",
+    "birthday": "06/18/1952",
+    "address": "540 Broadway , Chumuckla, West Virginia, 622",
+    "ssn": 161748354,
+    "insurance": "MATRIXITY",
+    "patient_id": 515,
+    "doctor_id": 124,
+    "patient_payment": {
+      "date": "11/27/2020",
+      "amount": 2724.46,
+      "paymentType": "Credit",
+      "referenceNUmber": 123477,
+      "pin": -1
+    },
+    "treatment_record_arr": [{
+        "appointment_date": "08/05/2020",
+        "reason_for_visit": "Diabetes checkup",
+        "weight": 130,
+        "height": 158,
+        "blood_pressure": "120/85",
+        "treatment": "Looked at patient's illness area",
+        "prescription": "None",
+        "visited_doctor": "Dr. Liam"
+      },
+      {
+        "appointment_date": "05/01/2020",
+        "reason_for_visit": "Sprain Wrist",
+        "weight": 130,
+        "height": 158,
+        "blood_pressure": "120/86",
+        "treatment": "Casted wrist",
+        "prescription": "Pain medications",
+        "visited_doctor": "Dr. Liam"
+      },
+      {
+        "appointment_date": "11/27/2020",
+        "reason_for_visit": "strep sore throat",
+        "weight": 125,
+        "height": 158,
+        "blood_pressure": "120/87",
+        "treatment": "checked throat",
+        "prescription": "throat medications",
+        "visited_doctor": "Dr. Liam"
+      }
+    ],
+    "previous_visit": {
+      "appointment_date": "05/01/2020",
+      "reason_for_visit": "Sprain Wrist",
+      "weight": 130,
+      "height": 158,
+      "blood_pressure": "120/86",
+      "treatment": "Casted wrist",
+      "prescription": "Pain medications",
+      "visited_doctor": "Dr. Liam"
+    },
+    "current_visit": {
+      "appointment_date": "11/27/2020",
+      "reason_for_visit": "strep sore throat",
+      "weight": 125,
+      "height": 158,
+      "blood_pressure": "120/87",
+      "treatment": "checked throat",
+      "prescription": "throat medications",
+      "visited_doctor": "Dr. Liam"
+    }
+  },
+  {
+    "patient_name": "Pamela Chase",
+    "birthday": "04/01/1964",
+    "address": "998 Carlton Avenue, Oceola, California, 1874",
+    "ssn": 514435051,
+    "insurance": "TECHTRIX",
+    "patient_id": 116,
+    "doctor_id": 123,
+    "patient_payment": {
+      "date": "11/26/2020",
+      "amount": 2543.63,
+      "paymentType": "Debit",
+      "referenceNUmber": 112233,
+      "pin": 9754
+    },
+    "treatment_record_arr": [{
+        "appointment_date": "01/03/2020",
+        "reason_for_visit": "migraine",
+        "weight": 131,
+        "height": 138,
+        "blood_pressure": "120/80",
+        "treatment": "Checked ears",
+        "prescription": "Head medications",
+        "visited_doctor": "Dr. Arthur"
+      },
+      {
+        "appointment_date": "10/27/2020",
+        "reason_for_visit": "Ear Infection",
+        "weight": 131,
+        "height": 138,
+        "blood_pressure": "120/81",
+        "treatment": "Checked ear",
+        "prescription": "Ear drops",
+        "visited_doctor": "Dr. Arthur"
+      },
+      {
+        "appointment_date": "11/26/2020",
+        "reason_for_visit": "Pain in side",
+        "weight": 141,
+        "height": 138,
+        "blood_pressure": "120/82",
+        "treatment": "did MRI",
+        "prescription": "pain medications",
+        "visited_doctor": "Dr. Arthur"
+      }
+    ],
+    "previous_visit": {
+      "appointment_date": "10/27/2020",
+      "reason_for_visit": "Ear Infection",
+      "weight": 131,
+      "height": 138,
+      "blood_pressure": "120/81",
+      "treatment": "Checked ear",
+      "prescription": "Ear drops",
+      "visited_doctor": "Dr. Arthur"
+    },
+    "current_visit": {
+      "appointment_date": "11/26/2020",
+      "reason_for_visit": "Pain in side",
+      "weight": 141,
+      "height": 138,
+      "blood_pressure": "120/82",
+      "treatment": "did MRI",
+      "prescription": "pain medications",
+      "visited_doctor": "Dr. Arthur"
+    }
+  },
+  {
+    "patient_name": "Gomez Hampton",
+    "birthday": "09/16/1952",
+    "address": "846 Ira Court, Trexlertown, Arizona, 3538",
+    "ssn": 782867488,
+    "insurance": "FOSSIEL",
+    "patient_id": 117,
+    "doctor_id": 123,
+    "patient_payment": {
+      "date": "11/25/2020",
+      "amount": 2428.16,
+      "paymentType": "Cash",
+      "referenceNUmber": 223344,
+      "pin": -1
+    },
+    "treatment_record_arr": [{
+        "appointment_date": "02/13/2020",
+        "reason_for_visit": "Covid",
+        "weight": 145,
+        "height": 102,
+        "blood_pressure": "121/80",
+        "treatment": "nose swab",
+        "prescription": "Flu related medications",
+        "visited_doctor": "Dr. Arthur"
+      },
+      {
+        "appointment_date": "07/20/2020",
+        "reason_for_visit": "Strep throat",
+        "weight": 138,
+        "height": 102,
+        "blood_pressure": "122/80",
+        "treatment": "checked throat",
+        "prescription": "soothing medications",
+        "visited_doctor": "Dr. Arthur"
+      },
+      {
+        "appointment_date": "11/25/2020",
+        "reason_for_visit": "UTI",
+        "weight": 113,
+        "height": 102,
+        "blood_pressure": "123/80",
+        "treatment": "Checked urinary tract",
+        "prescription": "anti inflamitory medications",
+        "visited_doctor": "Dr. Arthur"
+      }
+    ],
+    "previous_visit": {
+      "appointment_date": "07/20/2020",
+      "reason_for_visit": "Strep throat",
+      "weight": 138,
+      "height": 102,
+      "blood_pressure": "122/80",
+      "treatment": "checked throat",
+      "prescription": "soothing medications",
+      "visited_doctor": "Dr. Arthur"
+    },
+    "current_visit": {
+      "appointment_date": "11/25/2020",
+      "reason_for_visit": "UTI",
+      "weight": 113,
+      "height": 102,
+      "blood_pressure": "123/80",
+      "treatment": "Checked urinary tract",
+      "prescription": "anti inflamitory medications",
+      "visited_doctor": "Dr. Arthur"
+    }
+  },
+  {
+    "patient_name": "Rene Fry",
+    "birthday": "05/13/1966",
+    "address": "621 Glen Street, Sunbury, Washington, 3799",
+    "ssn": 428302274,
+    "insurance": "ACCUPRINT",
+    "patient_id": 518,
+    "doctor_id": 123,
+    "patient_payment": {
+      "date": "11/26/2020",
+      "amount": 3201.77,
+      "paymentType": "Debit",
+      "referenceNUmber": 1234,
+      "pin": 9753
+    },
+    "treatment_record_arr": [{
+        "appointment_date": "09/18/2020",
+        "reason_for_visit": "Wrist joint pain",
+        "weight": 159,
+        "height": 135,
+        "blood_pressure": "121/81",
+        "treatment": "checked wrist",
+        "prescription": "pain medications",
+        "visited_doctor": "Dr. Arthur"
+      },
+      {
+        "appointment_date": "03/18/2020",
+        "reason_for_visit": "Flu",
+        "weight": 116,
+        "height": 135,
+        "blood_pressure": "122/82",
+        "treatment": "Flu shot",
+        "prescription": "Flu medications",
+        "visited_doctor": "Dr. Arthur"
+      },
+      {
+        "appointment_date": "11/26/2020",
+        "reason_for_visit": "Cant breathe properly",
+        "weight": 120,
+        "height": 135,
+        "blood_pressure": "123/83",
+        "treatment": "Checked lungs",
+        "prescription": "None",
+        "visited_doctor": "Dr. Arthur"
+      }
+    ],
+    "previous_visit": {
+      "appointment_date": "03/18/2020",
+      "reason_for_visit": "Flu",
+      "weight": 116,
+      "height": 135,
+      "blood_pressure": "122/82",
+      "treatment": "Flu shot",
+      "prescription": "Flu medications",
+      "visited_doctor": "Dr. Arthur"
+    },
+    "current_visit": {
+      "appointment_date": "11/26/2020",
+      "reason_for_visit": "Cant breathe properly",
+      "weight": 120,
+      "height": 135,
+      "blood_pressure": "123/83",
+      "treatment": "Checked lungs",
+      "prescription": "None",
+      "visited_doctor": "Dr. Arthur"
+    }
+  },
+  {
+    "patient_name": "Mooney Matthews",
+    "birthday": "02/17/1992",
+    "address": "426 Dover Street, Dawn, Federated States Of Micronesia, 9470",
+    "ssn": 757081779,
+    "insurance": "ZILLANET",
+    "patient_id": 519,
+    "doctor_id": 123,
+    "patient_payment": {
+      "date": "11/27/2020",
+      "amount": 3305.95,
+      "paymentType": "Credit",
+      "referenceNUmber": 12345123,
+      "pin": -1
+    },
+    "treatment_record_arr": [{
+        "appointment_date": "09/11/2020",
+        "reason_for_visit": "Hurt leg",
+        "weight": 196,
+        "height": 173,
+        "blood_pressure": "120/85",
+        "treatment": "cleaned leg and bandaid",
+        "prescription": "pain medications",
+        "visited_doctor": "Dr. Arthur"
+      },
+      {
+        "appointment_date": "09/15/2020",
+        "reason_for_visit": "eczema",
+        "weight": 196,
+        "height": 173,
+        "blood_pressure": "120/86",
+        "treatment": "looked at eczema",
+        "prescription": "anti itch medications",
+        "visited_doctor": "Dr. Arthur"
+      },
+      {
+        "appointment_date": "11/27/2020",
+        "reason_for_visit": "Cellulitis",
+        "weight": 186,
+        "height": 173,
+        "blood_pressure": "120/87",
+        "treatment": "checked skin region",
+        "prescription": "cellulitis medications",
+        "visited_doctor": "Dr. Arthur"
+      }
+    ],
+    "previous_visit": {
+      "appointment_date": "09/15/2020",
+      "reason_for_visit": "eczema",
+      "weight": 196,
+      "height": 173,
+      "blood_pressure": "120/86",
+      "treatment": "looked at eczema",
+      "prescription": "anti itch medications",
+      "visited_doctor": "Dr. Arthur"
+    },
+    "current_visit": {
+      "appointment_date": "11/27/2020",
+      "reason_for_visit": "Cellulitis",
+      "weight": 186,
+      "height": 173,
+      "blood_pressure": "120/87",
+      "treatment": "checked skin region",
+      "prescription": "cellulitis medications",
+      "visited_doctor": "Dr. Arthur"
+    }
+  },
+  {
+    "patient_name": "Rhodes Hudson",
+    "birthday": "09/08/2016",
+    "address": "115 Lincoln Avenue, Taft, Vermont, 1415",
+    "ssn": 744058097,
+    "insurance": "ZIDOX",
+    "patient_id": 520,
+    "doctor_id": 123,
+    "patient_payment": {
+      "date": "11/27/2020",
+      "amount": 2743.22,
+      "paymentType": "Credit",
+      "referenceNUmber": 12322331,
+      "pin": 5101
+    },
+    "treatment_record_arr": [{
+        "appointment_date": "07/13/2020",
+        "reason_for_visit": "Pain in foot",
+        "weight": 174,
+        "height": 145,
+        "blood_pressure": "125/80",
+        "treatment": "checked foot",
+        "prescription": "pain medications",
+        "visited_doctor": "Dr. Arthur"
+      },
+      {
+        "appointment_date": "04/20/2020",
+        "reason_for_visit": "Runny nose",
+        "weight": 174,
+        "height": 145,
+        "blood_pressure": "126/80",
+        "treatment": "checked nose",
+        "prescription": "Allergy medications",
+        "visited_doctor": "Dr. Arthur"
+      },
+      {
+        "appointment_date": "11/27/2020",
+        "reason_for_visit": "Broken arm",
+        "weight": 181,
+        "height": 145,
+        "blood_pressure": "127/80",
+        "treatment": "Casted arm",
+        "prescription": "pain medications",
+        "visited_doctor": "Dr. Arthur"
+      }
+    ],
+    "previous_visit": {
+      "appointment_date": "04/20/2020",
+      "reason_for_visit": "Runny nose",
+      "weight": 174,
+      "height": 145,
+      "blood_pressure": "126/80",
+      "treatment": "checked nose",
+      "prescription": "Allergy medications",
+      "visited_doctor": "Dr. Arthur"
+    },
+    "current_visit": {
+      "appointment_date": "11/27/2020",
+      "reason_for_visit": "Broken arm",
+      "weight": 181,
+      "height": 145,
+      "blood_pressure": "127/80",
+      "treatment": "Casted arm",
+      "prescription": "pain medications",
+      "visited_doctor": "Dr. Arthur"
+    }
+  },
+  {
+    "patient_name": "Rosario Thomas",
+    "birthday": "03/31/1963",
+    "address": "649 Pitkin Avenue, Rivera, Pennsylvania, 3469",
+    "ssn": 584008399,
+    "insurance": "STRALOY",
+    "patient_id": 521,
+    "doctor_id": 123,
+    "patient_payment": {
+      "date": "11/27/2020",
+      "amount": 2817.84,
+      "paymentType": "Credit",
+      "referenceNUmber": 123443311,
+      "pin": 8510
+    },
+    "treatment_record_arr": [{
+        "appointment_date": "02/18/2020",
+        "reason_for_visit": "Bruised leg",
+        "weight": 189,
+        "height": 193,
+        "blood_pressure": "122/81",
+        "treatment": "checked leg area",
+        "prescription": "None",
+        "visited_doctor": "Dr. Arthur"
+      },
+      {
+        "appointment_date": "08/14/2020",
+        "reason_for_visit": "Bruised arm",
+        "weight": 152,
+        "height": 193,
+        "blood_pressure": "123/82",
+        "treatment": "checked arm area",
+        "prescription": "None",
+        "visited_doctor": "Dr. Arthur"
+      },
+      {
+        "appointment_date": "11/27/2020",
+        "reason_for_visit": "Bruised neck area",
+        "weight": 155,
+        "height": 193,
+        "blood_pressure": "124/83",
+        "treatment": "checked neck area",
+        "prescription": "pain medications",
+        "visited_doctor": "Dr. Arthur"
+      }
+    ],
+    "previous_visit": {
+      "appointment_date": "08/14/2020",
+      "reason_for_visit": "Bruised arm",
+      "weight": 152,
+      "height": 193,
+      "blood_pressure": "123/82",
+      "treatment": "checked arm area",
+      "prescription": "None",
+      "visited_doctor": "Dr. Arthur"
+    },
+    "current_visit": {
+      "appointment_date": "11/27/2020",
+      "reason_for_visit": "Bruised neck area",
+      "weight": 155,
+      "height": 193,
+      "blood_pressure": "124/83",
+      "treatment": "checked neck area",
+      "prescription": "pain medications",
+      "visited_doctor": "Dr. Arthur"
+    }
+  },
+  {
+    "patient_name": "Duffy Wise",
+    "birthday": "12/22/1956",
+    "address": "773 Berry Street, Utting, Colorado, 8656",
+    "ssn": 184160794,
+    "insurance": "EARGO",
+    "patient_id": 522,
+    "doctor_id": 125,
+    "patient_payment": {
+      "date": "11/25/2020",
+      "amount": 2407.81,
+      "paymentType": "Cash",
+      "referenceNUmber": 44332211,
+      "pin": -1
+    },
+    "treatment_record_arr": [{
+        "appointment_date": "05/14/2020",
+        "reason_for_visit": "Pink eye",
+        "weight": 180,
+        "height": 142,
+        "blood_pressure": "120/81",
+        "treatment": "checked eye",
+        "prescription": "eye patch",
+        "visited_doctor": "Dr. Rayven"
+      },
+      {
+        "appointment_date": "11/08/2020",
+        "reason_for_visit": "Ear infection",
+        "weight": 181,
+        "height": 142,
+        "blood_pressure": "120/82",
+        "treatment": "checked ear",
+        "prescription": "ear drops",
+        "visited_doctor": "Dr. Rayven"
+      },
+      {
+        "appointment_date": "11/25/2020",
+        "reason_for_visit": "cut arm",
+        "weight": 183,
+        "height": 142,
+        "blood_pressure": "120/83",
+        "treatment": "stitched arm",
+        "prescription": "pain medications",
+        "visited_doctor": "Dr. Rayven"
+      }
+    ],
+    "previous_visit": {
+      "appointment_date": "11/08/2020",
+      "reason_for_visit": "Ear infection",
+      "weight": 181,
+      "height": 142,
+      "blood_pressure": "120/82",
+      "treatment": "checked ear",
+      "prescription": "ear drops",
+      "visited_doctor": "Dr. Rayven"
+    },
+    "current_visit": {
+      "appointment_date": "11/25/2020",
+      "reason_for_visit": "cut arm",
+      "weight": 183,
+      "height": 142,
+      "blood_pressure": "120/83",
+      "treatment": "stitched arm",
+      "prescription": "pain medications",
+      "visited_doctor": "Dr. Rayven"
+    }
+  },
+  {
+    "patient_name": "Boyd Abbott",
+    "birthday": "11/20/1951",
+    "address": "772 Boerum Street, Harleigh, Connecticut, 1056",
+    "ssn": 338178861,
+    "insurance": "ROCKLOGIC",
+    "patient_id": 523,
+    "doctor_id": 125,
+    "patient_payment": {
+      "date": "11/26/2020",
+      "amount": 2993.31,
+      "paymentType": "Cash",
+      "referenceNUmber": 991100,
+      "pin": -1
+    },
+    "treatment_record_arr": [{
+        "appointment_date": "02/18/2020",
+        "reason_for_visit": "UTI",
+        "weight": 181,
+        "height": 118,
+        "blood_pressure": "121/80",
+        "treatment": "checked urinary tract",
+        "prescription": "UTI medication",
+        "visited_doctor": "Dr. Rayven"
+      },
+      {
+        "appointment_date": "09/24/2020",
+        "reason_for_visit": "Cut leg",
+        "weight": 181,
+        "height": 118,
+        "blood_pressure": "122/80",
+        "treatment": "stitched leg",
+        "prescription": "pain medication",
+        "visited_doctor": "Dr. Rayven"
+      },
+      {
+        "appointment_date": "11/26/2020",
+        "reason_for_visit": "Bruised arm",
+        "weight": 176,
+        "height": 118,
+        "blood_pressure": "123/80",
+        "treatment": "checked arm",
+        "prescription": "None",
+        "visited_doctor": "Dr. Rayven"
+      }
+    ],
+    "previous_visit": {
+      "appointment_date": "09/24/2020",
+      "reason_for_visit": "Cut leg",
+      "weight": 181,
+      "height": 118,
+      "blood_pressure": "122/80",
+      "treatment": "stitched leg",
+      "prescription": "pain medication",
+      "visited_doctor": "Dr. Rayven"
+    },
+    "current_visit": {
+      "appointment_date": "11/26/2020",
+      "reason_for_visit": "Bruised arm",
+      "weight": 176,
+      "height": 118,
+      "blood_pressure": "123/80",
+      "treatment": "checked arm",
+      "prescription": "None",
+      "visited_doctor": "Dr. Rayven"
+    }
+  },
+  {
+    "patient_name": "Hobbs Gentry",
+    "birthday": "10/12/2013",
+    "address": "380 Billings Place, Shepardsville, Missouri, 6627",
+    "ssn": 623118139,
+    "insurance": "CINCYR",
+    "patient_id": 524,
+    "doctor_id": 125,
+    "patient_payment": {
+      "date": "11/27/2020",
+      "amount": 3882.78,
+      "paymentType": "Credit",
+      "referenceNUmber": 5566771,
+      "pin": -1
+    },
+    "treatment_record_arr": [{
+        "appointment_date": "01/12/2020",
+        "reason_for_visit": "Sore throat",
+        "weight": 158,
+        "height": 107,
+        "blood_pressure": "121/81",
+        "treatment": "checked throat",
+        "prescription": "throat medication",
+        "visited_doctor": "Dr. Rayven"
+      },
+      {
+        "appointment_date": "06/19/2020",
+        "reason_for_visit": "Stomach pains",
+        "weight": 158,
+        "height": 107,
+        "blood_pressure": "122/82",
+        "treatment": "listened to stomach",
+        "prescription": "peptobismo",
+        "visited_doctor": "Dr. Rayven"
+      },
+      {
+        "appointment_date": "11/27/2020",
+        "reason_for_visit": "clogged nose",
+        "weight": 157,
+        "height": 107,
+        "blood_pressure": "123/83",
+        "treatment": "looked at nose",
+        "prescription": "Allergy medication",
+        "visited_doctor": "Dr. Rayven"
+      }
+    ],
+    "previous_visit": {
+      "appointment_date": "06/19/2020",
+      "reason_for_visit": "Stomach pains",
+      "weight": 158,
+      "height": 107,
+      "blood_pressure": "122/82",
+      "treatment": "listened to stomach",
+      "prescription": "peptobismo",
+      "visited_doctor": "Dr. Rayven"
+    },
+    "current_visit": {
+      "appointment_date": "11/27/2020",
+      "reason_for_visit": "clogged nose",
+      "weight": 157,
+      "height": 107,
+      "blood_pressure": "123/83",
+      "treatment": "looked at nose",
+      "prescription": "Allergy medication",
+      "visited_doctor": "Dr. Rayven"
+    }
+  }, {
+    "patient_name": "Hansen Gonzalez",
+    "birthday": "07/09/1951",
+    "address": "312 Rutledge Street, Turpin, Maryland, 3405",
+    "ssn": 249261204,
+    "insurance": "MARKETOID",
+    "patient_id": 525,
+    "doctor_id": 125,
+    "patient_payment": {
+      "date": "11/27/2020",
+      "amount": 2824.63,
+      "paymentType": "Credit",
+      "referenceNUmber": 987654321,
+      "pin": 7035
+    },
+    "treatment_record_arr": [{
+        "appointment_date": "05/25/2020",
+        "reason_for_visit": "Sprained arm",
+        "weight": 112,
+        "height": 149,
+        "blood_pressure": "125/85",
+        "treatment": "casted arm",
+        "prescription": "pain medication",
+        "visited_doctor": "Dr. Rayven"
+      },
+      {
+        "appointment_date": "09/30/2020",
+        "reason_for_visit": "Cut middle finger",
+        "weight": 112,
+        "height": 149,
+        "blood_pressure": "126/86",
+        "treatment": "stitched finger",
+        "prescription": "pain medication",
+        "visited_doctor": "Dr. Rayven"
+      },
+      {
+        "appointment_date": "11/27/2020",
+        "reason_for_visit": "hard of hearing in left ear",
+        "weight": 115,
+        "height": 149,
+        "blood_pressure": "127/87",
+        "treatment": "checked ear",
+        "prescription": "Allergy medication",
+        "visited_doctor": "Dr. Rayven"
+      }
+    ],
+    "previous_visit": {
+      "appointment_date": "09/30/2020",
+      "reason_for_visit": "Cut middle finger",
+      "weight": 112,
+      "height": 149,
+      "blood_pressure": "126/86",
+      "treatment": "stitched finger",
+      "prescription": "pain medication",
+      "visited_doctor": "Dr. Rayven"
+    },
+    "current_visit": {
+      "appointment_date": "11/27/2020",
+      "reason_for_visit": "hard of hearing in left ear",
+      "weight": 115,
+      "height": 149,
+      "blood_pressure": "127/87",
+      "treatment": "checked ear",
+      "prescription": "Allergy medication",
+      "visited_doctor": "Dr. Rayven"
+    }
   }
 ]

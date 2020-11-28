@@ -254,5 +254,48 @@
             "height": 0,
             "blood_pressure": "0/0"
         }
+    },
+    {
+        "patient_name": "Luke Cage",
+        "birthday": "05/06/1972",
+        "address": "2119 Marvel Dr",
+        "ssn": 123456789,
+        "insurance": "Progressive",
+        "patient_payment": {
+            "date": "12/01/2020",
+            "amount": 218.74,
+            "paymentType": "Debit",
+            "referenceNumber": 38576798,
+            "pin": 5268
+        },
+        "patient_id": 506,
+        "doctor_id": 124,
+        "treatment_record_arr": [
+            {
+                "weight": 0,
+                "height": 0,
+                "blood_pressure": "0/0"
+            },
+            {
+                "appointment_date": "12/01/2020",
+                "reason_for_visit": "Pain in back of left quad. possible hamstring.",
+                "weight": 180,
+                "height": 68,
+                "blood_pressure": "124/80",
+                "treatment": "stretched muscle a bit. muscle strain, possibly from too much workout.",
+                "prescription": "daily leg stretches, a leg brace, and ibuprophen if needed.",
+                "visited_doctor": "Dr. Liam"
+            }
+        ],
+        "current_visit": {
+            "appointment_date": "12/01/2020",
+            "reason_for_visit": "Pain in back of left quad. possible hamstring.",
+            "weight": 180,
+            "height": 68,
+            "blood_pressure": "124/80",
+            "treatment": "stretched muscle a bit. muscle strain, possibly from too much workout.",
+            "prescription": "daily leg stretches, a leg brace, and ibuprophen if needed.",
+            "visited_doctor": "Dr. Liam"
+        }
     }
 ]

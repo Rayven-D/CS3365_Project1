@@ -27,7 +27,7 @@ public class HealthCareInterface extends Application {
     private HealthCareController controller;
      boolean logoutPrimed, cancelPrimed;
      Database db;
-     Timer tm;
+     SystemTimer tm;
      String popupMessage;
      Label popupMessageLabel;
      Button popupOK, popupYes, popupNo;
@@ -120,7 +120,7 @@ public class HealthCareInterface extends Application {
         }catch(Exception e){
             e.printStackTrace();
         }
-        this.tm = new Timer();
+        this.tm = new SystemTimer();
         staffInterface = new StaffInterface(this.patientQueue, this, this.db);
         this.controller = new HealthCareController(this, staffInterface);
 

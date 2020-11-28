@@ -1,154 +1,5 @@
 [
     {
-        "patient_name": "Dean Deanster",
-        "birthday": "12/12/2020",
-        "address": "21 hundo mac davo lano",
-        "ssn": 555667777,
-        "insurance": "LOL Insurance",
-        "patient_payment": {
-            "date": "12/12/1111",
-            "amount": 1337,
-            "paymentType": "Card",
-            "referenceNumber": 1,
-            "pin": 1100
-        },
-        "patient_id": 501,
-        "doctor_id": 0,
-        "treatment_record_arr": [
-            {
-                "appointment_date": "12/12/2019",
-                "reason_for_visit": "Corona",
-                "weight": 120,
-                "height": 300,
-                "blood_pressure": "140/80",
-                "treatment": "Get gud",
-                "prescription": "lol pills",
-                "visited_doctor": "Dr. Rayven"
-            },
-            {
-                "appointment_date": "12/12/2020",
-                "reason_for_visit": "Corona phase 2",
-                "weight": 120,
-                "height": 300,
-                "blood_pressure": "140/80",
-                "treatment": "Get gud",
-                "prescription": "lol more pills",
-                "visited_doctor": "Dr. Rayven"
-            }
-        ],
-        "previous_visit": {
-            "appointment_date": "12/12/2019",
-            "reason_for_visit": "Corona",
-            "weight": 120,
-            "height": 300,
-            "blood_pressure": "140/80",
-            "treatment": "Get gud",
-            "prescription": "lol pills",
-            "visited_doctor": "Dr. Rayven"
-        },
-        "current_visit": {
-            "appointment_date": "12/12/2020",
-            "reason_for_visit": "Corona phase 2",
-            "weight": 120,
-            "height": 300,
-            "blood_pressure": "140/80",
-            "treatment": "Get gud",
-            "prescription": "lol more pills",
-            "visited_doctor": "Dr. Rayven"
-        }
-    },
-    {
-        "patient_name": "Test Two",
-        "birthday": "",
-        "address": "",
-        "ssn": 0,
-        "insurance": "",
-        "patient_id": 502,
-        "doctor_id": 0,
-        "treatment_record_arr": [
-            {
-                "weight": 0,
-                "height": 0,
-                "blood_pressure": "0.0"
-            }
-        ],
-        "current_visit": {
-            "weight": 0,
-            "height": 0,
-            "blood_pressure": "0.0"
-        }
-    },
-    {
-        "patient_name": "Frank Franker",
-        "birthday": "12/12/2020",
-        "address": "2222 Baker Ln",
-        "ssn": 133744445,
-        "insurance": "GIECO",
-        "patient_payment": {
-            "date": "12/01/2020",
-            "amount": 156.7,
-            "paymentType": "Debit",
-            "referenceNumber": 88207143,
-            "pin": 4976
-        },
-        "patient_id": 500,
-        "doctor_id": 123,
-        "treatment_record_arr": [
-            {
-                "appointment_date": "12/12/2019",
-                "reason_for_visit": "Corona",
-                "weight": 120,
-                "height": 300,
-                "blood_pressure": "140/80",
-                "treatment": "Get gud",
-                "prescription": "lol pills",
-                "visited_doctor": "Dr. Rayven"
-            },
-            {
-                "appointment_date": "12/12/2020",
-                "reason_for_visit": "Corona phase 2",
-                "weight": 120,
-                "height": 300,
-                "blood_pressure": "140/80",
-                "treatment": "Get gud",
-                "prescription": "lol more pills",
-                "visited_doctor": "Dr. Rayven"
-            },
-            {
-                "appointment_date": "12/01/2020",
-                "reason_for_visit": "yearly physical",
-                "weight": 169.8,
-                "height": 69.6,
-                "blood_pressure": "120/80",
-                "treatment": "Nothing out of ordinary. \t",
-                "prescription": "N/A",
-                "visited_doctor": "Dr. Arthur"
-            },
-            {
-                "appointment_date": "12/01/2020",
-                "weight": 0,
-                "height": 0,
-                "blood_pressure": "0/0"
-            }
-        ],
-        "previous_visit": {
-            "appointment_date": "12/12/2019",
-            "reason_for_visit": "Corona",
-            "weight": 120,
-            "height": 300,
-            "blood_pressure": "120/70",
-            "treatment": "Get gud",
-            "prescription": "lol pills",
-            "visited_doctor": "Dr. Rayven"
-        },
-        "current_visit": {
-            "appointment_date": "12/01/2020",
-            "weight": 0,
-            "height": 0,
-            "blood_pressure": "0/0"
-        }
-    },
-    {
         "patient_name": "Jack Daniels",
         "birthday": "10/02/2099",
         "address": "3333 Q Ave, Lubbock, TX, 79604",
@@ -164,11 +15,6 @@
         "patient_id": 504,
         "doctor_id": 124,
         "treatment_record_arr": [
-            {
-                "weight": 0,
-                "height": 0,
-                "blood_pressure": ""
-            },
             {
                 "appointment_date": "12/01/2020",
                 "reason_for_visit": "Pain on top left area of stomach, near liver.",
@@ -208,11 +54,6 @@
         "doctor_id": 125,
         "treatment_record_arr": [
             {
-                "weight": 0,
-                "height": 0,
-                "blood_pressure": ""
-            },
-            {
                 "appointment_date": "12/01/2020",
                 "reason_for_visit": "Yearly physical",
                 "weight": 170,
@@ -235,66 +76,114 @@
         }
     },
     {
-        "patient_name": "Banana Joe",
-        "birthday": "",
-        "address": "",
-        "ssn": 0,
-        "insurance": "",
-        "patient_id": 505,
-        "doctor_id": 0,
+        "patient_name": "Dean Deanster",
+        "birthday": "12/12/2020",
+        "address": "21 hundo mac davo lano",
+        "ssn": 555667777,
+        "insurance": "LOL Insurance",
+        "patient_payment": {
+            "date": "12/01/2020",
+            "amount": 198.67,
+            "paymentType": "Debit",
+            "referenceNumber": 34456123,
+            "pin": 6078
+        },
+        "patient_id": 501,
+        "doctor_id": 124,
         "treatment_record_arr": [
             {
-                "weight": 0,
-                "height": 0,
-                "blood_pressure": "0/0"
+                "appointment_date": "12/12/2019",
+                "reason_for_visit": "Corona",
+                "weight": 120,
+                "height": 300,
+                "blood_pressure": "140/80",
+                "treatment": "Get gud",
+                "prescription": "lol pills",
+                "visited_doctor": "Dr. Rayven"
+            },
+            {
+                "appointment_date": "12/12/2020",
+                "reason_for_visit": "Corona phase 2",
+                "weight": 120,
+                "height": 300,
+                "blood_pressure": "140/80",
+                "treatment": "Get gud",
+                "prescription": "lol more pills",
+                "visited_doctor": "Dr. Rayven"
             }
         ],
+        "previous_visit": {
+            "appointment_date": "12/12/2019",
+            "reason_for_visit": "Corona",
+            "weight": 120,
+            "height": 300,
+            "blood_pressure": "140/80",
+            "treatment": "Get gud",
+            "prescription": "lol pills",
+            "visited_doctor": "Dr. Rayven"
+        },
         "current_visit": {
+            "appointment_date": "12/01/2020",
             "weight": 0,
             "height": 0,
             "blood_pressure": "0/0"
         }
     },
     {
-        "patient_name": "Luke Cage",
-        "birthday": "05/06/1972",
-        "address": "2119 Marvel Dr",
-        "ssn": 123456789,
-        "insurance": "Progressive",
+        "patient_name": "Frank Franker",
+        "birthday": "12/12/2020",
+        "address": "2222 Baker Ln",
+        "ssn": 133744445,
+        "insurance": "GIECO",
         "patient_payment": {
             "date": "12/01/2020",
-            "amount": 218.74,
-            "paymentType": "Debit",
-            "referenceNumber": 38576798,
-            "pin": 5268
+            "amount": 79.98,
+            "paymentType": "Credit",
+            "referenceNumber": 58033078,
+            "pin": -1
         },
-        "patient_id": 506,
+        "patient_id": 500,
         "doctor_id": 124,
         "treatment_record_arr": [
             {
-                "weight": 0,
-                "height": 0,
-                "blood_pressure": "0/0"
+                "appointment_date": "12/12/2019",
+                "reason_for_visit": "Corona",
+                "weight": 120,
+                "height": 300,
+                "blood_pressure": "140/80",
+                "treatment": "Get gud",
+                "prescription": "lol pills",
+                "visited_doctor": "Dr. Rayven"
             },
             {
-                "appointment_date": "12/01/2020",
-                "reason_for_visit": "Pain in back of left quad. possible hamstring.",
-                "weight": 180,
-                "height": 68,
-                "blood_pressure": "124/80",
-                "treatment": "stretched muscle a bit. muscle strain, possibly from too much workout.",
-                "prescription": "daily leg stretches, a leg brace, and ibuprophen if needed.",
-                "visited_doctor": "Dr. Liam"
+                "appointment_date": "12/12/2020",
+                "reason_for_visit": "Corona phase 2",
+                "weight": 120,
+                "height": 300,
+                "blood_pressure": "140/80",
+                "treatment": "Get gud",
+                "prescription": "lol more pills",
+                "visited_doctor": "Dr. Rayven"
             }
         ],
+        "previous_visit": {
+            "appointment_date": "12/12/2019",
+            "reason_for_visit": "Corona",
+            "weight": 120,
+            "height": 300,
+            "blood_pressure": "120/70",
+            "treatment": "Get gud",
+            "prescription": "lol pills",
+            "visited_doctor": "Dr. Rayven"
+        },
         "current_visit": {
             "appointment_date": "12/01/2020",
-            "reason_for_visit": "Pain in back of left quad. possible hamstring.",
-            "weight": 180,
-            "height": 68,
-            "blood_pressure": "124/80",
-            "treatment": "stretched muscle a bit. muscle strain, possibly from too much workout.",
-            "prescription": "daily leg stretches, a leg brace, and ibuprophen if needed.",
+            "reason_for_visit": "pain in left shoulder",
+            "weight": 177,
+            "height": 70,
+            "blood_pressure": "120/80",
+            "treatment": "Nothing out of ordinary. \t",
+            "prescription": "N/A",
             "visited_doctor": "Dr. Liam"
         }
     }

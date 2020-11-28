@@ -48,7 +48,7 @@ public class CEOInterface extends Application {
     //CEO Menu
     Button viewReportsButton;
     Button generateReportButton;
-    Button universalLogout;
+    
 
     //Reports Screen
     ComboBox reportDateSelectorBox;
@@ -56,18 +56,23 @@ public class CEOInterface extends Application {
 
     private CEOController controller;
     private int reportSelection = 0;
+    private HealthCareInterface hcInterface;
+    
+    
+    
+    public CEOInterface(){}
+    
+    public CEOInterface(HealthCareInterface hci){
+        this.hcInterface = hci;
+        this.controller = new CEOController(this);
+        
+        data = FXCollections.observableArrayList(this.controller.getReports().get(reportSelection).getReports());
+        this.setCEOMenuScene(); 
+    }
 
     @Override
     public void start(Stage primaryStage) {
-        this.controller = new CEOController(this);
-        this.stage = primaryStage;
-        data = FXCollections.observableArrayList(this.controller.getReports().get(reportSelection).getReports());
-        this.setCEOMenuScene();
-        Scene scene = this.CEOScene;
-
-        primaryStage.setTitle("Hello World!");
-        primaryStage.setScene(scene);
-        primaryStage.show();
+          
     }
 
     public void handle(Event e) {
@@ -77,11 +82,11 @@ public class CEOInterface extends Application {
     public void setCEOMenuScene() {
         this.viewReportsButton = new Button("View Reports");
         this.generateReportButton = new Button("Generate New Report");
-        this.universalLogout = new Button("Logout");
-        this.viewReportsButton.setOnAction((e) -> this.setCEOReportsScene());
+        
+        this.viewReportsButton.setOnAction((e) -> {this.hcInterface.handle(e);});
         this.generateReportButton.setOnAction((e) -> controller.generateReport());
         VBox menuBox = new VBox();
-        menuBox.getChildren().addAll(this.viewReportsButton, this.generateReportButton, this.universalLogout);
+        menuBox.getChildren().addAll(this.viewReportsButton, this.generateReportButton, this.hcInterface.universalLogout);
         menuBox.setPadding(new Insets(20, 20, 20, 20));
         this.CEOScene = new Scene(menuBox, 500, 500);
     }
@@ -94,14 +99,7 @@ public class CEOInterface extends Application {
         this.reportDateSelectorBox.getSelectionModel().select(reportSelection);
         this.reportSelectorButton = new Button("View Report");
 
-        Button back = new Button("Go Back");
-        back.setOnAction(new EventHandler(){
-            @Override
-            public void handle(Event event) {
-                setCEOMenuScene();
-                stage.setScene(CEOScene);
-            }
-        });
+        
         this.reportSelectorButton.setOnAction(new EventHandler(){
             @Override
             public void handle(Event e) {
@@ -140,12 +138,19 @@ public class CEOInterface extends Application {
         table.setItems(data);
         table.getColumns().addAll(docName, patientAmount, amountEarned);
 
+        Button back = new Button("Go Back");
+               back.setOnAction(e -> {this.hcInterface.goBack.fire();});
+        
         //VISUALIZE
         VBox vbox = new VBox();
         vbox.getChildren().addAll(title, hbox, table, back);
         vbox.setPadding(new Insets(20, 20, 20, 20));
         this.CEOScene = new Scene(vbox, 500, 500);
-        this.stage.setScene(this.CEOScene);
+        
+    }
+    
+    public Scene getCEOScene(){
+        return this.CEOScene;
     }
 
     /**

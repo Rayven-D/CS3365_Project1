@@ -12,12 +12,12 @@ package healthcare;
 public class ReportInformation {
     private String name;
     private int patientAmount;
-    private int amountEarned;
+    private float amountEarned;
 
     public ReportInformation() {
     }
 
-    public ReportInformation(String name, int patientAmount, int amountEarned) {
+    public ReportInformation(String name, int patientAmount, float amountEarned) {
         this.name = name;
         this.patientAmount = patientAmount;
         this.amountEarned = amountEarned;
@@ -40,11 +40,11 @@ public class ReportInformation {
         this.patientAmount = patientAmount;
     }
 
-    public int getAmountEarned() {
+    public float getAmountEarned() {
         return amountEarned;
     }
 
-    public void setAmountEarned(int amountEarned) {
+    public void setAmountEarned(float amountEarned) {
         this.amountEarned = amountEarned;
     }
     

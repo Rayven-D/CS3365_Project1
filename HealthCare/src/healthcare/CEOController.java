@@ -63,7 +63,7 @@ public class CEOController {
     
     public void generateReport() {
         Timer timer = new Timer();
-        timer.generateDailyReport();
+        timer.generateDailyReport(db);
     };
     public void handle(Event e) {
         /*

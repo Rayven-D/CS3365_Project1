@@ -25,6 +25,7 @@ import javax.swing.*;
  */
 public class HealthCareInterface extends Application {
     private HealthCareController controller;
+    
      boolean logoutPrimed, cancelPrimed;
      Database db;
      SystemTimer tm;
@@ -58,12 +59,14 @@ public class HealthCareInterface extends Application {
     HBox nameBdayBox,  sipiBox, appDateBox, whbpBox;
     VBox chartBox, topBox, dropDownBox, allBox;
     User curUser;
+    
     PatientChart curPatient;
     
     DatePicker birthdayField;
     
     CheckInQueue patientQueue;
     StaffInterface staffInterface;
+    CEOInterface ceoInterfae;
     
     Scene chartScene;
     
@@ -123,7 +126,7 @@ public class HealthCareInterface extends Application {
         this.tm = new SystemTimer();
         staffInterface = new StaffInterface(this.patientQueue, this, this.db);
         this.controller = new HealthCareController(this, staffInterface);
-
+        this.ceoInterfae = new CEOInterface(this);
     }
     public void runLoginInterface(){
         usernameLabel = new Label("Username: ");

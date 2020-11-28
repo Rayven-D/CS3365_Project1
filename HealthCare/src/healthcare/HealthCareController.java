@@ -42,14 +42,27 @@ public class HealthCareController {
                     hcInterface.setLandingPage();
                     hcInterface.userInterface.show();
                     hcInterface.userInterface.setTitle("Staff | " + hcInterface.curUser.getName());
-                }else{
+                }else if(hcInterface.curUser.getPermissions() == 3){//CEO
+                    hcInterface.ceoInterfae.setCEOMenuScene();
+                    this.hcInterface.userInterface.setScene(hcInterface.ceoInterfae.getCEOScene());
+                    hcInterface.userInterface.setTitle("CEO");
+                    hcInterface.userInterface.show();
+                }
+                else{
                     hcInterface.setChartLandingPage();
                     hcInterface.userInterface.setScene(hcInterface.chartLandScene);
                     hcInterface.userInterface.show();
                     hcInterface.userInterface.setTitle( hcInterface.curUser.getName());
                 }
             } 
-        }else if(e.getSource() == hcInterface.treatments){
+        }else if(e.getSource() == hcInterface.ceoInterfae.viewReportsButton){
+            System.out.println("Pressed reports");
+            hcInterface.ceoInterfae.setCEOReportsScene();
+            this.hcInterface.userInterface.setScene(hcInterface.ceoInterfae.getCEOScene());
+            hcInterface.userInterface.setTitle("CEO");
+            hcInterface.userInterface.show();
+        }
+        else if(e.getSource() == hcInterface.treatments){
             TreatmentRecord curTreatment = hcInterface.curPatient.getTreatment_record_arr().get(hcInterface.treatments.getSelectionModel().getSelectedIndex());
             
             hcInterface.bpField.setText(curTreatment.getBlood_pressure());
@@ -568,6 +581,9 @@ public class HealthCareController {
                         hcInterface.setLandingPage();
                     else if(hcInterface.curUser.getPermissions() <= 2){
                         hcInterface.setChartLandingPage();
+                    }else if(hcInterface.curUser.getPermissions() == 3){
+                        hcInterface.ceoInterfae.setCEOMenuScene();
+                        hcInterface.userInterface.setScene(hcInterface.ceoInterfae.getCEOScene());
                     }
                 }
                 hcInterface.logoutPrimed = false;

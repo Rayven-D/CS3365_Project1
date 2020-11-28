@@ -106,6 +106,7 @@ public class SystemTimer {
     }
 
     public void generateDailyReport(Database db) {
+        System.out.println("K");
         Report report = new Report();
         ArrayList<ReportInformation> allReportInformations = new ArrayList();
         report.setDate(getTodayDate());

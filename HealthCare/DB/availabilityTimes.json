@@ -1,1 +1,602 @@
-[{"userId":123,"availabilityDates":[{"date":"12/01/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":1},{"date":"12/02/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":2},{"date":"12/03/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":3},{"date":"12/04/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":4},{"date":"12/05/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":5},{"date":"12/06/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":6},{"date":"12/07/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":7}]},{"userId":125,"availabilityDates":[{"date":"12/01/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":1},{"date":"12/02/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":2},{"date":"12/03/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":3},{"date":"12/04/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":4},{"date":"12/05/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":5},{"date":"12/06/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":6},{"date":"12/07/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":7}]},{"userId":124,"availabilityDates":[{"date":"12/01/2020","availabilityTimes":[0,0,0,0,-500,-500,-501,0,0,0,0,0],"patientCount":1},{"date":"12/02/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":2},{"date":"12/03/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":3},{"date":"12/04/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":4},{"date":"12/05/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":5},{"date":"12/06/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":6},{"date":"12/07/2020","availabilityTimes":[0,0,0,0,0,0,0,0,0,0,0,0],"patientCount":7}]}]
+[
+    {
+        "userId": 123,
+        "availabilityDates": [
+            {
+                "date": "11/28/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "11/29/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "11/30/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/01/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/02/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/03/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/04/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/05/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/06/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/07/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            }
+        ]
+    },
+    {
+        "userId": 124,
+        "availabilityDates": [
+            {
+                "date": "11/28/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "11/29/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "11/30/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/01/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/02/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/03/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/04/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/05/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/06/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/07/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            }
+        ]
+    },
+    {
+        "userId": 125,
+        "availabilityDates": [
+            {
+                "date": "11/28/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "11/29/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "11/30/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/01/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/02/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/03/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/04/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/05/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/06/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            },
+            {
+                "date": "12/07/2020",
+                "availabilityTimes": [
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                "patientCount": 0
+            }
+        ]
+    }
+]

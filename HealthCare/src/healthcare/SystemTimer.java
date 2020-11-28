@@ -30,9 +30,9 @@ public class SystemTimer {
     public SystemTimer() {
         d = new Date();
         c = Calendar.getInstance();
-        c.set(2020, 11, 1);
         startReportScheduler();
         startNoShowScheduler();
+        this.startAppointmentDayCycling();
     }
 
     public void startReportScheduler() {
@@ -46,7 +46,7 @@ public class SystemTimer {
         long initialDelay = untilNextRun.getSeconds();
 
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(new SystemTimerController(21, this), initialDelay, TimeUnit.DAYS.toSeconds(1), TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(new SystemTimerController(21, this, c), initialDelay, TimeUnit.DAYS.toSeconds(1), TimeUnit.SECONDS);
     }
 
     public void startNoShowScheduler() {
@@ -60,21 +60,40 @@ public class SystemTimer {
         long initialDelay = untilNextRun.getSeconds();
 
         ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-        scheduler.scheduleAtFixedRate(new SystemTimerController(20, this), initialDelay, TimeUnit.DAYS.toSeconds(1), TimeUnit.SECONDS);
+        scheduler.scheduleAtFixedRate(new SystemTimerController(20, this, c), initialDelay, TimeUnit.DAYS.toSeconds(1), TimeUnit.SECONDS);
+    }
+    
+    public void startAppointmentDayCycling(){
+        ZonedDateTime current = ZonedDateTime.now(ZoneId.of("America/Chicago"));
+        ZonedDateTime nextRun = current.withHour(2).withMinute(0).withSecond(0);
+
+        if (current.compareTo(nextRun) > 0) {
+            nextRun = nextRun.plusDays(1);
+        }
+        Duration untilNextRun = Duration.between(current, nextRun);
+        long initialDelay = untilNextRun.getSeconds();
+
+        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+        scheduler.scheduleAtFixedRate(new SystemTimerController(2, this, c ), initialDelay, TimeUnit.DAYS.toSeconds(1), TimeUnit.SECONDS);
     }
 
     public void forceCreateReport() {
-        SystemTimerController stc = new SystemTimerController(21, this);
+        SystemTimerController stc = new SystemTimerController(21, this, c);
         stc.run();
     }
 
     public void forceRemoveNoShows() {
-        SystemTimerController stc = new SystemTimerController(20, this);
+        SystemTimerController stc = new SystemTimerController(20, this, c);
+        stc.run();
+    }
+    
+    public void forceNewAppointmentDay(){
+        SystemTimerController stc = new SystemTimerController(2, this, c);
+        stc.setCalendar(this.c);
         stc.run();
     }
 
     public String getTodayDate() {
-        c.set(2020, 11, 1);
         DateFormat form = new SimpleDateFormat("MM/dd/yyyy");
         String todayDate = form.format(c.getTime());
         return todayDate;
@@ -95,9 +114,9 @@ public class SystemTimer {
         ArrayList<String> temp = new ArrayList<>();
         DateFormat form = new SimpleDateFormat("MM/dd/yyyy");
         Calendar tempCal = c;
-        c.set(2020, 11, 1);
+        c.set(2020, 10, 28);
         Date tempDate = tempCal.getTime();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 7; i++) {
             temp.add(form.format(tempDate));
             tempCal.add(Calendar.DATE, 1);
             tempDate = tempCal.getTime();
@@ -148,10 +167,6 @@ public class SystemTimer {
 
     public static void main(String[] args) {
         SystemTimer tm = new SystemTimer();
-        System.out.println(tm.getTodayDate());
-        System.out.println(tm.getTime());
-        tm.setTime(12);
-        System.out.println(tm.getTime());
-        tm.forceRemoveNoShows();
+        tm.forceNewAppointmentDay();
     }
 }

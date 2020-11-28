@@ -8,6 +8,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.io.Reader;
+import java.util.Collections;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -151,9 +152,10 @@ public class Database {
      * @param availabilityTimes An arraylist of availabilityTimes
      * @return a boolean to tell you if it saved properly
      */
-    public int saveAvailabilityTimes(ArrayList availabilityTimes) {
+    public int saveAvailabilityTimes(ArrayList<Availability> availabilityTimes) {
         int checker = 0;
         Gson gson = new Gson();
+        Collections.sort(availabilityTimes, (o1,o2) ->o1.getUserId()-o2.getUserId());
         String json = gson.toJson(availabilityTimes);
         try (PrintWriter out = new PrintWriter("./DB/availabilityTimes.json")) {
             out.println(json);
@@ -198,9 +200,10 @@ public class Database {
      * @param charts An arraylist of charts
      * @return a boolean to tell you if it saved properly
      */
-    public int saveCharts(ArrayList charts) {
+    public int saveCharts(ArrayList<PatientChart> charts) {
         int checker = 0;
         Gson gson = new Gson();
+        Collections.sort(charts, (o1,o2) ->o1.getPatient_id()-o2.getPatient_id());
         String json = gson.toJson(charts);
         try (PrintWriter out = new PrintWriter("./DB/charts.json")) {
             out.println(json);
@@ -254,9 +257,10 @@ public class Database {
      * @param reports An arrayList of reports
      * @return a boolean to tell you if it saved properly
      */
-    public int saveReports(ArrayList reports) {
+    public int saveReports(ArrayList<Report> reports) {
         int checker = 0;
         Gson gson = new Gson();
+        Collections.sort(reports, (o1,o2) ->o1.getDate().compareTo(o2.getDate()));
         String json = gson.toJson(reports);
         try (PrintWriter out = new PrintWriter("./DB/dailyReports.json")) {
             out.println(json);

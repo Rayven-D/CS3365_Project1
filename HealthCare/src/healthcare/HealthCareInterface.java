@@ -126,7 +126,7 @@ public class HealthCareInterface extends Application {
         this.tm = new SystemTimer();
         staffInterface = new StaffInterface(this.patientQueue, this, this.db);
         this.controller = new HealthCareController(this, staffInterface);
-        this.ceoInterfae = new CEOInterface(this);
+        this.ceoInterfae = new CEOInterface(this, this.userInterface);
     }
     public void runLoginInterface(){
         usernameLabel = new Label("Username: ");

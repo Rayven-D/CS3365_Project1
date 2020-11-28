@@ -68,7 +68,7 @@ public class StaffInterface{
     public StaffInterface(CheckInQueue queue, HealthCareInterface hcInterface, Database db){
         this.db = db;
         this.times = new ArrayList<>();
-        for(int i = 9 ; i < 15; i++){
+        for(int i = 9 ; i < 17; i++){
             int l = i % 13;
             if( i >= 13){
                 l++;

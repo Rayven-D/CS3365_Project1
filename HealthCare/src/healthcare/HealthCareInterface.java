@@ -303,11 +303,9 @@ public class HealthCareInterface extends Application {
                 for(User u: db.getUsers()){
                     if(u.getPermissions() == 2){
                         this.nurseDocBox.getItems().add(u.getName());
-                        System.out.println(u.getId() + " " + this.curPatient.getDoctorID());
                         if(u.getId() == curPatient.getDoctorID()){
                             
                             this.nurseDocBox.getSelectionModel().selectLast();
-                            System.out.println(this.nurseDocBox.getSelectionModel().getSelectedItem());
                         }
                     }
                 }
@@ -386,6 +384,11 @@ public class HealthCareInterface extends Application {
         this.userInterface.setScene(this.landingPageScene);
     }
     public void fillChartInfo(PatientChart curPatient){
+        ArrayList<TreatmentRecord> treatRec = curPatient.getTreatment_record_arr();
+        TreatmentRecord prevTreat = null;
+        if(treatRec.size() > 1){
+            prevTreat = treatRec.get(treatRec.size() -2);
+        }
         this.nameField.setText(curPatient.getPatient_name());
         if(curPatient.getBirthday() == null || curPatient.getBirthday().length() <= 0){
             
@@ -402,8 +405,12 @@ public class HealthCareInterface extends Application {
         this.insuranceField.setText(curPatient.getInsurance());
         
         this.weightField.setText(curPatient.getCurrent_visit().getWeight() + "");
+            if(prevTreat != null)
+                this.weightField.setText(prevTreat.getWeight() + "");
         
         this.heightField.setText(curPatient.getCurrent_visit().getHeight() + "");
+            if(prevTreat != null)
+                this.heightField.setText(prevTreat.getHeight() + "");
         
         this.bpField.setText(curPatient.getCurrent_visit().getBlood_pressure());
         

@@ -56,7 +56,6 @@ public class HealthCareController {
                 }
             } 
         }else if(e.getSource() == hcInterface.ceoInterfae.viewReportsButton){
-            System.out.println("Pressed reports");
             hcInterface.ceoInterfae.setCEOReportsScene();
             this.hcInterface.userInterface.setScene(hcInterface.ceoInterfae.getCEOScene());
             hcInterface.userInterface.setTitle("CEO");
@@ -172,7 +171,6 @@ public class HealthCareController {
                         patID = pc.getPatient_id();
                     }
                 }
-                System.out.println(patID);
                 if(patID != -1){
                     for(User u: hcInterface.userList){
                         if(u.getPermissions() == 2){
@@ -281,7 +279,6 @@ public class HealthCareController {
                     
                 }
             }
-            System.out.println(tempPatientID);
             boolean found = false;
             for(User u: hcInterface.userList){
                 if(u.getPermissions()== 2){
@@ -292,7 +289,6 @@ public class HealthCareController {
                                 staffInterface.changeDocBox.getSelectionModel().select(u.getName());
                                 staffInterface.changeDocBox.getSelectionModel().clearAndSelect(staffInterface.changeDocBox.getSelectionModel().getSelectedIndex());
                                 staffInterface.curApptLabel.setText("Current Appointment: " + d.getDate() + " at " + staffInterface.times.get(count));
-                                System.out.println("k");
                                 found =true;
                                 break;
                             }
@@ -531,6 +527,9 @@ public class HealthCareController {
                             
                             ArrayList<TreatmentRecord> treatRec = hcInterface.curPatient.getTreatment_record_arr();
                             TreatmentRecord curTreatment =  treatRec.remove(treatRec.size() -1);
+                            
+                            
+                                
                             curTreatment.setAppointment_date(hcInterface.tm.getTodayDate());
                             curTreatment.setWeight(Double.parseDouble(hcInterface.weightField.getText()));
                             curTreatment.setHeight(Double.parseDouble(hcInterface.heightField.getText()));
@@ -560,7 +559,6 @@ public class HealthCareController {
             }
         }
         else if(e.getSource() == hcInterface.universalLogout || e.getSource() == hcInterface.staffInterface.apptCancel || e.getSource() == hcInterface.staffInterface.inCancel || e.getSource() == hcInterface.goBack){
-            System.out.println("pressed");
             hcInterface.logoutPrimed = true;
             String message = "logout";
             if(e.getSource() == hcInterface.staffInterface.apptCancel || e.getSource() == hcInterface.staffInterface.inCancel || e.getSource() == hcInterface.goBack){

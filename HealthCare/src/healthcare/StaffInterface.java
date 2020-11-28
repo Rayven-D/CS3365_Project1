@@ -19,12 +19,12 @@ import java.util.HashSet;
  */
 public class StaffInterface{
      ArrayList<String> times;
-    private Database db;
-    private ArrayList<User> usersList;
-    private int patientID; 
-    private CheckInQueue queue;
-    private Timer tm;
-    private boolean confirmed;
+     Database db;
+     ArrayList<User> usersList;
+     int patientID; 
+     CheckInQueue queue;
+     SystemTimer tm;
+     boolean confirmed;
     //Check-in
     Label  inNameLabel, inBdayLabel;
     TextField inNameField;
@@ -57,6 +57,13 @@ public class StaffInterface{
     TextField deleteNameField;
     Button cancelAppointment, deleteGoBack;
     Scene deleteAppointmentScene;
+    
+    //Payment
+    Label paymentType, amountLabel, approvedLabel;
+    TextField amountOweLabel;
+    Scene paymentScene;
+    Button creditButton, debitButton, cashButton, exitButton, printButton;
+    
 
     public StaffInterface(CheckInQueue queue, HealthCareInterface hcInterface, Database db){
         this.db = db;
@@ -73,11 +80,50 @@ public class StaffInterface{
             times.add(s + ":30");
         }
         this.queue = queue;
-        tm = new Timer();
+        tm = new SystemTimer();
        setAppointmentScene();
        setCheckInScene(); 
+       setPaymentScene();
        this.confirmed = false;
        this.hcInterface = hcInterface;
+    }
+    
+    public void setPaymentScene(){
+        this.amountLabel = new Label("Total: ");
+        this.amountOweLabel = new TextField("0.00");
+            this.amountOweLabel.setEditable(false);
+        
+        this.paymentType = new Label("Payment Type");
+        this.creditButton = new Button("Credit");
+            this.creditButton.setOnAction(e -> {this.hcInterface.handle(e);});
+        this.debitButton = new Button("Debit");
+            this.debitButton.setOnAction(e -> {hcInterface.handle(e);});
+        this.cashButton = new Button("Cash");
+            this.cashButton.setOnAction(e -> {hcInterface.handle(e);});
+        this.exitButton = new Button("Exit");
+            this.exitButton.setOnAction(e ->{hcInterface.handle(e);});
+        this.printButton = new Button("Print");
+            this.printButton.setOnAction(e ->{hcInterface.handle(e);});
+            this.printButton.setVisible(false);
+        
+        this.approvedLabel = new Label("Approved");
+            approvedLabel.setVisible(false);
+        HBox amountBox = new HBox();
+        amountBox.getChildren().addAll(amountLabel, amountOweLabel);
+            amountBox.setAlignment(Pos.CENTER);
+        
+        HBox payTypeBox = new HBox();
+        payTypeBox.getChildren().addAll(creditButton, debitButton, cashButton);
+            payTypeBox.setSpacing(5);
+            payTypeBox.setAlignment(Pos.CENTER);
+            
+        VBox paymentAll = new VBox();
+        paymentAll.getChildren().addAll(amountBox, paymentType, payTypeBox, approvedLabel, printButton, exitButton);
+            paymentAll.setSpacing(5);
+            paymentAll.setAlignment(Pos.CENTER);
+          
+        this.paymentScene = new Scene(paymentAll, 300,300);       
+            
     }
     
     public void setAppointmentScene(){
@@ -279,5 +325,8 @@ public class StaffInterface{
     }
     public Scene getDeleteAppointmentScene(){
         return this.deleteAppointmentScene;
+    }
+    public Scene getPaymentScene(){
+        return this.paymentScene;
     }
 }

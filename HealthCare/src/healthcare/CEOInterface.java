@@ -19,6 +19,7 @@ import javafx.event.EventHandler;
 import javafx.event.Event;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.layout.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.*;
 import javafx.scene.control.TableColumn.CellDataFeatures;
@@ -90,7 +91,7 @@ public class CEOInterface extends Application {
         }
         this.reportDateSelectorBox.getSelectionModel().select(reportSelection);
         this.reportSelectorButton = new Button("View Report");
-        
+
         Button back = new Button("Go Back");
         back.setOnAction(new EventHandler(){
             @Override
@@ -105,7 +106,7 @@ public class CEOInterface extends Application {
                setCEOReportsScene();
             }
         });
-        
+
         this.reportDateSelectorBox.setOnAction(new EventHandler() {
             @Override
             public void handle(Event e) {
@@ -122,7 +123,7 @@ public class CEOInterface extends Application {
         Label title = new Label("Reports");
         title.setFont(new Font("Arial", 20));
 
-        //TABLE 
+        //TABLE
         TableView table = new TableView();
         table.setEditable(false);
         TableColumn docName = new TableColumn("Doctor Name");

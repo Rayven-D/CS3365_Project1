@@ -33,6 +33,7 @@ public class HealthCareInterface extends Application {
     private Button popupOK, popupYes, popupNo;
     private Scene popupWindow;
     private Stage popup;
+    private Stage window2;
     
     private VBox popupBox;
      ArrayList<User> userList;
@@ -73,7 +74,7 @@ public class HealthCareInterface extends Application {
     ComboBox nurseDocBox;
     Label   nurseDocLabel;
     
-    //Landing Page
+    //Staff Landing Page
     Button checkInPatient, setUpAppt, changeAppt, deleteAppt;
     Scene landingPageScene;
     
@@ -170,6 +171,8 @@ public class HealthCareInterface extends Application {
            exep.printStackTrace();
        }
        this.curPatient = db.getSingleChart(patientID);
+       //ResetPayment
+       
         LocalDate localDate = LocalDate.now();
         //Patient Name
         name = new Label("Name: ");
@@ -380,9 +383,13 @@ public class HealthCareInterface extends Application {
     }
     public void fillChartInfo(PatientChart curPatient){
         this.nameField.setText(curPatient.getPatient_name());
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy");
-        LocalDate ld = LocalDate.parse(curPatient.getBirthday(), format);
-        this.birthdayField.setValue(ld);
+        if(curPatient.getBirthday() == null || curPatient.getBirthday().length() <= 0){
+            
+        }else {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy");
+            LocalDate ld = LocalDate.parse(curPatient.getBirthday(), format);
+            this.birthdayField.setValue(ld);
+        }
         this.addressField.setText(curPatient.getAddress());
         String soc = "" + curPatient.getSsn();
         
@@ -528,6 +535,8 @@ public class HealthCareInterface extends Application {
                                 }
                             }
                             this.curPatient.setDoctorID(selectedDocID);
+                            this.curPatient.setBirthday(selectedBday);
+                            
                             
                             this.userInterface.setScene(this.chartScene);
                             this.userInterface.show();
@@ -569,6 +578,18 @@ public class HealthCareInterface extends Application {
                         }
                     }
                 }
+                else{
+                    int lastPatientID = -1;
+                    for(PatientChart pc: this.patientList){
+                        if(pc.getPatient_id() > lastPatientID){
+                            lastPatientID = pc.getPatient_id();
+                        }
+                    }
+                    lastPatientID++;
+                    PatientChart newPatient = new PatientChart(staffInterface.apptNameField.getText(), "", "", 0, "", null, lastPatientID);
+                    db.saveSingleChart(newPatient, lastPatientID);
+                    
+                }
                 if(staffInterface.apptDocCombo.getSelectionModel().getSelectedIndex() < 0 || staffInterface.apptDateCombo.getSelectionModel().getSelectedIndex() < 0 || staffInterface.apptTimeList.getSelectionModel().getSelectedIndex() < 0){
                     this.popupConfirm("Please select a doctor and/or time");
                     return;
@@ -593,7 +614,7 @@ public class HealthCareInterface extends Application {
                                 staffInterface.apptTimeList.getSelectionModel().getSelectedIndex();
                                  avail [staffInterface.apptTimeList.getSelectionModel().getSelectedIndex()] = tempPatientID ;
                                  day.setAvailabilityTimes(avail); 
-                                 
+                                
                                 db.saveSingleAvailability(u.getId(), tempDay);
                                 
                                 this.popupConfirm("Added patient appointment.");
@@ -846,7 +867,48 @@ public class HealthCareInterface extends Application {
                 this.popupConfirm("Please enter a name");
             }
         }else if(e.getSource() == this.paymentInfo){
+            if(curUser.getPermissions() != 0){
+                popupConfirm("Access Denied");
+                return;
+            }
             
+            staffInterface.setPaymentScene();
+            double randomAmount = (double)(Math.random() * 200 + 50);
+            window2 = new Stage();
+            String str = String.format("$ %.2f", randomAmount);
+            staffInterface.amountOweLabel.setText(str);
+            window2.setScene(staffInterface.getPaymentScene());
+            window2.show();
+        }
+        else if(e.getSource() == staffInterface.creditButton || e.getSource() == staffInterface.debitButton || e.getSource() == staffInterface.cashButton){
+            String paymentType = "";
+            float amount = Float.parseFloat(staffInterface.amountOweLabel.getText().replaceAll("[^0-9.]", ""));
+            int referenceNumber = (int)(Math.random() * 89999999 + 10000000);
+            int pin = -1;
+            if(e.getSource() == staffInterface.cashButton){
+                 paymentType = "Cash";
+                 popupConfirm("Payment Approved");
+            }else if(e.getSource() == staffInterface.debitButton){
+                paymentType = "Debit";
+                pin = (int)(Math.random() * 8999 + 1000);
+                
+            }else if(e.getSource() == staffInterface.creditButton){
+                paymentType = "Credit";
+            }
+            if( (int)(Math.random()*2 + 1) % 2 != 0 && e.getSource() != staffInterface.cashButton){
+                popupConfirm("Payment Declined");
+            }else {
+                PaymentInformation pi = new PaymentInformation(tm.getTodayDate(), amount, paymentType, referenceNumber, pin);
+                this.curPatient.setPatient_payment(pi);
+                this.db.saveSingleChart(curPatient, curPatient.getPatient_id());
+                this.popupConfirm("Payment Accepted");
+                staffInterface.printButton.setVisible(true);
+            }
+            
+        }else if(e.getSource() == staffInterface.printButton){
+            this.popupConfirm("Printing Receipt");
+        }else if(e.getSource() == staffInterface.exitButton){
+            this.window2.close();
         }
         else if(e.getSource() == this.saveChanges ){
             this.patientQueue.removeFromQueue(curUser.getId(), new Integer(curPatient.getPatient_id()));

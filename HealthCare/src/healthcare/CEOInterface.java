@@ -13,6 +13,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.Event;
 import javafx.scene.Scene;
+import javafx.scene.layout.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
@@ -33,8 +34,16 @@ public class CEOInterface extends Application {
     @Override
     public void start(Stage primaryStage) {
         this.controller = new CEOController(this); 
+        dateLabel = new Label("CEO Interface running");
         
-      
+        VBox test = new VBox();
+        test.getChildren().add(dateLabel);
+        
+        Scene s = new Scene(test, 500,500);
+        
+        primaryStage.setScene(s);
+        primaryStage.show();
+        
     }
     
     public void handle(Event e){

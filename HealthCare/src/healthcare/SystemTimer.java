@@ -74,7 +74,7 @@ public class SystemTimer {
     }
 
     public String getTodayDate() {
-        c.set(2020, 11, 1);
+        c.set(2020, 10, 28);
         DateFormat form = new SimpleDateFormat("MM/dd/yyyy");
         String todayDate = form.format(c.getTime());
         return todayDate;

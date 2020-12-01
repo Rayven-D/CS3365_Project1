@@ -5,7 +5,7 @@
 
 >The project was to design a Health Care System based on the given case study, use case diagram, and use case descriptions. 
 
-![Use Case Diagram](https://imgur.com/a/l53IPVw)
+![Use Case Diagram](https://github.com/Rayven-D/HealthCareSystem_CS3365Project/blob/master/HealthCare/Capture.PNG)
 
 >Below is a video link to the program in action.
 

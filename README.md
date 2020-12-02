@@ -10,3 +10,5 @@
 >Below is a video link to the program in action.
 
 [![CS 3365 Project HealthCare System](http://img.youtube.com/vi/shodCcGKPsg/0.jpg)](https://youtu.be/shodCcGKPsg?t=461 "CS 3365 Project HealthCare System")
+
+<sub><sup>This project was completed during Fall 2020 during COVID-19. 
